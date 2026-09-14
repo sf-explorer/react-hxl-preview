@@ -12,6 +12,8 @@ import clientProfileCard from "./data/clientProfileCard.json"
 import clientProfileAttrs from "./data/clientProfileCard.attrs.json"
 import opportunityCard from "./data/opportunityCard.json"
 import opportunityAttrs from "./data/opportunityCard.attrs.json"
+import accountUpdateConfirm from "./data/accountUpdateConfirm.json"
+import accountUpdateConfirmAttrs from "./data/accountUpdateConfirm.attrs.json"
 
 // Build registries once — they are lookup tables, not per-frame state.
 const hxlRegistry = createDefaultHxlRegistry()
@@ -33,6 +35,11 @@ const tileFixtures: TileFixture[] = [
     name: "Opportunity Card",
     widget: opportunityCard as unknown as TileWidgetBundle,
     attrs: (opportunityAttrs as any).attributes,
+  },
+  {
+    name: "Account Update (inputs)",
+    widget: accountUpdateConfirm as unknown as TileWidgetBundle,
+    attrs: (accountUpdateConfirmAttrs as any).attributes,
   },
 ]
 

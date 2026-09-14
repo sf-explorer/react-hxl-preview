@@ -3,6 +3,7 @@ import type { TileComponentType } from "./types"
 import { TileGlyph } from "./icons"
 import { TileMarkdown } from "./markdown"
 import { TileTable } from "./table"
+import { useField, useTileInteraction } from "./interaction"
 
 // ---------------------------------------------------------------------------
 // Shared attribute → CSS mappings
@@ -191,21 +192,249 @@ const Link: TileComponentType = ({ attributes }) => {
   )
 }
 
+const BUTTON_VARIANT: Record<string, string> = {
+  primary: "tile-btn--primary",
+  secondary: "tile-btn--secondary",
+}
+
 const Button: TileComponentType = ({ attributes, children }) => {
-  const primary = attributes.variant === "primary"
-  // Display-only in preview; capture the intended action as a tooltip.
-  const action = attributes.actions?.click?.[0]?.attributes?.content
-  return (
-    <button
-      type="button"
-      className={`tile-btn ${primary ? "tile-btn--primary" : "tile-btn--ghost"}`}
-      disabled
-      aria-disabled="true"
-      title={typeof action === "string" ? action : undefined}
-    >
+  const { snapshot, dispatch } = useTileInteraction()
+  const variantClass = BUTTON_VARIANT[str(attributes.variant)] ?? "tile-btn--ghost"
+  const inner = (
+    <>
       {attributes.iconName && <TileGlyph name={str(attributes.iconName)} size="sm" />}
       {attributes.label != null && attributes.label !== "" ? str(attributes.label) : children}
+    </>
+  )
+
+  const clickActions = Array.isArray(attributes.actions?.click)
+    ? (attributes.actions.click as any[])
+    : null
+
+  // No declared click actions → display-only (the base-renderer contract).
+  // Capture the intended action content as a tooltip, as before.
+  if (!clickActions || clickActions.length === 0) {
+    const action = attributes.actions?.click?.[0]?.attributes?.content
+    return (
+      <button
+        type="button"
+        className={`tile-btn ${variantClass}`}
+        disabled
+        aria-disabled="true"
+        title={typeof action === "string" ? action : undefined}
+      >
+        {inner}
+      </button>
+    )
+  }
+
+  // Gather the payload each action asks for at click time:
+  //   "auto"  → every registered input value
+  //   [ids]   → just those input ids
+  //   "none"  → empty payload
+  const onClick = () => {
+    const events = clickActions.map((a) => {
+      const gather = a?.inputs
+      let payload: Record<string, unknown> = {}
+      if (gather === "auto") {
+        payload = snapshot()
+      } else if (Array.isArray(gather)) {
+        const snap = snapshot()
+        for (const id of gather) payload[String(id)] = snap[String(id)]
+      }
+      return { action: str(a?.definition) || "action", payload }
+    })
+    dispatch(events)
+  }
+
+  return (
+    <button type="button" className={`tile-btn ${variantClass}`} onClick={onClick}>
+      {inner}
     </button>
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Divider
+// ---------------------------------------------------------------------------
+
+const Separator: TileComponentType = ({ attributes }) => {
+  const vertical = attributes.orientation === "vertical"
+  return (
+    <div
+      className={`tile-separator tile-separator--${vertical ? "vertical" : "horizontal"}`}
+      role="separator"
+      aria-orientation={vertical ? "vertical" : "horizontal"}
+    />
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Inputs — stateful; each writes its value into the shared store by `id` so a
+// button's `inputs: "auto"` gather can read the live snapshot at click time.
+// ---------------------------------------------------------------------------
+
+function FieldLabel({ id, text }: { id?: string; text: unknown }) {
+  if (text == null || text === "") return null
+  return (
+    <label className="tile-field-label" htmlFor={id}>
+      {str(text)}
+    </label>
+  )
+}
+
+interface Option {
+  label?: unknown
+  value?: unknown
+}
+
+function options(v: unknown): Option[] {
+  return Array.isArray(v) ? (v as Option[]) : []
+}
+
+const Select: TileComponentType = ({ attributes }) => {
+  const id = str(attributes.id) || undefined
+  const [value, setValue] = useField(id, str(attributes.value))
+  return (
+    <div className="tile-field">
+      <FieldLabel id={id} text={attributes.label} />
+      <select
+        id={id}
+        className="tile-input tile-select"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+      >
+        {options(attributes.options).map((o, i) => (
+          <option key={i} value={str(o.value)}>
+            {str(o.label)}
+          </option>
+        ))}
+      </select>
+    </div>
+  )
+}
+
+const TextField: TileComponentType = ({ attributes }) => {
+  const id = str(attributes.id) || undefined
+  const [value, setValue] = useField(id, str(attributes.value))
+  return (
+    <div className="tile-field">
+      <FieldLabel id={id} text={attributes.label} />
+      <input
+        id={id}
+        className="tile-input"
+        type={str(attributes.type) || "text"}
+        value={value}
+        placeholder={str(attributes.placeholder) || undefined}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </div>
+  )
+}
+
+const NumberField: TileComponentType = ({ attributes }) => {
+  const id = str(attributes.id) || undefined
+  const initial = typeof attributes.value === "number" ? attributes.value : ""
+  const [value, setValue] = useField<number | "">(id, initial)
+  return (
+    <div className="tile-field">
+      <FieldLabel id={id} text={attributes.label} />
+      <input
+        id={id}
+        className="tile-input"
+        type="number"
+        value={value === "" ? "" : value}
+        min={typeof attributes.min === "number" ? attributes.min : undefined}
+        max={typeof attributes.max === "number" ? attributes.max : undefined}
+        placeholder={str(attributes.placeholder) || undefined}
+        onChange={(e) => setValue(e.target.value === "" ? "" : Number(e.target.value))}
+      />
+    </div>
+  )
+}
+
+const Radio: TileComponentType = ({ attributes }) => {
+  const name = str(attributes.id) || undefined
+  const [value, setValue] = useField(name, str(attributes.value))
+  return (
+    <div className="tile-field">
+      {attributes.label != null && attributes.label !== "" && (
+        <span className="tile-field-label">{str(attributes.label)}</span>
+      )}
+      <div className="tile-radio-group" role="radiogroup" aria-label={str(attributes.label)}>
+        {options(attributes.options).map((o, i) => {
+          const v = str(o.value)
+          return (
+            <label className="tile-radio" key={i}>
+              <input
+                type="radio"
+                name={name}
+                value={v}
+                checked={value === v}
+                onChange={() => setValue(v)}
+              />
+              <span>{str(o.label)}</span>
+            </label>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+const Checkbox: TileComponentType = ({ attributes }) => {
+  const id = str(attributes.id) || undefined
+  const [checked, setChecked] = useField(id, attributes.isChecked === true)
+  return (
+    <label className="tile-check" htmlFor={id}>
+      <input
+        id={id}
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => setChecked(e.target.checked)}
+      />
+      <span>{str(attributes.label)}</span>
+    </label>
+  )
+}
+
+const Switch: TileComponentType = ({ attributes }) => {
+  const id = str(attributes.id) || undefined
+  const [on, setOn] = useField(id, attributes.isChecked === true)
+  return (
+    <label className="tile-switch" htmlFor={id}>
+      <input
+        id={id}
+        type="checkbox"
+        role="switch"
+        checked={on}
+        onChange={(e) => setOn(e.target.checked)}
+      />
+      <span className="tile-switch-track" aria-hidden="true">
+        <span className="tile-switch-thumb" />
+      </span>
+      {attributes.label != null && attributes.label !== "" && (
+        <span className="tile-switch-label">{str(attributes.label)}</span>
+      )}
+    </label>
+  )
+}
+
+const Textarea: TileComponentType = ({ attributes }) => {
+  const id = str(attributes.id) || undefined
+  const [value, setValue] = useField(id, str(attributes.value))
+  return (
+    <div className="tile-field">
+      <FieldLabel id={id} text={attributes.label} />
+      <textarea
+        id={id}
+        className="tile-input tile-textarea"
+        value={value}
+        rows={3}
+        placeholder={str(attributes.placeholder) || undefined}
+        onChange={(e) => setValue(e.target.value)}
+      />
+    </div>
   )
 }
 
@@ -249,4 +478,12 @@ export const defaultTileComponents: Record<string, TileComponentType> = {
   "tile/button": Button,
   "tile/spacer": Spacer,
   "tile/callout": Callout,
+  "tile/separator": Separator,
+  "tile/select": Select,
+  "tile/textField": TextField,
+  "tile/numberField": NumberField,
+  "tile/radio": Radio,
+  "tile/checkbox": Checkbox,
+  "tile/switch": Switch,
+  "tile/textarea": Textarea,
 }

@@ -20,10 +20,14 @@ export {
   createTileRegistry,
   createDefaultTileRegistry,
   defaultTileComponents,
+  TileInteractionProvider,
+  useTileInteraction,
+  useField,
   evaluateTileBinding,
   evaluateTileValue,
 } from "./tile"
 export type {
+  DispatchedEvent,
   TileWidgetRendererProps,
   TileValue,
   TileMeta,

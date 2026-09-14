@@ -1,0 +1,15 @@
+{
+  "_comment": "account-update-confirm (detail-views) from the HXL playground gallery. The source example bakes its values in as literals; here each field value binds to {!$attrs.<id>} so the seed data below is editable in the demo. On Confirm the button re-gathers the LIVE input values (which start from these) as the dispatched payload.",
+  "attributes": {
+    "accountName": "Acme Corporation",
+    "ownerName": "Sarah Johnson",
+    "phone": "(415) 555-9876",
+    "industry": "Manufacturing",
+    "website": "acmecorporation.com",
+    "employees": 1200,
+    "rating": "hot",
+    "active": true,
+    "autoRenew": true,
+    "description": "Key manufacturing account in the western region."
+  }
+}

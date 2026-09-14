@@ -12,6 +12,8 @@ import clientProfileCard from "./data/clientProfileCard.json"
 import clientProfileAttrs from "./data/clientProfileCard.attrs.json"
 import opportunityCard from "./data/opportunityCard.json"
 import opportunityAttrs from "./data/opportunityCard.attrs.json"
+import accountUpdateConfirm from "./data/accountUpdateConfirm.json"
+import accountUpdateConfirmAttrs from "./data/accountUpdateConfirm.attrs.json"
 
 const tileRegistry = createDefaultTileRegistry()
 const hxlRegistry = createDefaultHxlRegistry()
@@ -71,6 +73,31 @@ describe("TileWidgetRenderer — real gallery widgets", () => {
     )
     expect(oppHtml.length).toBeGreaterThan(500)
     expect(oppHtml).not.toContain("Unknown tile")
+  })
+
+  it("renders the account-update-confirm input tiles without unknowns", () => {
+    const html = renderToStaticMarkup(
+      <TileWidgetRenderer
+        widget={accountUpdateConfirm as unknown as TileWidgetBundle}
+        attrs={(accountUpdateConfirmAttrs as any).attributes}
+        registry={tileRegistry}
+      />,
+    )
+    expect(html).not.toContain("Unknown tile")
+    // every input tile type is present and seeded from bound $attrs data
+    expect(html).toContain("Acme Corporation") // header ({!$attrs.accountName})
+    expect(html).toContain("Account Owner") // tile/select label
+    expect(html).toContain('value="(415) 555-9876"') // tile/textField
+    expect(html).toContain('type="number"') // tile/numberField
+    expect(html).toContain('role="radiogroup"') // tile/radio
+    expect(html).toContain('role="switch"') // tile/switch
+    expect(html).toContain("<textarea") // tile/textarea
+    expect(html).toContain('role="separator"') // tile/separator
+    // the Confirm/Cancel action buttons are enabled (not display-only):
+    // both carry actions.click, so no button renders the `disabled` attribute.
+    expect(html).toContain("Confirm Update")
+    expect(html).toContain("Cancel")
+    expect(html).not.toContain("disabled")
   })
 })
 

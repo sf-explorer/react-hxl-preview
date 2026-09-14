@@ -1,0 +1,387 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Update Account (Dynamic Payload Demo)",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": {},
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": {
+                "gap": "md"
+              },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "sm",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/icon",
+                      "attributes": {
+                        "name": "building",
+                        "size": "lg",
+                        "color": "default"
+                      }
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "gap": "none"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/text",
+                          "attributes": {
+                            "text": "{!$attrs.accountName}",
+                            "variant": "h3",
+                            "weight": "bold"
+                          }
+                        },
+                        {
+                          "definition": "tile/text",
+                          "attributes": {
+                            "text": "Account",
+                            "variant": "caption",
+                            "color": "muted"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/separator",
+                  "attributes": {
+                    "orientation": "horizontal"
+                  }
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "lg",
+                    "align": "start"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "width": "stretch",
+                        "gap": "xs"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/select",
+                          "attributes": {
+                            "id": "ownerName",
+                            "label": "Account Owner",
+                            "value": "{!$attrs.ownerName}",
+                            "options": [
+                              {
+                                "label": "Sarah Johnson",
+                                "value": "Sarah Johnson"
+                              },
+                              {
+                                "label": "Christy Fair",
+                                "value": "Christy Fair"
+                              },
+                              {
+                                "label": "Marcus Lee",
+                                "value": "Marcus Lee"
+                              },
+                              {
+                                "label": "Priya Patel",
+                                "value": "Priya Patel"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "width": "stretch",
+                        "gap": "xs"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/textField",
+                          "attributes": {
+                            "id": "phone",
+                            "label": "Phone",
+                            "value": "{!$attrs.phone}",
+                            "type": "tel",
+                            "placeholder": "(415) 555-0000"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "lg",
+                    "align": "start"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "width": "stretch",
+                        "gap": "xs"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/select",
+                          "attributes": {
+                            "id": "industry",
+                            "label": "Industry",
+                            "value": "{!$attrs.industry}",
+                            "options": [
+                              {
+                                "label": "Manufacturing",
+                                "value": "Manufacturing"
+                              },
+                              {
+                                "label": "Technology",
+                                "value": "Technology"
+                              },
+                              {
+                                "label": "Healthcare",
+                                "value": "Healthcare"
+                              },
+                              {
+                                "label": "Financial Services",
+                                "value": "Financial Services"
+                              },
+                              {
+                                "label": "Retail",
+                                "value": "Retail"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "width": "stretch",
+                        "gap": "xs"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/textField",
+                          "attributes": {
+                            "id": "website",
+                            "label": "Company Website",
+                            "value": "{!$attrs.website}",
+                            "type": "url",
+                            "placeholder": "example.com"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "lg",
+                    "align": "start"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "width": "stretch",
+                        "gap": "xs"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/numberField",
+                          "attributes": {
+                            "id": "employees",
+                            "label": "Number of Employees",
+                            "value": "{!$attrs.employees}",
+                            "min": 0,
+                            "placeholder": "0"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "width": "stretch",
+                        "gap": "xs"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/radio",
+                          "attributes": {
+                            "id": "rating",
+                            "label": "Rating",
+                            "value": "{!$attrs.rating}",
+                            "options": [
+                              {
+                                "label": "Hot",
+                                "value": "hot"
+                              },
+                              {
+                                "label": "Warm",
+                                "value": "warm"
+                              },
+                              {
+                                "label": "Cold",
+                                "value": "cold"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "lg",
+                    "align": "start"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "width": "stretch",
+                        "gap": "xs"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/checkbox",
+                          "attributes": {
+                            "id": "active",
+                            "label": "Active Account",
+                            "isChecked": "{!$attrs.active}"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "width": "stretch",
+                        "gap": "xs"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/switch",
+                          "attributes": {
+                            "id": "autoRenew",
+                            "label": "Auto-Renew Contract",
+                            "isChecked": "{!$attrs.autoRenew}"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "lg",
+                    "align": "start"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "width": "stretch",
+                        "gap": "xs"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/textarea",
+                          "attributes": {
+                            "id": "description",
+                            "label": "Description",
+                            "value": "{!$attrs.description}",
+                            "placeholder": "Notes about this account…"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/text",
+                  "attributes": {
+                    "text": "Edit the fields, then click a button. Each button gathers a different set of inputs at click time — watch the toast for the dispatched payload.",
+                    "variant": "caption",
+                    "color": "muted"
+                  }
+                },
+                {
+                  "definition": "tile/spacer",
+                  "attributes": {
+                    "size": "md"
+                  }
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "sm",
+                    "justify": "end"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "Cancel",
+                        "variant": "secondary",
+                        "actions": {
+                          "click": [
+                            {
+                              "definition": "updateAccountCancel",
+                              "attributes": {},
+                              "inputs": "none"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "Confirm Update",
+                        "variant": "primary",
+                        "actions": {
+                          "click": [
+                            {
+                              "definition": "updateAccountConfirm",
+                              "attributes": {},
+                              "inputs": "auto"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

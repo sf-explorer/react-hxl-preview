@@ -8,6 +8,12 @@ export {
 } from "./registry"
 export { defaultTileComponents } from "./components"
 export {
+  TileInteractionProvider,
+  useTileInteraction,
+  useField,
+} from "./interaction"
+export type { DispatchedEvent } from "./interaction"
+export {
   evaluateTileBinding,
   evaluateTileValue,
 } from "./expression"

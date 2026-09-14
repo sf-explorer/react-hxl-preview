@@ -106,8 +106,18 @@ const registry = createDefaultTileRegistry()
 - **Components:** `tile/widget`, `tile/container`, `tile/column`, `tile/row`,
   `tile/text`, `tile/avatar`, `tile/badge`, `tile/icon`, `tile/progress`,
   `tile/markdown`, `tile/link`, `tile/table` (client-side sort / filter /
-  pagination, typed columns), `tile/button` (display-only), `tile/spacer`,
-  `tile/callout`.
+  pagination, typed columns), `tile/spacer`, `tile/separator`, `tile/callout`.
+- **Inputs (interactive):** `tile/select`, `tile/textField`, `tile/numberField`,
+  `tile/radio`, `tile/checkbox`, `tile/switch`, `tile/textarea`. Each is stateful
+  and writes its live value into a shared store keyed by its `id`.
+- **`tile/button`** is display-only *unless* it declares `actions.click`. A
+  button with actions is clickable: on click it gathers a payload per action —
+  `inputs: "auto"` snapshots every input value, `inputs: "none"` dispatches an
+  empty payload, an array of ids gathers just those — and surfaces the dispatched
+  action + payload as a toast. `TileWidgetRenderer` wraps its tree in a
+  `TileInteractionProvider` so this works out of the box; `useTileInteraction`
+  and `useField` are exported for custom input/action tiles. The
+  **Account Update (inputs)** gallery fixture is the end-to-end demo.
 
 The renderer is total here too: an unknown `definition` paints a neutral
 placeholder. `src/demo/render.test.tsx` renders the real `clientProfileCard`

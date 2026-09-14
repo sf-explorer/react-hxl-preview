@@ -2,6 +2,7 @@ import { createElement } from "react"
 import type { ReactNode } from "react"
 import { evaluateExpression } from "../expression"
 import { evaluateTileValue } from "./expression"
+import { TileInteractionProvider } from "./interaction"
 import type {
   TileComponentRegistry,
   TileNode,
@@ -92,5 +93,9 @@ export function TileWidgetRenderer({
   const root = widget?.contentBody?.widgetBody
   if (!root) return null
   const scope: TileScope = { $attrs: attrs }
-  return <>{renderTileNode(root, scope, registry, 0)}</>
+  return (
+    <TileInteractionProvider>
+      {renderTileNode(root, scope, registry, 0)}
+    </TileInteractionProvider>
+  )
 }
