@@ -1,0 +1,37 @@
+{
+  "_comment": "Real 'Strategic Portfolio Expansion' deal (synthetic, Jaskirat Rangi's largest open opportunity) shaped to the opportunityCard attribute contract. This is the payload a Custom Lightning Type renderer.json (Agentforce, flat $attrs.<field>) or MCP wrapper/payload CLT (nested outputValues.opportunity.<field>) maps into the widget. STANDARD objects only: Opportunity, OpportunityFieldHistory, Case, Task, Event, plus an Opportunity.StageName describe for stage position. Every value below is DERIVED in Apex (OpportunityAction.cls), it is not a stored field: healthHeadline/healthReasons/healthVariant come from the Deal Readiness score, recommendedStepList is the ranked firing signals, daysInStageLabel is stage age from field history, casesLabel counts material cases. A reference snapshot, not a live capture; values may drift from the org.",
+  "attributes": {
+    "oppName": "Strategic Portfolio Expansion - $8.5M Investment Allocation",
+    "accountName": "Jaskirat Rangi",
+    "amount": "$8,500,000",
+    "stageName": "Qualification",
+    "healthHeadline": "Deal Readiness: Attention needed · 70/100",
+    "healthReasons": "Driven by an overdue follow-up and a high-priority service case. Leading risk: the decision timeline remains unconfirmed.",
+    "healthVariant": "warning",
+    "_health_note": "healthVariant is one of success (≥80) / warning (≥60) / error (<60), keyed to the Deal Readiness band. This deal sits at 70 -> Attention needed -> warning.",
+    "probability": 20,
+    "closeDate": "12/1/2026",
+    "daysInStageLabel": "8 days in current stage",
+    "recommendedStepList": [
+      { "iconName": "clock",    "iconColor": "warning", "text": "Complete the overdue \"Follow-up: Decision Timeline Confirmation\" task." },
+      { "iconName": "calendar", "iconColor": "primary", "text": "Schedule investment risk assessment meeting." },
+      { "iconName": "activity", "iconColor": "warning", "text": "Resolve the high-priority case \"Mortgage Refinance - Rate Lock Extension\" before it stalls the deal." }
+    ],
+    "_steps_note": "recommendedStepList is the top-ranked firing risk signals (highest-urgency first); the single top signal is also the Leading Risk quoted in healthReasons, so score, leading risk and actions never disagree.",
+    "objective": "Client seeking diversified investment strategy across multiple asset classes including equities, fixed income, and alternative investments.",
+    "nextStep": "Schedule investment risk assessment meeting and prepare comprehensive portfolio analysis proposal.",
+    "lastTouchLabel": "Q3 Check-in - Decision Timeline · 8/26/2026",
+    "nextMeetingLabel": "None scheduled",
+    "activities": [
+      { "subject": "Follow-up: Decision Timeline Confirmation", "dueDate": "8/21/2026", "status": "Past due", "statusVariant": "error", "url": "https://<your-org>.my.salesforce.com/lightning/r/Task/00TXXXXXXXXXXXXXXX/view" },
+      { "subject": "Follow-up on Open Items",                  "dueDate": "8/28/2026", "status": "Past due", "statusVariant": "error", "url": "https://<your-org>.my.salesforce.com/lightning/r/Task/00TXXXXXXXXXXXXXXX/view" }
+    ],
+    "casesLabel": "6 cases · 2 open",
+    "cases": [
+      { "subject": "529 Plan - Update Beneficiary Information", "caseNumber": "00004663", "status": "New",         "url": "https://<your-org>.my.salesforce.com/lightning/r/Case/500XXXXXXXXXXXXXXX/view" },
+      { "subject": "Mortgage Refinance - Rate Lock Extension",  "caseNumber": "00004662", "status": "In Progress", "url": "https://<your-org>.my.salesforce.com/lightning/r/Case/500XXXXXXXXXXXXXXX/view" }
+    ],
+    "_cases_note": "casesLabel counts ALL related cases (6 cases · 2 open); the cases array carries the material ones surfaced in the Activity & Risks drill-down. Only Priority='High' OR Type='Problem' cases deduct Deal Readiness, routine asks still list but never over-flag the deal.",
+    "_url_note": "Every url is built at runtime from URL.getOrgDomainUrl() + /lightning/r/<Object>/<id>/view; ids are org-specific and omitted here."
+  }
+}

@@ -1,0 +1,1095 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Client Profile Card",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": {
+            "borderless": true,
+            "variant": "default"
+          },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": {
+                "gap": "lg",
+                "align": "stretch",
+                "width": "full"
+              },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "md",
+                    "align": "center",
+                    "justify": "between",
+                    "isWrapped": true
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/row",
+                      "attributes": {
+                        "gap": "md",
+                        "align": "center",
+                        "justify": "start",
+                        "isWrapped": false
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/avatar",
+                          "attributes": {
+                            "initials": "{!$attrs.clientInitials}",
+                            "alt": "{!$attrs.clientName}",
+                            "iconName": "user",
+                            "shape": "circle",
+                            "size": "lg"
+                          }
+                        },
+                        {
+                          "definition": "tile/column",
+                          "attributes": {
+                            "gap": "none",
+                            "align": "start",
+                            "width": "stretch"
+                          },
+                          "children": [
+                            {
+                              "definition": "tile/text",
+                              "attributes": {
+                                "text": "{!$attrs.clientName}",
+                                "variant": "h2",
+                                "weight": "semibold"
+                              }
+                            },
+                            {
+                              "definition": "tile/text",
+                              "attributes": {
+                                "text": "{!$attrs.clientTitle}",
+                                "variant": "caption",
+                                "color": "muted"
+                              }
+                            },
+                            {
+                              "definition": "tile/text",
+                              "attributes": {
+                                "text": "{!$attrs.householdName}",
+                                "variant": "caption",
+                                "color": "muted"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/badge",
+                      "attributes": {
+                        "label": "{!$attrs.segment}",
+                        "variant": "primary"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": {
+                    "gap": "sm",
+                    "align": "stretch",
+                    "width": "full"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/text",
+                      "attributes": {
+                        "text": "ADVISOR PRIORITIES",
+                        "variant": "caption",
+                        "weight": "bold",
+                        "color": "muted"
+                      }
+                    },
+                    {
+                      "definition": "tile/column",
+                      "meta": {
+                        "forEach": "{!$attrs.attentionItems}",
+                        "forItem": "$attention",
+                        "forIndex": "$ai"
+                      },
+                      "attributes": {
+                        "gap": "xs",
+                        "align": "stretch",
+                        "width": "full"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/row",
+                          "attributes": {
+                            "gap": "sm",
+                            "align": "start",
+                            "justify": "start",
+                            "isWrapped": false
+                          },
+                          "children": [
+                            {
+                              "definition": "tile/icon",
+                              "attributes": {
+                                "name": "bell",
+                                "size": "sm",
+                                "color": "warning",
+                                "alt": "Advisor priority"
+                              }
+                            },
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "none",
+                                "align": "start",
+                                "width": "stretch"
+                              },
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attention.title}",
+                                    "variant": "body",
+                                    "weight": "semibold"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attention.detail}",
+                                    "variant": "caption",
+                                    "color": "muted"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/badge",
+                              "attributes": {
+                                "label": "{!$attention.statusLabel}",
+                                "variant": "{!$attention.statusVariant}"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "meta": {
+                    "if": "{!$attrs.showAttentionItems}"
+                  }
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": {
+                    "gap": "xs",
+                    "align": "stretch",
+                    "width": "full"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/text",
+                      "attributes": {
+                        "text": "FINANCIAL POSITION",
+                        "variant": "caption",
+                        "weight": "bold",
+                        "color": "muted"
+                      }
+                    },
+                    {
+                      "definition": "tile/container",
+                      "attributes": {
+                        "borderless": false,
+                        "variant": "default"
+                      },
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": {
+                            "gap": "sm",
+                            "align": "stretch",
+                            "width": "full"
+                          },
+                          "children": [
+                            {
+                              "definition": "tile/row",
+                              "attributes": {
+                                "gap": "sm",
+                                "align": "center",
+                                "justify": "between",
+                                "isWrapped": false
+                              },
+                              "children": [
+                                {
+                                  "definition": "tile/row",
+                                  "attributes": {
+                                    "gap": "sm",
+                                    "align": "center",
+                                    "justify": "start",
+                                    "isWrapped": false
+                                  },
+                                  "children": [
+                                    {
+                                      "definition": "tile/icon",
+                                      "attributes": {
+                                        "name": "activity",
+                                        "size": "sm",
+                                        "color": "success",
+                                        "alt": "Net worth"
+                                      }
+                                    },
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "Net worth",
+                                        "variant": "body"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attrs.netWorth}",
+                                    "variant": "body",
+                                    "weight": "semibold",
+                                    "color": "default"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/row",
+                              "attributes": {
+                                "gap": "sm",
+                                "align": "center",
+                                "justify": "between",
+                                "isWrapped": false
+                              },
+                              "children": [
+                                {
+                                  "definition": "tile/row",
+                                  "attributes": {
+                                    "gap": "sm",
+                                    "align": "center",
+                                    "justify": "start",
+                                    "isWrapped": false
+                                  },
+                                  "children": [
+                                    {
+                                      "definition": "tile/icon",
+                                      "attributes": {
+                                        "name": "credit-card",
+                                        "size": "sm",
+                                        "color": "success",
+                                        "alt": "Investable assets"
+                                      }
+                                    },
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "Investable assets",
+                                        "variant": "body"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attrs.investableAssets}",
+                                    "variant": "body",
+                                    "weight": "semibold",
+                                    "color": "default"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/row",
+                              "attributes": {
+                                "gap": "sm",
+                                "align": "center",
+                                "justify": "between",
+                                "isWrapped": false
+                              },
+                              "children": [
+                                {
+                                  "definition": "tile/row",
+                                  "attributes": {
+                                    "gap": "sm",
+                                    "align": "center",
+                                    "justify": "start",
+                                    "isWrapped": false
+                                  },
+                                  "children": [
+                                    {
+                                      "definition": "tile/icon",
+                                      "attributes": {
+                                        "name": "building",
+                                        "size": "sm",
+                                        "color": "warning",
+                                        "alt": "Mortgage"
+                                      }
+                                    },
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "Mortgage",
+                                        "variant": "body"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attrs.mortgageOutstanding}",
+                                    "variant": "body",
+                                    "weight": "semibold",
+                                    "color": "default"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/row",
+                              "attributes": {
+                                "gap": "sm",
+                                "align": "center",
+                                "justify": "between",
+                                "isWrapped": false
+                              },
+                              "children": [
+                                {
+                                  "definition": "tile/row",
+                                  "attributes": {
+                                    "gap": "sm",
+                                    "align": "center",
+                                    "justify": "start",
+                                    "isWrapped": false
+                                  },
+                                  "children": [
+                                    {
+                                      "definition": "tile/icon",
+                                      "attributes": {
+                                        "name": "trending-up",
+                                        "size": "sm",
+                                        "color": "primary",
+                                        "alt": "Open pipeline"
+                                      }
+                                    },
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "Open pipeline",
+                                        "variant": "body"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attrs.relationshipPipeline}",
+                                    "variant": "body",
+                                    "weight": "semibold",
+                                    "color": "primary"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/row",
+                              "attributes": {
+                                "gap": "sm",
+                                "align": "center",
+                                "justify": "between",
+                                "isWrapped": false
+                              },
+                              "children": [
+                                {
+                                  "definition": "tile/row",
+                                  "attributes": {
+                                    "gap": "sm",
+                                    "align": "center",
+                                    "justify": "start",
+                                    "isWrapped": false
+                                  },
+                                  "children": [
+                                    {
+                                      "definition": "tile/icon",
+                                      "attributes": {
+                                        "name": "check-circle",
+                                        "size": "sm",
+                                        "color": "success",
+                                        "alt": "Won lifetime"
+                                      }
+                                    },
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "Won lifetime",
+                                        "variant": "body"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attrs.wonLifetime}",
+                                    "variant": "body",
+                                    "weight": "semibold",
+                                    "color": "success"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": {
+                    "gap": "md",
+                    "align": "stretch",
+                    "width": "full"
+                  },
+                  "id": "00000000-0000-0000-0000-000000000010",
+                  "children": [
+                    {
+                      "definition": "tile/container",
+                      "id": "00000000-0000-0000-0000-000000000005",
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": {
+                            "gap": "md",
+                            "align": "stretch",
+                            "width": "full"
+                          },
+                          "id": "00000000-0000-0000-0000-000000000004",
+                          "children": [
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "none",
+                                "align": "start",
+                                "width": "full"
+                              },
+                              "id": "00000000-0000-0000-0000-000000000003",
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Plan & Portfolio",
+                                    "variant": "h6",
+                                    "weight": "bold",
+                                    "color": "default"
+                                  },
+                                  "id": "00000000-0000-0000-0000-000000000001"
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Goals and household allocation",
+                                    "variant": "caption",
+                                    "color": "muted"
+                                  },
+                                  "id": "00000000-0000-0000-0000-000000000002"
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "md",
+                                "align": "stretch",
+                                "width": "full"
+                              },
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "PRIORITY GOALS",
+                                    "variant": "caption",
+                                    "weight": "bold",
+                                    "color": "muted"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/column",
+                                  "attributes": {
+                                    "gap": "md",
+                                    "align": "stretch",
+                                    "width": "full"
+                                  },
+                                  "children": [
+                                    {
+                                      "definition": "tile/column",
+                                      "meta": {
+                                        "forEach": "{!$attrs.goals}",
+                                        "forItem": "$goal",
+                                        "forIndex": "$i"
+                                      },
+                                      "attributes": {
+                                        "gap": "xs",
+                                        "align": "stretch",
+                                        "width": "full"
+                                      },
+                                      "children": [
+                                        {
+                                          "definition": "tile/text",
+                                          "attributes": {
+                                            "text": "{!$goal.captionLabel}",
+                                            "variant": "caption"
+                                          }
+                                        },
+                                        {
+                                          "definition": "tile/progress",
+                                          "attributes": {
+                                            "value": "{!$goal.pct}",
+                                            "shape": "linear",
+                                            "size": "sm",
+                                            "color": "{!$goal.color}",
+                                            "label": "{!$goal.name}"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/column",
+                                  "meta": {
+                                    "if": "{!$attrs.showAllocation}"
+                                  },
+                                  "attributes": {
+                                    "gap": "md",
+                                    "align": "stretch",
+                                    "width": "full"
+                                  },
+                                  "children": [
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "ASSET ALLOCATION",
+                                        "variant": "caption",
+                                        "weight": "bold",
+                                        "color": "muted"
+                                      }
+                                    },
+                                    {
+                                      "definition": "tile/column",
+                                      "attributes": {
+                                        "gap": "md",
+                                        "align": "stretch",
+                                        "width": "full"
+                                      },
+                                      "children": [
+                                        {
+                                          "definition": "tile/column",
+                                          "meta": {
+                                            "forEach": "{!$attrs.allocation}",
+                                            "forItem": "$asset",
+                                            "forIndex": "$assetIndex"
+                                          },
+                                          "attributes": {
+                                            "gap": "xs",
+                                            "align": "stretch",
+                                            "width": "full"
+                                          },
+                                          "children": [
+                                            {
+                                              "definition": "tile/text",
+                                              "attributes": {
+                                                "text": "{!$asset.captionLabel}",
+                                                "variant": "caption"
+                                              }
+                                            },
+                                            {
+                                              "definition": "tile/progress",
+                                              "attributes": {
+                                                "value": "{!$asset.pct}",
+                                                "shape": "linear",
+                                                "size": "sm",
+                                                "color": "primary",
+                                                "label": "{!$asset.asset}"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/container",
+                      "id": "00000000-0000-0000-0000-00000000000a",
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": {
+                            "gap": "md",
+                            "align": "stretch",
+                            "width": "full"
+                          },
+                          "id": "00000000-0000-0000-0000-000000000009",
+                          "children": [
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "none",
+                                "align": "start",
+                                "width": "full"
+                              },
+                              "id": "00000000-0000-0000-0000-000000000008",
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Activity & Follow-Up",
+                                    "variant": "h6",
+                                    "weight": "bold",
+                                    "color": "default"
+                                  },
+                                  "id": "00000000-0000-0000-0000-000000000006"
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Briefing, recent changes, tasks, and meetings",
+                                    "variant": "caption",
+                                    "color": "muted"
+                                  },
+                                  "id": "00000000-0000-0000-0000-000000000007"
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "md",
+                                "align": "stretch",
+                                "width": "full"
+                              },
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "ADVISOR BRIEFING",
+                                    "variant": "caption",
+                                    "weight": "bold",
+                                    "color": "muted"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/markdown",
+                                  "attributes": {
+                                    "source": "{!$attrs.advisorSnapshot}"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/column",
+                                  "meta": {
+                                    "if": "{!$attrs.showRecentChanges}"
+                                  },
+                                  "attributes": {
+                                    "gap": "md",
+                                    "align": "stretch",
+                                    "width": "full"
+                                  },
+                                  "children": [
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "RECENT CHANGES",
+                                        "variant": "caption",
+                                        "weight": "bold",
+                                        "color": "muted"
+                                      }
+                                    },
+                                    {
+                                      "definition": "tile/column",
+                                      "attributes": {
+                                        "gap": "md",
+                                        "align": "stretch",
+                                        "width": "full"
+                                      },
+                                      "children": [
+                                        {
+                                          "definition": "tile/row",
+                                          "meta": {
+                                            "forEach": "{!$attrs.recentChanges}",
+                                            "forItem": "$change",
+                                            "forIndex": "$changeIndex"
+                                          },
+                                          "attributes": {
+                                            "gap": "md",
+                                            "align": "start",
+                                            "justify": "start",
+                                            "isWrapped": false
+                                          },
+                                          "children": [
+                                            {
+                                              "definition": "tile/icon",
+                                              "attributes": {
+                                                "name": "calendar",
+                                                "size": "sm",
+                                                "color": "primary",
+                                                "alt": "Recent change"
+                                              }
+                                            },
+                                            {
+                                              "definition": "tile/column",
+                                              "attributes": {
+                                                "gap": "none",
+                                                "align": "start",
+                                                "width": "stretch"
+                                              },
+                                              "children": [
+                                                {
+                                                  "definition": "tile/text",
+                                                  "attributes": {
+                                                    "text": "{!$change.title}",
+                                                    "variant": "body",
+                                                    "weight": "semibold"
+                                                  }
+                                                },
+                                                {
+                                                  "definition": "tile/text",
+                                                  "attributes": {
+                                                    "text": "{!$change.detail}",
+                                                    "variant": "caption",
+                                                    "color": "muted"
+                                                  }
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "definition": "tile/text",
+                                              "attributes": {
+                                                "text": "{!$change.dateLabel}",
+                                                "variant": "caption",
+                                                "color": "muted"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "TASKS & MEETINGS",
+                                    "variant": "caption",
+                                    "weight": "bold",
+                                    "color": "muted"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/column",
+                                  "attributes": {
+                                    "gap": "md",
+                                    "align": "stretch",
+                                    "width": "full"
+                                  },
+                                  "children": [
+                                    {
+                                      "definition": "tile/row",
+                                      "meta": {
+                                        "forEach": "{!$attrs.actionItems}",
+                                        "forItem": "$actionItem",
+                                        "forIndex": "$actionIndex"
+                                      },
+                                      "attributes": {
+                                        "gap": "md",
+                                        "align": "start",
+                                        "justify": "start",
+                                        "isWrapped": true
+                                      },
+                                      "children": [
+                                        {
+                                          "definition": "tile/column",
+                                          "attributes": {
+                                            "gap": "none",
+                                            "align": "start",
+                                            "width": "stretch"
+                                          },
+                                          "children": [
+                                            {
+                                              "definition": "tile/link",
+                                              "attributes": {
+                                                "text": "{!$actionItem.subject}",
+                                                "href": "{!$actionItem.url}",
+                                                "variant": "primary"
+                                              }
+                                            },
+                                            {
+                                              "definition": "tile/text",
+                                              "attributes": {
+                                                "text": "{!$actionItem.type} \u00b7 {!$actionItem.dueDate}",
+                                                "variant": "caption",
+                                                "color": "muted"
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "definition": "tile/badge",
+                                          "attributes": {
+                                            "label": "{!$actionItem.status}",
+                                            "variant": "{!$actionItem.statusVariant}"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/container",
+                      "id": "00000000-0000-0000-0000-00000000000f",
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": {
+                            "gap": "md",
+                            "align": "stretch",
+                            "width": "full"
+                          },
+                          "id": "00000000-0000-0000-0000-00000000000e",
+                          "children": [
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "none",
+                                "align": "start",
+                                "width": "full"
+                              },
+                              "id": "00000000-0000-0000-0000-00000000000d",
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Client Records",
+                                    "variant": "h6",
+                                    "weight": "bold",
+                                    "color": "default"
+                                  },
+                                  "id": "00000000-0000-0000-0000-00000000000b"
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Household, accounts, and service",
+                                    "variant": "caption",
+                                    "color": "muted"
+                                  },
+                                  "id": "00000000-0000-0000-0000-00000000000c"
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "md",
+                                "align": "stretch",
+                                "width": "full"
+                              },
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "HOUSEHOLD DIRECTORY",
+                                    "variant": "caption",
+                                    "weight": "bold",
+                                    "color": "muted"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/table",
+                                  "attributes": {
+                                    "caption": "Household members and relationship roles",
+                                    "appearance": "striped",
+                                    "size": "sm",
+                                    "columns": [
+                                      {
+                                        "key": "name",
+                                        "header": "Name",
+                                        "columnType": {
+                                          "type": "link",
+                                          "urlKey": "url"
+                                        }
+                                      },
+                                      {
+                                        "key": "role",
+                                        "header": "Relationship"
+                                      }
+                                    ],
+                                    "rows": "{!$attrs.household}"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "FINANCIAL ACCOUNTS",
+                                    "variant": "caption",
+                                    "weight": "bold",
+                                    "color": "muted"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/table",
+                                  "attributes": {
+                                    "caption": "Financial accounts held across the household",
+                                    "appearance": "striped",
+                                    "size": "sm",
+                                    "isStickyHeader": true,
+                                    "sort": {
+                                      "key": "balance",
+                                      "direction": "desc"
+                                    },
+                                    "pagination": {
+                                      "pageSize": 5
+                                    },
+                                    "columns": [
+                                      {
+                                        "key": "name",
+                                        "header": "Account",
+                                        "isSortable": true,
+                                        "isFilterable": true,
+                                        "columnType": {
+                                          "type": "link",
+                                          "urlKey": "url"
+                                        }
+                                      },
+                                      {
+                                        "key": "type",
+                                        "header": "Type",
+                                        "isSortable": true
+                                      },
+                                      {
+                                        "key": "balance",
+                                        "header": "Balance",
+                                        "align": "right",
+                                        "isSortable": true,
+                                        "columnType": {
+                                          "type": "number",
+                                          "format": "currency",
+                                          "currencyCode": "USD",
+                                          "minimumFractionDigits": 0
+                                        }
+                                      }
+                                    ],
+                                    "rows": "{!$attrs.accounts}"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "SERVICE CASES",
+                                    "variant": "caption",
+                                    "weight": "bold",
+                                    "color": "muted"
+                                  }
+                                },
+                                {
+                                  "definition": "tile/table",
+                                  "attributes": {
+                                    "caption": "Open and recent service cases across the household",
+                                    "appearance": "striped",
+                                    "size": "sm",
+                                    "pagination": {
+                                      "pageSize": 6
+                                    },
+                                    "columns": [
+                                      {
+                                        "key": "subject",
+                                        "header": "Subject",
+                                        "isSortable": true,
+                                        "isFilterable": true,
+                                        "columnType": {
+                                          "type": "link",
+                                          "urlKey": "url"
+                                        }
+                                      },
+                                      {
+                                        "key": "status",
+                                        "header": "Status",
+                                        "isSortable": true
+                                      },
+                                      {
+                                        "key": "priority",
+                                        "header": "Priority",
+                                        "isSortable": true
+                                      }
+                                    ],
+                                    "rows": "{!$attrs.cases}"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "sm",
+                    "align": "center",
+                    "justify": "start"
+                  },
+                  "children": [
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "Give me details for my largest open deal",
+                        "variant": "primary",
+                        "iconName": "trending-up",
+                        "actions": {
+                          "click": [
+                            {
+                              "definition": "action/sendMessage",
+                              "attributes": {
+                                "content": "Give me the opportunity profile for \"{!$attrs.largestOpenDealName}\""
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

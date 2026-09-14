@@ -1,0 +1,902 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Opportunity Card",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "id": "c1381ae6-89b9-417a-a922-2902c413dcdf",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": {
+            "borderless": false,
+            "variant": "default"
+          },
+          "id": "3cbe971c-7944-449c-b5b7-35765052ec20",
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": {
+                "gap": "md",
+                "align": "stretch",
+                "width": "full"
+              },
+              "id": "be68d3bc-487b-49bd-8f7f-739e7d83932e",
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "md",
+                    "align": "start",
+                    "justify": "start",
+                    "isWrapped": true
+                  },
+                  "id": "b80f849d-7afc-4d51-b19d-f8a1cd4ef23f",
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "gap": "none",
+                        "align": "start",
+                        "width": "stretch"
+                      },
+                      "id": "56a4f45d-f56a-4782-ac20-a2b7f5f8860d",
+                      "children": [
+                        {
+                          "definition": "tile/text",
+                          "attributes": {
+                            "text": "{!$attrs.oppName}",
+                            "variant": "h4",
+                            "weight": "semibold",
+                            "color": "default",
+                            "isItalic": false,
+                            "isStrikethrough": false
+                          },
+                          "id": "4b3e042f-654c-4c28-b3af-e28aa1a62807"
+                        },
+                        {
+                          "definition": "tile/row",
+                          "attributes": {
+                            "gap": "xs",
+                            "align": "center",
+                            "justify": "start",
+                            "isWrapped": true
+                          },
+                          "id": "f2732885-e86e-4121-b7a8-52b0a9b11396",
+                          "children": [
+                            {
+                              "definition": "tile/icon",
+                              "attributes": {
+                                "name": "user",
+                                "size": "xs",
+                                "color": "muted",
+                                "alt": ""
+                              },
+                              "id": "18924102-2e50-47c4-b33d-fecb1f0d207a"
+                            },
+                            {
+                              "definition": "tile/text",
+                              "attributes": {
+                                "text": "{!$attrs.accountName}",
+                                "variant": "caption",
+                                "color": "muted",
+                                "isItalic": false,
+                                "isStrikethrough": false
+                              },
+                              "id": "f7b890f5-848f-46be-b6f6-84794e9a4d5f"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": {
+                        "gap": "xs",
+                        "align": "end",
+                        "width": "auto"
+                      },
+                      "id": "d1f47a92-6c83-4e15-9b02-7a3e6f2c8d41",
+                      "children": [
+                        {
+                          "definition": "tile/text",
+                          "attributes": {
+                            "text": "{!$attrs.amount}",
+                            "variant": "h4",
+                            "weight": "semibold",
+                            "color": "default",
+                            "isItalic": false,
+                            "isStrikethrough": false
+                          },
+                          "id": "e2a85c17-3d94-4f60-8b13-6c9a7e2f1d58"
+                        },
+                        {
+                          "definition": "tile/badge",
+                          "attributes": {
+                            "label": "{!$attrs.stageName}",
+                            "variant": "primary"
+                          },
+                          "id": "4f42f43e-64fd-43bd-ab26-840fa5b624d9"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "attributes": {
+                    "title": "{!$attrs.healthHeadline}",
+                    "description": "{!$attrs.healthReasons}",
+                    "variant": "{!$attrs.healthVariant}"
+                  },
+                  "id": "9f7ca598-3442-43cc-bf7d-f2e212a3f869",
+                  "children": []
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "sm",
+                    "align": "stretch",
+                    "isWrapped": true,
+                    "justify": "start"
+                  },
+                  "id": "f90a6f43-7d08-443f-99fc-a0efc19d7eaf",
+                  "children": [
+                    {
+                      "definition": "tile/container",
+                      "attributes": {
+                        "borderless": false,
+                        "variant": "default"
+                      },
+                      "id": "c82c309b-298d-4bf0-ba1e-e669f1333963",
+                      "children": [
+                        {
+                          "definition": "tile/row",
+                          "attributes": {
+                            "gap": "sm",
+                            "align": "center",
+                            "justify": "start",
+                            "isWrapped": true
+                          },
+                          "id": "47d66e16-621d-4965-ac18-05317f34a3ec",
+                          "children": [
+                            {
+                              "definition": "tile/icon",
+                              "attributes": {
+                                "name": "activity",
+                                "size": "sm",
+                                "color": "primary",
+                                "alt": ""
+                              },
+                              "id": "af899e4b-29b0-4ff7-9a10-0b65e870e015"
+                            },
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "none",
+                                "align": "start",
+                                "width": "auto"
+                              },
+                              "id": "f3005bfc-8d97-480c-bb72-949a54ca27ad",
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "WIN PROBABILITY",
+                                    "variant": "caption",
+                                    "color": "muted",
+                                    "isItalic": false,
+                                    "isStrikethrough": false
+                                  },
+                                  "id": "a411d875-8e8e-46b2-a10a-7fdd4503d50c"
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attrs.probability}%",
+                                    "weight": "semibold",
+                                    "variant": "body",
+                                    "color": "default",
+                                    "isItalic": false,
+                                    "isStrikethrough": false
+                                  },
+                                  "id": "d4b2d39f-9176-4a42-ba76-42b53f6e89b8"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/container",
+                      "attributes": {
+                        "borderless": false,
+                        "variant": "default"
+                      },
+                      "id": "292b29c6-3af4-42e4-96af-fdd76bd3aa29",
+                      "children": [
+                        {
+                          "definition": "tile/row",
+                          "attributes": {
+                            "gap": "sm",
+                            "align": "center",
+                            "justify": "start",
+                            "isWrapped": true
+                          },
+                          "id": "5172b697-1aca-4cba-af65-293d50c40f19",
+                          "children": [
+                            {
+                              "definition": "tile/icon",
+                              "attributes": {
+                                "name": "calendar",
+                                "size": "sm",
+                                "color": "primary",
+                                "alt": ""
+                              },
+                              "id": "c59b754a-8fc9-4304-b91d-1704fa806066"
+                            },
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "none",
+                                "align": "start",
+                                "width": "auto"
+                              },
+                              "id": "1e6dcf04-7777-441a-b477-e6d69cae805a",
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "CLOSE DATE",
+                                    "variant": "caption",
+                                    "color": "muted",
+                                    "isItalic": false,
+                                    "isStrikethrough": false
+                                  },
+                                  "id": "232953bb-1b77-4984-80ed-5574a57480fc"
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attrs.closeDate}",
+                                    "weight": "semibold",
+                                    "variant": "body",
+                                    "color": "default",
+                                    "isItalic": false,
+                                    "isStrikethrough": false
+                                  },
+                                  "id": "840d0f5f-67a7-4bd4-8c54-14ccac03a9c7"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/container",
+                      "attributes": {
+                        "borderless": false,
+                        "variant": "default"
+                      },
+                      "id": "86bad97c-bc87-449b-ac51-b606347a3ebc",
+                      "children": [
+                        {
+                          "definition": "tile/row",
+                          "attributes": {
+                            "gap": "sm",
+                            "align": "center",
+                            "justify": "start",
+                            "isWrapped": true
+                          },
+                          "id": "ea2ad2fe-b823-4065-b0c1-a71affc986e2",
+                          "children": [
+                            {
+                              "definition": "tile/icon",
+                              "attributes": {
+                                "name": "clock",
+                                "size": "sm",
+                                "color": "warning",
+                                "alt": ""
+                              },
+                              "id": "8911dbb7-84b5-468f-84cc-339af7a934b9"
+                            },
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "none",
+                                "align": "start",
+                                "width": "auto"
+                              },
+                              "id": "1a222013-034b-4ea3-8f0f-142184d0af84",
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "STAGE AGE",
+                                    "variant": "caption",
+                                    "color": "muted",
+                                    "isItalic": false,
+                                    "isStrikethrough": false
+                                  },
+                                  "id": "2faa1c9f-2df9-45e9-a29e-47f98c2e9fd3"
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attrs.daysInStageLabel}",
+                                    "weight": "semibold",
+                                    "variant": "body",
+                                    "color": "default",
+                                    "isItalic": false,
+                                    "isStrikethrough": false
+                                  },
+                                  "id": "ff1df6c3-79e5-4bb6-ac04-4fd91f87d203"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": {
+                    "gap": "xs",
+                    "align": "stretch",
+                    "width": "full"
+                  },
+                  "id": "a1c8f6d2-4e73-4b19-9a5c-7d2e83f01b64",
+                  "children": [
+                    {
+                      "definition": "tile/text",
+                      "attributes": {
+                        "text": "WHAT NEEDS ATTENTION",
+                        "variant": "caption",
+                        "weight": "bold",
+                        "color": "muted"
+                      },
+                      "id": "c2f7a1d8-6b34-4e90-8a15-9d3e72f04b61"
+                    },
+                    {
+                      "definition": "tile/container",
+                      "attributes": {
+                        "borderless": false,
+                        "variant": "default"
+                      },
+                      "id": "d8e3b6f1-2a74-4c58-9b0e-6f2a81d3c749",
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": {
+                            "gap": "sm",
+                            "align": "stretch",
+                            "width": "full"
+                          },
+                          "id": "e6b2f9a3-7c41-4d85-8e19-2a7b6f3d1c08",
+                          "children": [
+                            {
+                              "definition": "tile/row",
+                              "meta": {
+                                "forEach": "{!$attrs.recommendedStepList}",
+                                "forItem": "$step",
+                                "forIndex": "$si"
+                              },
+                              "attributes": {
+                                "gap": "sm",
+                                "align": "center",
+                                "justify": "start",
+                                "isWrapped": false
+                              },
+                              "id": "f1a8c6e2-3b79-4d04-9c25-8e2b7f1a6d93",
+                              "children": [
+                                {
+                                  "definition": "tile/icon",
+                                  "attributes": {
+                                    "name": "{!$step.iconName}",
+                                    "size": "sm",
+                                    "color": "{!$step.iconColor}",
+                                    "alt": ""
+                                  },
+                                  "id": "a7c2f6b1-8d39-4e54-9a06-3b7e2f8c1d45"
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$step.text}",
+                                    "variant": "body",
+                                    "color": "default"
+                                  },
+                                  "id": "b3e8f1a6-4c72-4d90-8e15-6a2b9f3d7c81"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": {
+                    "gap": "md",
+                    "align": "stretch",
+                    "width": "full"
+                  },
+                  "id": "00000000-0000-0000-0000-00000000000b",
+                  "children": [
+                    {
+                      "definition": "tile/container",
+                      "id": "00000000-0000-0000-0000-000000000005",
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": {
+                            "gap": "md",
+                            "align": "stretch",
+                            "width": "full"
+                          },
+                          "id": "00000000-0000-0000-0000-000000000004",
+                          "children": [
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "none",
+                                "align": "start",
+                                "width": "full"
+                              },
+                              "id": "00000000-0000-0000-0000-000000000003",
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Deal Strategy",
+                                    "variant": "h6",
+                                    "weight": "bold",
+                                    "color": "default"
+                                  },
+                                  "id": "00000000-0000-0000-0000-000000000001"
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Client objective and the next step",
+                                    "variant": "caption",
+                                    "color": "muted"
+                                  },
+                                  "id": "00000000-0000-0000-0000-000000000002"
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "md",
+                                "align": "stretch",
+                                "width": "full"
+                              },
+                              "id": "7c4e1a68-2b93-4d57-8f0a-1e6b9c3d2a74",
+                              "children": [
+                                {
+                                  "definition": "tile/column",
+                                  "attributes": {
+                                    "gap": "none",
+                                    "align": "start",
+                                    "width": "full"
+                                  },
+                                  "id": "9a2f6c81-4d73-4e05-8b16-3c7e2a9f1d68",
+                                  "children": [
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "OBJECTIVE",
+                                        "variant": "caption",
+                                        "weight": "bold",
+                                        "color": "muted"
+                                      },
+                                      "id": "b8e3f2a7-6c41-4d90-9e05-2a8b7f1c6d34"
+                                    },
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "{!$attrs.objective}",
+                                        "variant": "body",
+                                        "color": "default"
+                                      },
+                                      "id": "c4a9f6e2-8d13-4b57-9f20-6c7e1a2b3d95"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/column",
+                                  "attributes": {
+                                    "gap": "none",
+                                    "align": "start",
+                                    "width": "full"
+                                  },
+                                  "id": "d2f8a6c1-3e74-4d09-8b25-7a1c6f9e2d48",
+                                  "children": [
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "NEXT STEP",
+                                        "variant": "caption",
+                                        "weight": "bold",
+                                        "color": "muted"
+                                      },
+                                      "id": "e6c2f1a8-4b93-4d54-9a06-3b7e8f2c1d47"
+                                    },
+                                    {
+                                      "definition": "tile/text",
+                                      "attributes": {
+                                        "text": "{!$attrs.nextStep}",
+                                        "variant": "body",
+                                        "color": "default"
+                                      },
+                                      "id": "f1a8c6e2-7d34-4b90-8e15-2c7b9f3d1a68"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "definition": "tile/container",
+                      "id": "00000000-0000-0000-0000-00000000000a",
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": {
+                            "gap": "md",
+                            "align": "stretch",
+                            "width": "full"
+                          },
+                          "id": "00000000-0000-0000-0000-000000000009",
+                          "children": [
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "none",
+                                "align": "start",
+                                "width": "full"
+                              },
+                              "id": "00000000-0000-0000-0000-000000000008",
+                              "children": [
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Activity & Risks",
+                                    "variant": "h6",
+                                    "weight": "bold",
+                                    "color": "default"
+                                  },
+                                  "id": "00000000-0000-0000-0000-000000000006"
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "Interactions, meetings, tasks and open service cases",
+                                    "variant": "caption",
+                                    "color": "muted"
+                                  },
+                                  "id": "00000000-0000-0000-0000-000000000007"
+                                }
+                              ]
+                            },
+                            {
+                              "definition": "tile/column",
+                              "attributes": {
+                                "gap": "md",
+                                "align": "stretch",
+                                "width": "full"
+                              },
+                              "id": "c4e2f7a1-91b3-4d68-8e0a-5b7c2f1d9a36",
+                              "children": [
+                                {
+                                  "definition": "tile/row",
+                                  "attributes": {
+                                    "gap": "sm",
+                                    "align": "center",
+                                    "justify": "start",
+                                    "isWrapped": true
+                                  },
+                                  "id": "a2c8f6e1-3b74-4d90-8e05-1a7b9c2f6d38",
+                                  "children": [
+                                    {
+                                      "definition": "tile/icon",
+                                      "attributes": {
+                                        "name": "clock",
+                                        "size": "sm",
+                                        "color": "muted",
+                                        "alt": ""
+                                      },
+                                      "id": "b6e2f9a3-7c14-4d85-9e10-2a8b6f3d1c07"
+                                    },
+                                    {
+                                      "definition": "tile/column",
+                                      "attributes": {
+                                        "gap": "none",
+                                        "align": "start",
+                                        "width": "stretch"
+                                      },
+                                      "id": "c1f8a6e2-4d73-4b09-8e25-6a7c1f9e2d48",
+                                      "children": [
+                                        {
+                                          "definition": "tile/text",
+                                          "attributes": {
+                                            "text": "LAST INTERACTION",
+                                            "variant": "caption",
+                                            "weight": "bold",
+                                            "color": "muted"
+                                          },
+                                          "id": "d4a9c2f7-8e13-4b56-9f08-2c7e1a6b3d96"
+                                        },
+                                        {
+                                          "definition": "tile/text",
+                                          "attributes": {
+                                            "text": "{!$attrs.lastTouchLabel}",
+                                            "variant": "body",
+                                            "color": "default"
+                                          },
+                                          "id": "e8c2f1a6-3b94-4d54-9a06-7e2b8f1c4d40"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/row",
+                                  "attributes": {
+                                    "gap": "sm",
+                                    "align": "center",
+                                    "justify": "start",
+                                    "isWrapped": true
+                                  },
+                                  "id": "f2a8c6e1-4b73-4d90-8e15-3c7b9f2d1a69",
+                                  "children": [
+                                    {
+                                      "definition": "tile/icon",
+                                      "attributes": {
+                                        "name": "calendar",
+                                        "size": "sm",
+                                        "color": "primary",
+                                        "alt": ""
+                                      },
+                                      "id": "a9d3e6b2-4f71-4c85-9a20-8e1b6d3f2c08"
+                                    },
+                                    {
+                                      "definition": "tile/column",
+                                      "attributes": {
+                                        "gap": "none",
+                                        "align": "start",
+                                        "width": "stretch"
+                                      },
+                                      "id": "b7f2a1e9-3c64-4d80-9e12-6a8b4f2d7c94",
+                                      "children": [
+                                        {
+                                          "definition": "tile/text",
+                                          "attributes": {
+                                            "text": "NEXT MEETING",
+                                            "variant": "caption",
+                                            "weight": "bold",
+                                            "color": "muted"
+                                          },
+                                          "id": "c2f7a1d8-6b34-4e90-8a15-9d3e72f04b62"
+                                        },
+                                        {
+                                          "definition": "tile/text",
+                                          "attributes": {
+                                            "text": "{!$attrs.nextMeetingLabel}",
+                                            "variant": "body",
+                                            "color": "default"
+                                          },
+                                          "id": "d8e3b6f1-2a74-4c58-9b0e-6f2a81d3c750"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "OPEN ACTION ITEMS",
+                                    "variant": "caption",
+                                    "weight": "bold",
+                                    "color": "muted"
+                                  },
+                                  "id": "e6b2f9a3-7c41-4d85-8e19-2a7b6f3d1c09"
+                                },
+                                {
+                                  "definition": "tile/row",
+                                  "meta": {
+                                    "forEach": "{!$attrs.activities}",
+                                    "forItem": "$item",
+                                    "forIndex": "$ai"
+                                  },
+                                  "attributes": {
+                                    "gap": "md",
+                                    "align": "center",
+                                    "justify": "start"
+                                  },
+                                  "id": "a9d3e6b2-4f71-4c85-9a20-8e1b6d3f2c07",
+                                  "children": [
+                                    {
+                                      "definition": "tile/column",
+                                      "attributes": {
+                                        "gap": "none",
+                                        "align": "start",
+                                        "width": "stretch"
+                                      },
+                                      "id": "e1c8f4a6-7b29-4d03-8c15-3a9e2f7b1d48",
+                                      "children": [
+                                        {
+                                          "definition": "tile/link",
+                                          "attributes": {
+                                            "text": "{!$item.subject}",
+                                            "variant": "primary",
+                                            "href": "{!$item.url}"
+                                          },
+                                          "id": "b7f2a1e9-3c64-4d80-9e12-6a8b4f2d7c93"
+                                        },
+                                        {
+                                          "definition": "tile/text",
+                                          "attributes": {
+                                            "text": "{!$item.dueDate}",
+                                            "variant": "caption",
+                                            "color": "muted"
+                                          },
+                                          "id": "d4a9c2f7-8e13-4b56-9f08-2c7e1a6b3d95"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "definition": "tile/spacer",
+                                      "attributes": {
+                                        "size": "fill"
+                                      },
+                                      "id": "f2e7b1a4-9c36-4d08-8b25-1a7c3f9e2d64"
+                                    },
+                                    {
+                                      "definition": "tile/badge",
+                                      "attributes": {
+                                        "label": "{!$item.status}",
+                                        "variant": "{!$item.statusVariant}"
+                                      },
+                                      "id": "a3c8f6e1-2b79-4d54-9a06-7e2b8f1c4d39"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "definition": "tile/text",
+                                  "attributes": {
+                                    "text": "{!$attrs.casesLabel}",
+                                    "variant": "caption",
+                                    "weight": "bold",
+                                    "color": "muted"
+                                  },
+                                  "id": "b8e3f2a7-6c41-4d90-9e05-2a8b7f1c6d35"
+                                },
+                                {
+                                  "definition": "tile/row",
+                                  "meta": {
+                                    "forEach": "{!$attrs.cases}",
+                                    "forItem": "$case",
+                                    "forIndex": "$ci"
+                                  },
+                                  "attributes": {
+                                    "gap": "md",
+                                    "align": "center",
+                                    "justify": "start"
+                                  },
+                                  "id": "c4a9f6e2-8d13-4b57-9f20-6c7e1a2b3d96",
+                                  "children": [
+                                    {
+                                      "definition": "tile/icon",
+                                      "attributes": {
+                                        "name": "activity",
+                                        "size": "sm",
+                                        "color": "warning",
+                                        "alt": ""
+                                      },
+                                      "id": "d2f8a6c1-3e74-4d09-8b25-7a1c6f9e2d49"
+                                    },
+                                    {
+                                      "definition": "tile/column",
+                                      "attributes": {
+                                        "gap": "none",
+                                        "align": "start",
+                                        "width": "stretch"
+                                      },
+                                      "id": "e6c2f1a8-4b93-4d54-9a06-3b7e8f2c1d48",
+                                      "children": [
+                                        {
+                                          "definition": "tile/link",
+                                          "attributes": {
+                                            "text": "{!$case.subject}",
+                                            "variant": "primary",
+                                            "href": "{!$case.url}"
+                                          },
+                                          "id": "f1a8c6e2-7d34-4b90-8e15-2c7b9f3d1a69"
+                                        },
+                                        {
+                                          "definition": "tile/text",
+                                          "attributes": {
+                                            "text": "{!$case.caseNumber}",
+                                            "variant": "caption",
+                                            "color": "muted"
+                                          },
+                                          "id": "a2c8f6e1-3b74-4d90-8e05-1a7b9c2f6d39"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "definition": "tile/spacer",
+                                      "attributes": {
+                                        "size": "fill"
+                                      },
+                                      "id": "b6e2f9a3-7c14-4d85-9e10-2a8b6f3d1c08"
+                                    },
+                                    {
+                                      "definition": "tile/badge",
+                                      "attributes": {
+                                        "label": "{!$case.status}",
+                                        "variant": "warning"
+                                      },
+                                      "id": "c1f8a6e2-4d73-4b09-8e25-6a7c1f9e2d49"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": {
+                    "gap": "sm",
+                    "align": "center",
+                    "justify": "start",
+                    "isWrapped": true
+                  },
+                  "id": "11762a9d-0da3-460c-bf2d-b3e00acdcd91",
+                  "children": [
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "Prep me for this deal",
+                        "variant": "primary",
+                        "iconName": "trending-up",
+                        "actions": {
+                          "click": [
+                            {
+                              "definition": "action/sendMessage",
+                              "attributes": {
+                                "content": "Give me a deal-review brief for the opportunity {!$attrs.oppName} using only the Get Opportunity Profile action: where the deal stands, the top risks, and the single next step. Do not summarize alerts or call the Summarize Account Record Alerts action."
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "id": "a3a12aa8-b0bd-4918-9d66-9618f8ae506c"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

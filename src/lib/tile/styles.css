@@ -1,0 +1,422 @@
+/* ==========================================================================
+   Salesforce UiWidgetBundle (tile/*) charter.
+   ========================================================================== */
+
+.tile-widget {
+  --tile-text: #16325c;
+  --tile-muted: #5c6b82;
+  --tile-primary: #0176d3;
+  --tile-success: #2e844a;
+  --tile-warning: #a86403;
+  --tile-danger: #ba0517;
+  --tile-border: #e5e9ef;
+  --tile-surface: #ffffff;
+  --tile-surface-alt: #f6f8fb;
+
+  color: var(--tile-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+/* --- layout -------------------------------------------------------------- */
+
+.tile-container {
+  border: 1px solid var(--tile-border);
+  border-radius: 12px;
+  padding: 1rem;
+  background: var(--tile-surface);
+}
+
+.tile-container--borderless {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.tile-column,
+.tile-row {
+  min-width: 0;
+}
+
+/* --- text ---------------------------------------------------------------- */
+
+.tile-text {
+  margin: 0;
+}
+
+.tile-text--h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tile-text--h6 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.tile-text--body {
+  font-size: 0.875rem;
+}
+
+.tile-text--caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.tile-text--w-semibold {
+  font-weight: 600;
+}
+.tile-text--w-bold {
+  font-weight: 700;
+}
+
+.tile-text--c-muted {
+  color: var(--tile-muted);
+}
+.tile-text--c-primary {
+  color: var(--tile-primary);
+}
+.tile-text--c-success {
+  color: var(--tile-success);
+}
+.tile-text--c-warning {
+  color: var(--tile-warning);
+}
+.tile-text--c-default {
+  color: var(--tile-text);
+}
+
+/* --- avatar -------------------------------------------------------------- */
+
+.tile-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--tile-primary);
+  color: #fff;
+  font-weight: 600;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 0.875rem;
+}
+
+.tile-avatar[data-size="lg"] {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1rem;
+}
+
+/* --- badge --------------------------------------------------------------- */
+
+.tile-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--tile-surface-alt);
+  color: var(--tile-muted);
+  border: 1px solid var(--tile-border);
+}
+
+.tile-badge--primary {
+  background: #eaf4fe;
+  color: var(--tile-primary);
+  border-color: #cfe4fb;
+}
+.tile-badge--success {
+  background: #e6f4ea;
+  color: var(--tile-success);
+  border-color: #cdebd5;
+}
+.tile-badge--warning {
+  background: #fdf3e3;
+  color: var(--tile-warning);
+  border-color: #f6e2c0;
+}
+.tile-badge--danger {
+  background: #fdeceb;
+  color: var(--tile-danger);
+  border-color: #f7cfcc;
+}
+
+/* --- icon ---------------------------------------------------------------- */
+
+.tile-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--tile-muted);
+}
+.tile-icon--primary {
+  color: var(--tile-primary);
+}
+.tile-icon--success {
+  color: var(--tile-success);
+}
+.tile-icon--warning {
+  color: var(--tile-warning);
+}
+.tile-icon--danger {
+  color: var(--tile-danger);
+}
+
+/* --- progress ------------------------------------------------------------ */
+
+.tile-progress {
+  width: 100%;
+}
+
+.tile-progress-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.tile-progress-pct {
+  color: var(--tile-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.tile-progress-track {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--tile-surface-alt);
+  overflow: hidden;
+}
+
+.tile-progress[data-size="sm"] .tile-progress-track {
+  height: 0.375rem;
+}
+
+.tile-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--tile-primary);
+  transition: width 0.3s ease;
+}
+.tile-progress-fill--success {
+  background: var(--tile-success);
+}
+.tile-progress-fill--warning {
+  background: var(--tile-warning);
+}
+.tile-progress-fill--danger {
+  background: var(--tile-danger);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile-progress-fill {
+    transition: none;
+  }
+}
+
+/* --- markdown / link ----------------------------------------------------- */
+
+.tile-markdown p {
+  margin: 0 0 0.5rem;
+}
+.tile-markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.tile-link {
+  color: var(--tile-primary);
+  text-decoration: none;
+}
+.tile-link:hover {
+  text-decoration: underline;
+}
+
+/* --- button (display-only) ---------------------------------------------- */
+
+.tile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.875rem;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: not-allowed;
+}
+.tile-btn--primary {
+  background: var(--tile-primary);
+  color: #fff;
+}
+.tile-btn--ghost {
+  background: transparent;
+  border-color: var(--tile-border);
+  color: var(--tile-text);
+}
+
+/* --- table --------------------------------------------------------------- */
+
+.tile-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.tile-table-filter {
+  margin-bottom: 0.5rem;
+  padding: 0.375rem 0.625rem;
+  border: 1px solid var(--tile-border);
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  width: 100%;
+  max-width: 16rem;
+}
+
+.tile-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.tile-table-caption {
+  caption-side: top;
+  text-align: left;
+  color: var(--tile-muted);
+  font-size: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.tile-table th,
+.tile-table td {
+  padding: 0.5rem 0.625rem;
+  text-align: left;
+  border-bottom: 1px solid var(--tile-border);
+  vertical-align: top;
+}
+
+.tile-table th {
+  color: var(--tile-muted);
+  font-weight: 600;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tile-table .align-right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.tile-table--striped tbody tr:nth-child(even) {
+  background: var(--tile-surface-alt);
+}
+
+.tile-table--sticky thead th {
+  position: sticky;
+  top: 0;
+  background: var(--tile-surface);
+  z-index: 1;
+}
+
+.tile-table-sort {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tile-table-arrow {
+  color: var(--tile-primary);
+  font-size: 0.625rem;
+}
+
+.tile-table-empty {
+  color: var(--tile-muted);
+  text-align: center;
+  font-style: italic;
+}
+
+.tile-table-pager {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--tile-muted);
+}
+
+.tile-table-pager button {
+  padding: 0.25rem 0.625rem;
+  border: 1px solid var(--tile-border);
+  border-radius: 6px;
+  background: var(--tile-surface);
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+
+.tile-table-pager button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- callout ------------------------------------------------------------- */
+
+.tile-callout {
+  width: 100%;
+  border: 1px solid var(--tile-border);
+  border-left-width: 3px;
+  border-radius: 8px;
+  padding: 0.625rem 0.875rem;
+  background: var(--tile-surface-alt);
+}
+
+.tile-callout-title {
+  font-weight: 600;
+  margin-bottom: 0.125rem;
+}
+
+.tile-callout-body {
+  font-size: 0.8125rem;
+  color: var(--tile-muted);
+}
+
+.tile-callout--success {
+  border-left-color: var(--tile-success);
+  background: #e6f4ea;
+}
+.tile-callout--warning {
+  border-left-color: var(--tile-warning);
+  background: #fdf3e3;
+}
+.tile-callout--danger,
+.tile-callout--error {
+  border-left-color: var(--tile-danger);
+  background: #fdeceb;
+}
+.tile-callout--info,
+.tile-callout--primary {
+  border-left-color: var(--tile-primary);
+  background: #eaf4fe;
+}
+
+/* --- unknown ------------------------------------------------------------- */
+
+.tile-unknown {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 6px;
+  border: 1px dashed var(--tile-border);
+  background: var(--tile-surface-alt);
+  color: var(--tile-muted);
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.75rem;
+}

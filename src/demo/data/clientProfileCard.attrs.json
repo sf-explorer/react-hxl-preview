@@ -1,0 +1,44 @@
+{
+  "_comment": "Real Jaskirat Rangi data (synthetic wealth client, Person Account) shaped to the clientProfileCard attribute contract. This is the payload a Custom Lightning Type renderer.json (Agentforce, flat $attrs.<field>) or MCP wrapper/payload CLT (nested outputValues.clientProfile.<field>) would map into the widget. Standard objects only: Account, AccountContactRelation, FinancialPlan, FinancialGoal, FinancialAccount, plus Case, Opportunity & PersonLifeEvent for the latent (payload-only) arrays. Covers the rendered sections, header, three KPIs (incl. computed netWorth), data-driven advisorSnapshot, goals (with color/url/captionLabel), and the accounts table (with type/url deep-links). The household/cases/opportunities/lifeEvents/allocation arrays are returned live in-org and omitted here rather than hand-authored. A reference snapshot, not a live capture; values may drift from the org.",
+  "attributes": {
+    "clientName": "Jaskirat Rangi",
+    "clientInitials": "JR",
+    "clientTitle": "Wealth Client",
+    "clientEmail": "jaskirat@examples.com",
+    "advisorName": "Raveesh Raina",
+    "householdName": "Rangi Household",
+    "segment": "High Net Worth",
+    "investableAssets": "$2,150,000",
+    "mortgageOutstanding": "$531,000",
+    "netWorth": "$1,619,000",
+    "advisorSnapshot": "**Jaskirat Rangi** is a **High Net Worth** client managed by Raveesh Raina in the Rangi Household. Investable assets of **$2,150,000** against **$531,000** in mortgage debt put net investable worth near **$1,619,000**. Across 8 tracked goals, **Retirement Fund** is best funded at **33%**, while **Purchase Vacation Property** is furthest behind at **0%** and may warrant a funding conversation. Recent activity: **5** open opportunities in flight and a recent life event (**Retirement**, Feb 17, 2027). Review the allocation drift below before the next check-in.",
+    "goals": [
+      { "name": "Retirement Fund",           "amountLabel": "$658,904 of $2,000,000", "pct": 33, "color": "success", "captionLabel": "Retirement Fund: $658,904 (33%)" },
+      { "name": "Annual Family Vacation",     "amountLabel": "$12,548 of $50,000",     "pct": 25, "color": "warning", "captionLabel": "Annual Family Vacation: $12,548 (25%)" },
+      { "name": "Build Emergency Reserve",    "amountLabel": "$43,141 of $200,000",    "pct": 22, "color": "warning", "captionLabel": "Build Emergency Reserve: $43,141 (22%)" },
+      { "name": "Pay Off Mortgage Early",     "amountLabel": "$27,902 of $450,000",    "pct": 6,  "color": "warning", "captionLabel": "Pay Off Mortgage Early: $27,902 (6%)" }
+    ],
+    "_goals_note": "Apex sorts all tracked goals by funding fraction DESC and keeps the top 4 (goals with no target sink to the bottom); color = pct>=33 ? success : warning. Each goal also carries a url deep-link (omitted here).",
+    "accounts": [
+      { "name": "401k-RANGI Corporate-Fidelity",     "type": "Investment Account", "balance": 1040000 },
+      { "name": "Rangi Home Mortgage",               "type": "Mortgage",           "balance": 625000 },
+      { "name": "Priya Rangi 401k",                  "type": "Investment Account", "balance": 465000 },
+      { "name": "Traditional IRA-RANGI",             "type": "Investment Account", "balance": 452600 },
+      { "name": "Priya Rangi Roth IRA",              "type": "Investment Account", "balance": 66600 },
+      { "name": "529-RANGI-Vanguard Education Plan", "type": "Investment Account", "balance": 58300 },
+      { "name": "Kiran Rangi UTMA Custodial",        "type": "Investment Account", "balance": 39400 },
+      { "name": "Arjun Rangi Roth IRA",              "type": "Investment Account", "balance": 16500 },
+      { "name": "Arjun Rangi Brokerage",             "type": "Investment Account", "balance": 11600 }
+    ],
+    "_accounts_note": "Each account row also carries a url deep-link (base + /lightning/r/FinancialAccount/<id>/view), omitted here since ids are org-specific.",
+    "household": [
+      { "name": "Jaskirat Rangi", "role": "Client",    "email": "jaskirat@examples.com" },
+      { "name": "Priya Rangi",    "role": "Spouse",    "email": "priya@examples.com" },
+      { "name": "Arjun Rangi",    "role": "Dependent", "email": "arjun@examples.com" },
+      { "name": "Kiran Rangi",    "role": "Dependent", "email": "kiran@examples.com" }
+    ],
+    "recordUrl": "https://<your-org>.my.salesforce.com/lightning/r/Account/001XXXXXXXXXXXXXXX/view",
+    "householdUrl": "https://<your-org>.my.salesforce.com/lightning/r/Account/001XXXXXXXXXXXXXXX/view",
+    "clientMailto": "mailto:jaskirat@examples.com"
+  }
+}
