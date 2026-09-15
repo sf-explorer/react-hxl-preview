@@ -1,0 +1,5 @@
+{
+  "title" : "Client Profile Card (Agentforce)",
+  "description" : "Agentforce action-output CLT for the Client Profile Card. Typed at the ClientProfileAction Apex inner class so it binds flat ($attrs.<field>) as the action's Output Rendering in LEX. Same widget & Apex as MCP wrapper CLT clientProfileCardResult.",
+  "lightning:type" : "@apexClassType/c__ClientProfileAction$ClientProfile"
+}

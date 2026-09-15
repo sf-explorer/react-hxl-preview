@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Returns a wealth client&apos;s profile overview (contact, segment, investable assets, mortgage, financial goals, financial accounts, household). Identify the client from the conversation: pass a Person Account Id when you have one (in Lightning this comes from the open record), or pass the client&apos;s name &amp; the action resolves it. If neither is available, the card renders a &quot;name a client&quot; prompt rather than guessing, so ask the user which client they mean rather than asking for an Id.</description>
+    <developerName>Get_Client_Profile</developerName>
+    <invocationTarget>ClientProfileAction</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Client_Profile</localDeveloperName>
+    <masterLabel>Get Client Profile</masterLabel>
+</GenAiFunction>

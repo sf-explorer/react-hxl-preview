@@ -1,6 +1,9 @@
 node_modules
 dist
+dist-demo
 *.log
 .DS_Store
 hxl-widget-gallery
 .sf
+.sfdx
+.cursor

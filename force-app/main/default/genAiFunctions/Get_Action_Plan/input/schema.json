@@ -1,0 +1,13 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "spec" : {
+      "title" : "Grid spec (JSON)",
+      "description" : "JSON describing the grid: optional title/subtitle/note/confirmLabel/cancelLabel, a 'columns' array (key, label, type[readonly|text|select|switch], options for selects, optional placeholder) and a 'rows' array (each row has an 'id' plus a value per column key). Leave blank to render a portable demo triage plan.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

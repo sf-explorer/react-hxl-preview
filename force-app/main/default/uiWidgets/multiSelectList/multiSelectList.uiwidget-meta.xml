@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Notify Teammates (Multi-Select)</masterLabel>
+    <description>Multi-select list demo: a meta.forEach list where each row renders a tile/switch with a data-bound unique id (notify_&lt;id&gt;), and Send Updates gathers one { notify_&lt;id&gt;: true/false } payload. Built for HXL rendering in Agentforce and MCP channels.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

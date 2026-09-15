@@ -26,28 +26,6 @@ body {
   max-width: 60ch;
 }
 
-.demo-modes {
-  display: flex;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-.demo-modes button {
-  padding: 0.5rem 1rem;
-  border: 1px solid #cbd5e0;
-  background: #fff;
-  border-radius: 8px;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.demo-modes button.active {
-  border-color: #0176d3;
-  background: #eaf4fe;
-  color: #0176d3;
-}
-
 .demo-toolbar {
   display: flex;
   flex-wrap: wrap;
@@ -71,7 +49,25 @@ body {
   font-weight: 600;
 }
 
-.demo-grid {
+/* Share sits apart from the fixture buttons, pushed to the right. */
+.demo-toolbar button.demo-share {
+  margin-left: auto;
+  border-color: #00829a;
+  background: #00829a;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Config + data collapsed on top; the two columns sit side by side when open. */
+.demo-config--top {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  padding: 0 1rem 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.demo-config-body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
@@ -79,7 +75,7 @@ body {
 }
 
 @media (max-width: 800px) {
-  .demo-grid {
+  .demo-config-body {
     grid-template-columns: 1fr;
   }
 }
@@ -175,6 +171,9 @@ body {
   background: #fff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  position: sticky;
-  top: 1rem;
+}
+
+/* Full-width preview — the rendered card spans the whole row. */
+.demo-preview--full {
+  width: 100%;
 }

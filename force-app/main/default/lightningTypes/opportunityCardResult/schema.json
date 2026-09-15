@@ -1,0 +1,24 @@
+{
+  "title": "Opportunity Card Result",
+  "description": "Invocable-action result envelope for the OpportunityAction MCP tool. Its own resourceUri so the client template cache maps to this widget layout.",
+  "type": "object",
+  "lightning:type": "lightning__objectType",
+  "unevaluatedProperties": false,
+  "lightning:tags": [
+    "mcp"
+  ],
+  "properties": {
+    "actionName": {
+      "title": "Action Name",
+      "lightning:type": "lightning__textType"
+    },
+    "isSuccess": {
+      "title": "Is Success",
+      "lightning:type": "lightning__booleanType"
+    },
+    "outputValues": {
+      "title": "Output Values",
+      "lightning:type": "c__opportunityOutputValues"
+    }
+  }
+}

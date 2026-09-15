@@ -1,0 +1,102 @@
+{
+  "title": "Action Plan Widget",
+  "description": "Generic, caller-driven editable action grid. The caller supplies flattened rows[].cells[] — each cell typed readonly/select/text/switch with its own data-bound inputId — plus title/subtitle/note and button labels. Legacy actionTypes/owners/actions are retained (a deployed schema property cannot be removed) but are no longer bound by the widget.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "title":        { "title": "Title",         "description": "Card heading",                       "lightning:type": "lightning__textType" },
+        "subtitle":     { "title": "Subtitle",      "description": "Optional caption under the title",   "lightning:type": "lightning__textType" },
+        "note":         { "title": "Note",          "description": "Optional footer note (muted caption)", "lightning:type": "lightning__textType" },
+        "confirmLabel": { "title": "Confirm Label", "description": "Primary button label",                "lightning:type": "lightning__textType" },
+        "cancelLabel":  { "title": "Cancel Label",  "description": "Secondary button label",              "lightning:type": "lightning__textType" },
+        "rows": {
+          "title": "Rows",
+          "description": "Flattened grid rows; each row has an id and a list of typed cells",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "id": { "title": "Row Id", "description": "Unique row id; drives each cell's inputId", "lightning:type": "lightning__textType" },
+              "cells": {
+                "title": "Cells",
+                "description": "Typed cells for this row (one per column)",
+                "lightning:type": "lightning__listType",
+                "items": {
+                  "lightning:type": "lightning__objectType",
+                  "properties": {
+                    "key":         { "title": "Key",         "description": "Owning column key",                              "lightning:type": "lightning__textType" },
+                    "label":       { "title": "Label",       "description": "Column label",                                   "lightning:type": "lightning__textType" },
+                    "type":        { "title": "Type",        "description": "Resolved cell type (readonly/text/select/switch)", "lightning:type": "lightning__textType" },
+                    "inputId":     { "title": "Input Id",    "description": "Data-bound input id (<key>_<rowId>)",            "lightning:type": "lightning__textType" },
+                    "value":       { "title": "Value",       "description": "Display/edit value for readonly/text/select",    "lightning:type": "lightning__textType" },
+                    "placeholder": { "title": "Placeholder", "description": "textField placeholder",                          "lightning:type": "lightning__textType" },
+                    "checked":     { "title": "Checked",     "description": "Switch state",                                   "lightning:type": "lightning__booleanType" },
+                    "isReadonly":  { "title": "Is Readonly", "description": "Render as display text",                         "lightning:type": "lightning__booleanType" },
+                    "isText":      { "title": "Is Text",     "description": "Render as a text field",                        "lightning:type": "lightning__booleanType" },
+                    "isSelect":    { "title": "Is Select",   "description": "Render as a select",                            "lightning:type": "lightning__booleanType" },
+                    "isSwitch":    { "title": "Is Switch",   "description": "Render as a switch",                            "lightning:type": "lightning__booleanType" },
+                    "options": {
+                      "title": "Options",
+                      "description": "Select options",
+                      "lightning:type": "lightning__listType",
+                      "items": {
+                        "lightning:type": "lightning__objectType",
+                        "properties": {
+                          "label": { "title": "Label", "description": "Display label", "lightning:type": "lightning__textType" },
+                          "value": { "title": "Value", "description": "Option value",  "lightning:type": "lightning__textType" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "actionTypes": {
+          "title": "Action Types (legacy)",
+          "description": "Legacy shared option list; retained for backward compatibility, not bound by the current widget",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": { "title": "Label", "description": "Display label", "lightning:type": "lightning__textType" },
+              "value": { "title": "Value", "description": "Option value",  "lightning:type": "lightning__textType" }
+            }
+          }
+        },
+        "owners": {
+          "title": "Owners (legacy)",
+          "description": "Legacy shared option list; retained for backward compatibility, not bound by the current widget",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": { "title": "Label", "description": "Display label", "lightning:type": "lightning__textType" },
+              "value": { "title": "Value", "description": "Option value",  "lightning:type": "lightning__textType" }
+            }
+          }
+        },
+        "actions": {
+          "title": "Actions (legacy)",
+          "description": "Legacy triage rows; retained for backward compatibility, superseded by rows[].cells[]",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "id":            { "title": "Id",            "description": "Unique row id",           "lightning:type": "lightning__textType" },
+              "task":          { "title": "Task",          "description": "Task name",               "lightning:type": "lightning__textType" },
+              "justification": { "title": "Justification", "description": "Why proposed",            "lightning:type": "lightning__textType" },
+              "action":        { "title": "Action",        "description": "Selected action value",   "lightning:type": "lightning__textType" },
+              "owner":         { "title": "Owner",         "description": "Selected owner value",    "lightning:type": "lightning__textType" },
+              "due":           { "title": "Due",           "description": "Due label",               "lightning:type": "lightning__textType" },
+              "approved":      { "title": "Approved",      "description": "Approval toggle state",   "lightning:type": "lightning__booleanType" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "renderer": {
+    "componentOverrides": {
+      "$": {
+        "definition": "@widget/c/clientProfileCard",
+        "attributes": {
+          "clientName": "{!$attrs.outputValues.clientProfile.clientName}",
+          "clientInitials": "{!$attrs.outputValues.clientProfile.clientInitials}",
+          "clientTitle": "{!$attrs.outputValues.clientProfile.clientTitle}",
+          "segment": "{!$attrs.outputValues.clientProfile.segment}",
+          "investableAssets": "{!$attrs.outputValues.clientProfile.investableAssets}",
+          "mortgageOutstanding": "{!$attrs.outputValues.clientProfile.mortgageOutstanding}",
+          "netWorth": "{!$attrs.outputValues.clientProfile.netWorth}",
+          "relationshipPipeline": "{!$attrs.outputValues.clientProfile.relationshipPipeline}",
+          "relationshipPipelineRaw": "{!$attrs.outputValues.clientProfile.relationshipPipelineRaw}",
+          "wonLifetime": "{!$attrs.outputValues.clientProfile.wonLifetime}",
+          "wonLifetimeRaw": "{!$attrs.outputValues.clientProfile.wonLifetimeRaw}",
+          "openOppCount": "{!$attrs.outputValues.clientProfile.openOppCount}",
+          "advisorSnapshot": "{!$attrs.outputValues.clientProfile.advisorSnapshot}",
+          "advisorName": "{!$attrs.outputValues.clientProfile.advisorName}",
+          "householdName": "{!$attrs.outputValues.clientProfile.householdName}",
+          "householdCount": "{!$attrs.outputValues.clientProfile.householdCount}",
+          "householdOverflow": "{!$attrs.outputValues.clientProfile.householdOverflow}",
+          "largestOpenDealId": "{!$attrs.outputValues.clientProfile.largestOpenDealId}",
+          "largestOpenDealName": "{!$attrs.outputValues.clientProfile.largestOpenDealName}",
+          "goals": "{!$attrs.outputValues.clientProfile.goals}",
+          "household": "{!$attrs.outputValues.clientProfile.household}",
+          "actionItems": "{!$attrs.outputValues.clientProfile.actionItems}",
+          "accounts": "{!$attrs.outputValues.clientProfile.accounts}",
+          "cases": "{!$attrs.outputValues.clientProfile.cases}",
+          "recordUrl": "{!$attrs.outputValues.clientProfile.recordUrl}",
+          "householdUrl": "{!$attrs.outputValues.clientProfile.householdUrl}"
+        }
+      }
+    }
+  }
+}

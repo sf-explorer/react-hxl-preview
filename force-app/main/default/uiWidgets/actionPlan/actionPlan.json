@@ -1,0 +1,124 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Action Plan",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": {},
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "md" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "sm", "align": "center", "justify": "start" },
+                  "children": [
+                    { "definition": "tile/icon", "attributes": { "name": "activity", "size": "lg", "color": "default" } },
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "none" },
+                      "children": [
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.title}", "variant": "h3", "weight": "bold" } },
+                        { "definition": "tile/text", "meta": { "if": "{!$attrs.subtitle}" }, "attributes": { "text": "{!$attrs.subtitle}", "variant": "caption", "color": "muted" } }
+                      ]
+                    }
+                  ]
+                },
+                { "definition": "tile/separator", "attributes": { "orientation": "horizontal" } },
+                {
+                  "definition": "tile/column",
+                  "attributes": { "gap": "sm", "width": "full" },
+                  "children": [
+                    {
+                      "definition": "tile/container",
+                      "meta": { "forEach": "{!$attrs.rows}", "forItem": "$row" },
+                      "attributes": {},
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "xs", "width": "full" },
+                          "children": [
+                            {
+                              "definition": "tile/row",
+                              "attributes": { "gap": "md", "align": "end", "isWrapped": true, "width": "full" },
+                              "children": [
+                                {
+                                  "definition": "tile/column",
+                                  "meta": { "forEach": "{!$row.cells}", "forItem": "$cell" },
+                                  "attributes": { "gap": "xs", "width": "stretch" },
+                                  "children": [
+                                    {
+                                      "definition": "tile/column",
+                                      "meta": { "if": "{!$cell.isReadonly}" },
+                                      "attributes": { "gap": "none" },
+                                      "children": [
+                                        { "definition": "tile/text", "attributes": { "text": "{!$cell.label}", "variant": "caption", "color": "muted" } },
+                                        { "definition": "tile/text", "attributes": { "text": "{!$cell.value}", "variant": "body", "weight": "semibold" } }
+                                      ]
+                                    },
+                                    {
+                                      "definition": "tile/select",
+                                      "meta": { "if": "{!$cell.isSelect}" },
+                                      "attributes": { "id": "{!$cell.inputId}", "label": "{!$cell.label}", "value": "{!$cell.value}", "options": "{!$cell.options}" }
+                                    },
+                                    {
+                                      "definition": "tile/textField",
+                                      "meta": { "if": "{!$cell.isText}" },
+                                      "attributes": { "id": "{!$cell.inputId}", "label": "{!$cell.label}", "value": "{!$cell.value}", "placeholder": "{!$cell.placeholder}" }
+                                    },
+                                    {
+                                      "definition": "tile/switch",
+                                      "meta": { "if": "{!$cell.isSwitch}" },
+                                      "attributes": { "id": "{!$cell.inputId}", "label": "{!$cell.label}", "isChecked": "{!$cell.checked}" }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            { "definition": "tile/separator", "attributes": { "orientation": "horizontal" } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/text",
+                  "meta": { "if": "{!$attrs.note}" },
+                  "attributes": { "text": "{!$attrs.note}", "variant": "caption", "color": "muted" }
+                },
+                { "definition": "tile/spacer", "attributes": { "size": "md" } },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "sm", "justify": "end" },
+                  "children": [
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "{!$attrs.cancelLabel}",
+                        "variant": "secondary",
+                        "actions": { "click": [ { "definition": "planCancel", "attributes": {}, "inputs": "none" } ] }
+                      }
+                    },
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "{!$attrs.confirmLabel}",
+                        "variant": "primary",
+                        "actions": { "click": [ { "definition": "planConfirm", "attributes": {}, "inputs": "auto" } ] }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Action Plan (Triage)</masterLabel>
+    <description>Agent-proposed triage plan: each row carries data-bound unique ids (action_&lt;id&gt;, owner_&lt;id&gt;, due_&lt;id&gt;, approve_&lt;id&gt;) so the whole revised plan is gathered as one payload, with shared owners/actionTypes option lists. Built for HXL rendering in Agentforce and MCP channels.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

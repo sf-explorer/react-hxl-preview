@@ -1,22 +1,25 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import {
-  HxlSurface,
   TileWidgetRenderer,
-  createDefaultHxlRegistry,
   createDefaultTileRegistry,
   type TileWidgetBundle,
 } from "../lib"
-import { fixtures } from "./fixtures"
 
-import clientProfileCard from "./data/clientProfileCard.json"
+// Widget bundles are read from the deployable source of truth
+// (force-app/main/default/uiWidgets/*), not a demo-local copy.
+import clientProfileCard from "../../force-app/main/default/uiWidgets/clientProfileCard/clientProfileCard.json"
 import clientProfileAttrs from "./data/clientProfileCard.attrs.json"
-import opportunityCard from "./data/opportunityCard.json"
+import opportunityCard from "../../force-app/main/default/uiWidgets/opportunityCard/opportunityCard.json"
 import opportunityAttrs from "./data/opportunityCard.attrs.json"
-import accountUpdateConfirm from "./data/accountUpdateConfirm.json"
+import accountUpdateConfirm from "../../force-app/main/default/uiWidgets/accountUpdateConfirm/accountUpdateConfirm.json"
 import accountUpdateConfirmAttrs from "./data/accountUpdateConfirm.attrs.json"
+import multiSelectList from "../../force-app/main/default/uiWidgets/multiSelectList/multiSelectList.json"
+import multiSelectListAttrs from "./data/multiSelectList.attrs.json"
+import actionPlan from "../../force-app/main/default/uiWidgets/actionPlan/actionPlan.json"
+import actionPlanAttrs from "./data/actionPlan.attrs.json"
+import { buildShareUrl } from "./share"
 
-// Build registries once — they are lookup tables, not per-frame state.
-const hxlRegistry = createDefaultHxlRegistry()
+// Build the registry once — it's a lookup table, not per-frame state.
 const tileRegistry = createDefaultTileRegistry()
 
 interface TileFixture {
@@ -41,40 +44,30 @@ const tileFixtures: TileFixture[] = [
     widget: accountUpdateConfirm as unknown as TileWidgetBundle,
     attrs: (accountUpdateConfirmAttrs as any).attributes,
   },
+  {
+    name: "Notify Teammates (multi-select)",
+    widget: multiSelectList as unknown as TileWidgetBundle,
+    attrs: (multiSelectListAttrs as any).attributes,
+  },
+  {
+    name: "Action Plan (generic)",
+    widget: actionPlan as unknown as TileWidgetBundle,
+    attrs: (actionPlanAttrs as any).attributes,
+  },
 ]
 
-type Mode = "tile" | "hxl"
-
 export function App() {
-  const [mode, setMode] = useState<Mode>("tile")
-
   return (
     <div className="demo">
       <header className="demo-header">
         <h1>React HXL Viewer</h1>
         <p>
-          Preview a declarative HXL experience from a config plus JSON data.
-          Same config + same data → same UI.
+          Preview a Salesforce UiWidgetBundle (tile/*) from a config plus JSON
+          data. Same config + same data → same UI.
         </p>
-        <div className="demo-modes">
-          <button
-            type="button"
-            className={mode === "tile" ? "active" : ""}
-            onClick={() => setMode("tile")}
-          >
-            Salesforce widget (tile/*)
-          </button>
-          <button
-            type="button"
-            className={mode === "hxl" ? "active" : ""}
-            onClick={() => setMode("hxl")}
-          >
-            Spec.md dialect
-          </button>
-        </div>
       </header>
 
-      {mode === "tile" ? <TilePlayground /> : <HxlPlayground />}
+      <TilePlayground />
     </div>
   )
 }
@@ -114,12 +107,28 @@ function useEditableJson(initial: Record<string, unknown>) {
 
 function TilePlayground() {
   const [index, setIndex] = useState(0)
+  const [shareState, setShareState] = useState<"idle" | "copied" | "error">("idle")
   const fixture = tileFixtures[index]
   const attrs = useEditableJson(fixture.attrs)
 
   function select(i: number) {
     setIndex(i)
+    setShareState("idle")
     attrs.reset(tileFixtures[i].attrs)
+  }
+
+  // Build a headlessexperiencelayer.com link for the widget + current $attrs,
+  // copy it to the clipboard, and open the public viewer in a new tab.
+  async function share() {
+    try {
+      const url = await buildShareUrl(fixture.widget, attrs.value)
+      await navigator.clipboard?.writeText(url)
+      setShareState("copied")
+      window.open(url, "_blank", "noopener")
+      setTimeout(() => setShareState("idle"), 2000)
+    } catch {
+      setShareState("error")
+    }
   }
 
   return (
@@ -135,114 +144,62 @@ function TilePlayground() {
             {f.name}
           </button>
         ))}
+        <button
+          type="button"
+          className="demo-share"
+          onClick={share}
+          title="Copy a headlessexperiencelayer.com link and open it in a new tab"
+        >
+          {shareState === "copied"
+            ? "Link copied ✓"
+            : shareState === "error"
+              ? "Share failed"
+              : "Share ↗"}
+        </button>
       </div>
 
-      <div className="demo-grid">
-        <section className="demo-pane">
-          <details className="demo-config">
-            <summary>
+      <details className="demo-config demo-config--top">
+        <summary>
+          <h2>config &amp; data</h2>
+          <span className="demo-hint">widget JSON + editable $attrs</span>
+        </summary>
+        <div className="demo-config-body">
+          <div className="demo-config-col">
+            <div className="demo-pane-header">
               <h2>widget config</h2>
               <span className="demo-hint">read-only — the .uiwidget JSON</span>
-            </summary>
+            </div>
             <pre className="demo-code demo-code--config">
               {JSON.stringify(fixture.widget, null, 2)}
             </pre>
-          </details>
-
-          <div className="demo-pane-header">
-            <h2>$attrs data</h2>
-            <span className="demo-hint">editable — try changing a value</span>
           </div>
-          <textarea
-            className={`demo-inputs${attrs.error ? " has-error" : ""}`}
-            value={attrs.text}
-            spellCheck={false}
-            onChange={(e) => attrs.setText(e.target.value)}
-          />
-          {attrs.error && <p className="demo-error">Invalid JSON: {attrs.error}</p>}
-        </section>
 
-        <section className="demo-pane">
-          <div className="demo-pane-header">
-            <h2>preview</h2>
-            <span className="demo-hint">{fixture.widget.title}</span>
-          </div>
-          <div className="demo-preview">
-            <TileWidgetRenderer
-              widget={fixture.widget}
-              attrs={attrs.value}
-              registry={tileRegistry}
+          <div className="demo-config-col">
+            <div className="demo-pane-header">
+              <h2>$attrs data</h2>
+              <span className="demo-hint">editable — try changing a value</span>
+            </div>
+            <textarea
+              className={`demo-inputs${attrs.error ? " has-error" : ""}`}
+              value={attrs.text}
+              spellCheck={false}
+              onChange={(e) => attrs.setText(e.target.value)}
             />
+            {attrs.error && <p className="demo-error">Invalid JSON: {attrs.error}</p>}
           </div>
-        </section>
+        </div>
+      </details>
+
+      <div className="demo-pane-header">
+        <h2>preview</h2>
+        <span className="demo-hint">{fixture.widget.title}</span>
       </div>
-    </>
-  )
-}
-
-// ---------------------------------------------------------------------------
-// Spec.md dialect playground — the from-scratch { type, props, {{ }} } engine.
-// ---------------------------------------------------------------------------
-
-function HxlPlayground() {
-  const [index, setIndex] = useState(0)
-  const fixture = fixtures[index]
-  const inputs = useEditableJson(fixture.inputs)
-
-  function select(i: number) {
-    setIndex(i)
-    inputs.reset(fixtures[i].inputs)
-  }
-
-  return (
-    <>
-      <div className="demo-toolbar">
-        {fixtures.map((f, i) => (
-          <button
-            key={f.name}
-            type="button"
-            className={i === index ? "active" : ""}
-            onClick={() => select(i)}
-          >
-            {f.name}
-          </button>
-        ))}
-      </div>
-
-      <div className="demo-grid">
-        <section className="demo-pane">
-          <div className="demo-pane-header">
-            <h2>experience</h2>
-            <span className="demo-hint">read-only</span>
-          </div>
-          <pre className="demo-code">{JSON.stringify(fixture.experience, null, 2)}</pre>
-
-          <div className="demo-pane-header">
-            <h2>inputs</h2>
-            <span className="demo-hint">editable</span>
-          </div>
-          <textarea
-            className={`demo-inputs${inputs.error ? " has-error" : ""}`}
-            value={inputs.text}
-            spellCheck={false}
-            onChange={(e) => inputs.setText(e.target.value)}
-          />
-          {inputs.error && <p className="demo-error">Invalid JSON: {inputs.error}</p>}
-        </section>
-
-        <section className="demo-pane">
-          <div className="demo-pane-header">
-            <h2>preview</h2>
-          </div>
-          <div className="demo-preview">
-            <HxlSurface
-              agentName="preview-agent"
-              experience={fixture.experience}
-              inputs={inputs.value}
-              registry={hxlRegistry}
-            />
-          </div>
-        </section>
+      <div className="demo-preview demo-preview--full">
+        <TileWidgetRenderer
+          widget={fixture.widget}
+          attrs={attrs.value}
+          registry={tileRegistry}
+        />
       </div>
     </>
   )

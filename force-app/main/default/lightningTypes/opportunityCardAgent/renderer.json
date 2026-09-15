@@ -1,0 +1,59 @@
+{
+  "renderer": {
+    "componentOverrides": {
+      "$": {
+        "definition": "@widget/c/opportunityCard",
+        "attributes": {
+          "oppName": "{!$attrs.oppName}",
+          "accountName": "{!$attrs.accountName}",
+          "householdName": "{!$attrs.householdName}",
+          "stageName": "{!$attrs.stageName}",
+          "amount": "{!$attrs.amount}",
+          "amountRaw": "{!$attrs.amountRaw}",
+          "closeDate": "{!$attrs.closeDate}",
+          "daysToClose": "{!$attrs.daysToClose}",
+          "ownerName": "{!$attrs.ownerName}",
+          "probability": "{!$attrs.probability}",
+          "forecastCategory": "{!$attrs.forecastCategory}",
+          "nextStep": "{!$attrs.nextStep}",
+          "stageProgressPct": "{!$attrs.stageProgressPct}",
+          "daysInStage": "{!$attrs.daysInStage}",
+          "daysInStageLabel": "{!$attrs.daysInStageLabel}",
+          "dealHealthScore": "{!$attrs.dealHealthScore}",
+          "dealHealthLabel": "{!$attrs.dealHealthLabel}",
+          "healthColor": "{!$attrs.healthColor}",
+          "healthVariant": "{!$attrs.healthVariant}",
+          "healthHeadline": "{!$attrs.healthHeadline}",
+          "healthReasons": "{!$attrs.healthReasons}",
+          "dealSnapshot": "{!$attrs.dealSnapshot}",
+          "recommendedSteps": "{!$attrs.recommendedSteps}",
+          "recommendedStepList": "{!$attrs.recommendedStepList}",
+          "relationshipPipeline": "{!$attrs.relationshipPipeline}",
+          "relationshipPipelineRaw": "{!$attrs.relationshipPipelineRaw}",
+          "wonLifetime": "{!$attrs.wonLifetime}",
+          "wonLifetimeRaw": "{!$attrs.wonLifetimeRaw}",
+          "openOppCount": "{!$attrs.openOppCount}",
+          "relatedOppsLabel": "{!$attrs.relatedOppsLabel}",
+          "householdLabel": "{!$attrs.householdLabel}",
+          "casesLabel": "{!$attrs.casesLabel}",
+          "activitiesLabel": "{!$attrs.activitiesLabel}",
+          "openCaseCount": "{!$attrs.openCaseCount}",
+          "lastTouchLabel": "{!$attrs.lastTouchLabel}",
+          "householdMarkdown": "{!$attrs.householdMarkdown}",
+          "activityMarkdown": "{!$attrs.activityMarkdown}",
+          "hasProducts": "{!$attrs.hasProducts}",
+          "stakeholders": "{!$attrs.stakeholders}",
+          "activities": "{!$attrs.activities}",
+          "products": "{!$attrs.products}",
+          "relatedOpps": "{!$attrs.relatedOpps}",
+          "household": "{!$attrs.household}",
+          "cases": "{!$attrs.cases}",
+          "recordUrl": "{!$attrs.recordUrl}",
+          "accountUrl": "{!$attrs.accountUrl}",
+          "householdCount": "{!$attrs.householdCount}",
+          "householdOverflow": "{!$attrs.householdOverflow}"
+        }
+      }
+    }
+  }
+}

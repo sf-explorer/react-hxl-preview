@@ -1,0 +1,5 @@
+{
+  "title" : "Opportunity Card (Agentforce)",
+  "description" : "Agentforce action-output CLT for the Opportunity Card. Typed at the OpportunityAction Apex inner class so it binds flat ($attrs.<field>) as the action's Output Rendering in LEX. Same widget & Apex as MCP wrapper CLT opportunityCardResult.",
+  "lightning:type" : "@apexClassType/c__OpportunityAction$DealProfile"
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>HXL Opportunity Card</label>
+    <description>Grants Apex access to OpportunityAction, the data source for the Opportunity Card widget (Agentforce/LEX &amp; Slackbot/MCP). Assign to any user who runs the Get Opportunity Profile action or MCP tool. Data returns with sharing.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <classAccesses>
+        <apexClass>OpportunityAction</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+</PermissionSet>

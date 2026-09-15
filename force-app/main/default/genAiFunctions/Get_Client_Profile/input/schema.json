@@ -1,0 +1,13 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "recordId" : {
+      "title" : "Client Account Id or Name",
+      "description" : "The wealth client to profile: either a Person Account Id (in Lightning this comes from the open record) or the client's name (the action resolves the name to a Person Account). If omitted, the card renders a 'name a client' prompt rather than guessing.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

@@ -1,0 +1,5 @@
+{
+  "title" : "Action Plan (Agentforce)",
+  "description" : "Agentforce action-output CLT for the Action Plan widget. Typed at the ActionPlanAction Apex inner class so it binds flat ($attrs.<field>) as the action's Output Rendering in LEX. Same widget & Apex as MCP wrapper CLT actionPlanResult.",
+  "lightning:type" : "@apexClassType/c__ActionPlanAction$ActionPlan"
+}

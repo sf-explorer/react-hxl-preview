@@ -1,0 +1,11 @@
+{
+  "_comment": "Pattern A demo: a meta.forEach list where each row renders a tile/switch with a data-bound unique id (notify_<id>). Toggle any rows, then Send Updates — the button's inputs:'auto' gather returns one { notify_<id>: true/false } payload in the toast, i.e. a multi-select result. Edit this data to add/remove rows or flip the initial selected state.",
+  "attributes": {
+    "teammates": [
+      { "id": "sarah",  "name": "Sarah Johnson", "role": "Account Owner",       "selected": true },
+      { "id": "christy", "name": "Christy Fair",  "role": "Sales Development",    "selected": false },
+      { "id": "marcus", "name": "Marcus Lee",    "role": "Solutions Engineer",  "selected": true },
+      { "id": "priya",  "name": "Priya Patel",   "role": "Customer Success",    "selected": false }
+    ]
+  }
+}
