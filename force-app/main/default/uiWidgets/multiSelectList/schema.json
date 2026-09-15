@@ -1,0 +1,26 @@
+{
+  "title": "Notify Teammates (Multi-Select) Widget",
+  "description": "Multi-select list demo: a meta.forEach list where each row renders a tile/switch with a data-bound unique id (notify_<id>), and Send Updates gathers one { notify_<id>: true/false } payload",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "teammates": {
+          "title": "Teammates",
+          "description": "Rows for the multi-select list (id, name, role, initial selected state)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "id":       { "title": "Id",       "description": "Unique row id; drives the data-bound notify_<id> input", "lightning:type": "lightning__textType" },
+              "name":     { "title": "Name",     "description": "Teammate name",                                          "lightning:type": "lightning__textType" },
+              "role":     { "title": "Role",     "description": "Teammate role",                                          "lightning:type": "lightning__textType" },
+              "selected": { "title": "Selected", "description": "Initial toggle state for the row",                       "lightning:type": "lightning__booleanType" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

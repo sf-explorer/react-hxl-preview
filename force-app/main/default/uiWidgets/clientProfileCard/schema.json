@@ -1,0 +1,187 @@
+{
+  "title": "Client Profile Card Widget",
+  "description": "Wealth client relationship hub: identity, net position, household pipeline & won, goals, household roster, open action items, financial accounts, and service cases",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "clientName":              { "title": "Client Name",              "description": "Full name of the client",                             "lightning:type": "lightning__textType" },
+        "clientInitials":          { "title": "Client Initials",          "description": "Up to 2-char initials for the avatar fallback",       "lightning:type": "lightning__textType" },
+        "clientTitle":             { "title": "Client Title",             "description": "Client role/title line",                              "lightning:type": "lightning__textType" },
+        "clientEmail":             { "title": "Client Email",             "description": "Primary email address (retained; not rendered on the hub layout)", "lightning:type": "lightning__textType" },
+        "advisorName":             { "title": "Advisor Name",             "description": "Owning advisor / relationship manager",               "lightning:type": "lightning__textType" },
+        "householdName":           { "title": "Household Name",           "description": "Name of the client's household group",                 "lightning:type": "lightning__textType" },
+        "segment":                 { "title": "Segment",                  "description": "Client segment / tier label for the badge",           "lightning:type": "lightning__textType" },
+        "investableAssets":        { "title": "Investable Assets",        "description": "Formatted total of investment account balances",      "lightning:type": "lightning__textType" },
+        "mortgageOutstanding":     { "title": "Mortgage Outstanding",     "description": "Formatted total outstanding mortgage balance",        "lightning:type": "lightning__textType" },
+        "netWorth":                { "title": "Net Worth",                "description": "Formatted investable assets minus mortgage",          "lightning:type": "lightning__textType" },
+        "relationshipPipeline":    { "title": "Relationship Pipeline",    "description": "Formatted sum of OPEN opportunities across the household", "lightning:type": "lightning__textType" },
+        "relationshipPipelineRaw": { "title": "Relationship Pipeline Raw","description": "Raw numeric open-pipeline total",                     "lightning:type": "lightning__numberType" },
+        "wonLifetime":             { "title": "Won Lifetime",             "description": "Formatted sum of WON opportunities across the household", "lightning:type": "lightning__textType" },
+        "wonLifetimeRaw":          { "title": "Won Lifetime Raw",         "description": "Raw numeric lifetime-won total",                      "lightning:type": "lightning__numberType" },
+        "openOppCount":            { "title": "Open Opportunity Count",   "description": "Count of open opportunities across the household",     "lightning:type": "lightning__numberType" },
+        "advisorSnapshot":         { "title": "Advisor Snapshot",         "description": "Data-driven advisor narrative (markdown)",            "lightning:type": "lightning__textType" },
+        "recordUrl":               { "title": "Record URL",               "description": "Deep link to the client Account record",              "lightning:type": "lightning__urlType" },
+        "householdUrl":            { "title": "Household URL",            "description": "Deep link to the household group Account",             "lightning:type": "lightning__urlType" },
+        "clientMailto":            { "title": "Client Mailto",            "description": "mailto: link to the client's email (retained; not rendered on the hub layout)", "lightning:type": "lightning__urlType" },
+        "householdCount":          { "title": "Household Count",          "description": "Household member count",                              "lightning:type": "lightning__numberType" },
+        "householdOverflow":       { "title": "Household Overflow",       "description": "'+N' label when household exceeds the shown avatars", "lightning:type": "lightning__textType" },
+        "largestOpenDealId":       { "title": "Largest Open Deal Id",     "description": "18-char Opportunity Id of the household's single largest OPEN deal (chaining target passed to Get_Opportunity_Profile.recordId)", "lightning:type": "lightning__textType" },
+        "largestOpenDealName":     { "title": "Largest Open Deal Name",   "description": "Name of the household's single largest OPEN deal (chaining target)", "lightning:type": "lightning__textType" },
+        "showAttentionItems":      { "title": "Show Attention Items",     "description": "Toggle for the ADVISOR PRIORITIES block (concept-4 layout)", "lightning:type": "lightning__booleanType" },
+        "showAllocation":          { "title": "Show Asset Allocation",    "description": "Toggle for the ASSET ALLOCATION subsection (hidden when no investment accounts)", "lightning:type": "lightning__booleanType" },
+        "showRecentChanges":       { "title": "Show Recent Changes",      "description": "Toggle for the RECENT CHANGES subsection (hidden when nothing material changed)", "lightning:type": "lightning__booleanType" },
+        "attentionItems": {
+          "title": "Attention Items",
+          "description": "Advisor-priority callouts for the concept-4 layout (title, detail, status label + variant)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "title":         { "title": "Title",          "lightning:type": "lightning__textType" },
+              "detail":        { "title": "Detail",         "lightning:type": "lightning__textType" },
+              "statusLabel":   { "title": "Status Label",   "lightning:type": "lightning__textType" },
+              "statusVariant": { "title": "Status Variant", "lightning:type": "lightning__textType" }
+            }
+          }
+        },
+        "recentChanges": {
+          "title": "Recent Changes",
+          "description": "Recent relationship changes for the concept-4 Activity accordion (title, detail, date)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "title":     { "title": "Title",  "lightning:type": "lightning__textType" },
+              "detail":    { "title": "Detail", "lightning:type": "lightning__textType" },
+              "date":      { "title": "Date (deprecated)", "lightning:type": "lightning__textType" },
+              "dateLabel": { "title": "Date",   "lightning:type": "lightning__textType" }
+            }
+          }
+        },
+        "goals": {
+          "title": "Financial Goals",
+          "description": "The four best-funded goals (name, pct, color, caption, url)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "name":         { "title": "Goal Name",     "lightning:type": "lightning__textType" },
+              "amountLabel":  { "title": "Amount Label",   "lightning:type": "lightning__textType" },
+              "pct":          { "title": "Percent",        "lightning:type": "lightning__numberType" },
+              "color":        { "title": "Ring Color",     "lightning:type": "lightning__textType" },
+              "captionLabel": { "title": "Caption Label",  "lightning:type": "lightning__textType" },
+              "url":          { "title": "Goal URL",       "lightning:type": "lightning__urlType" }
+            }
+          }
+        },
+        "allocation": {
+          "title": "Asset Allocation",
+          "description": "Retained list (not rendered on the hub layout)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "asset":        { "title": "Asset Class",   "lightning:type": "lightning__textType" },
+              "actual":       { "title": "Actual",        "lightning:type": "lightning__numberType" },
+              "pct":          { "title": "Percent",       "lightning:type": "lightning__numberType" },
+              "captionLabel": { "title": "Caption Label", "lightning:type": "lightning__textType" },
+              "url":          { "title": "Asset URL",     "lightning:type": "lightning__urlType" }
+            }
+          }
+        },
+        "household": {
+          "title": "Household Members",
+          "description": "Household roster (name, role, initials, url); email retained but not rendered",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "name":     { "title": "Member Name", "lightning:type": "lightning__textType" },
+              "role":     { "title": "Role",        "lightning:type": "lightning__textType" },
+              "email":    { "title": "Email",       "lightning:type": "lightning__textType" },
+              "initials": { "title": "Initials",    "lightning:type": "lightning__textType" },
+              "url":      { "title": "Member URL",  "lightning:type": "lightning__urlType" }
+            }
+          }
+        },
+        "actionItems": {
+          "title": "Action Items",
+          "description": "Open tasks + upcoming events across the household (subject, type, dueDate, status, colors, url)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "subject":       { "title": "Subject",        "lightning:type": "lightning__textType" },
+              "type":          { "title": "Type",           "lightning:type": "lightning__textType" },
+              "dueDate":       { "title": "Due Date",        "lightning:type": "lightning__textType" },
+              "status":        { "title": "Status",          "lightning:type": "lightning__textType" },
+              "statusColor":   { "title": "Status Color",    "lightning:type": "lightning__textType" },
+              "statusVariant": { "title": "Status Variant",  "lightning:type": "lightning__textType" },
+              "sortKey":       { "title": "Sort Key",        "lightning:type": "lightning__textType" },
+              "url":           { "title": "Item URL",        "lightning:type": "lightning__urlType" }
+            }
+          }
+        },
+        "accounts": {
+          "title": "Financial Accounts",
+          "description": "Rows for the accounts table (name, type, balance, url)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "name":    { "title": "Account",     "lightning:type": "lightning__textType" },
+              "type":    { "title": "Type",        "lightning:type": "lightning__textType" },
+              "balance": { "title": "Balance",     "lightning:type": "lightning__numberType" },
+              "url":     { "title": "Account URL", "lightning:type": "lightning__urlType" }
+            }
+          }
+        },
+        "cases": {
+          "title": "Service Cases",
+          "description": "Rows for the cases table (subject, status, priority, url); caseNumber retained but not rendered",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "caseNumber": { "title": "Case Number", "lightning:type": "lightning__textType" },
+              "subject":    { "title": "Subject",     "lightning:type": "lightning__textType" },
+              "status":     { "title": "Status",      "lightning:type": "lightning__textType" },
+              "priority":   { "title": "Priority",    "lightning:type": "lightning__textType" },
+              "url":        { "title": "Case URL",    "lightning:type": "lightning__urlType" }
+            }
+          }
+        },
+        "opportunities": {
+          "title": "Open Pipeline",
+          "description": "Retained list (replaced by the Open Pipeline stat box + chaining button; not rendered)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "name":      { "title": "Opportunity", "lightning:type": "lightning__textType" },
+              "stage":     { "title": "Stage",       "lightning:type": "lightning__textType" },
+              "amount":    { "title": "Amount",      "lightning:type": "lightning__numberType" },
+              "closeDate": { "title": "Close Date",  "lightning:type": "lightning__textType" },
+              "url":       { "title": "Opportunity URL", "lightning:type": "lightning__urlType" }
+            }
+          }
+        },
+        "lifeEvents": {
+          "title": "Life Events",
+          "description": "Retained list (not rendered on the hub layout)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "name":      { "title": "Event",      "lightning:type": "lightning__textType" },
+              "eventType": { "title": "Event Type", "lightning:type": "lightning__textType" },
+              "eventDate": { "title": "Event Date", "lightning:type": "lightning__textType" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

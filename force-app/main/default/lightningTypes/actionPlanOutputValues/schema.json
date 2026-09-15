@@ -1,0 +1,14 @@
+{
+  "title": "Action Plan Output Values",
+  "description": "Payload fields from the ActionPlanAction response",
+  "type": "object",
+  "lightning:type": "lightning__objectType",
+  "unevaluatedProperties": false,
+  "lightning:tags": ["mcp"],
+  "properties": {
+    "plan": {
+      "title": "Action Plan",
+      "lightning:type": "@apexClassType/c__ActionPlanAction$ActionPlan"
+    }
+  }
+}

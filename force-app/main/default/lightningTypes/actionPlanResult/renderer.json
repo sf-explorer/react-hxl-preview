@@ -1,0 +1,17 @@
+{
+  "renderer": {
+    "componentOverrides": {
+      "$": {
+        "definition": "@widget/c/actionPlan",
+        "attributes": {
+          "title": "{!$attrs.outputValues.plan.title}",
+          "subtitle": "{!$attrs.outputValues.plan.subtitle}",
+          "note": "{!$attrs.outputValues.plan.note}",
+          "confirmLabel": "{!$attrs.outputValues.plan.confirmLabel}",
+          "cancelLabel": "{!$attrs.outputValues.plan.cancelLabel}",
+          "rows": "{!$attrs.outputValues.plan.rows}"
+        }
+      }
+    }
+  }
+}

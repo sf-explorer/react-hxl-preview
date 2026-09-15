@@ -1,0 +1,37 @@
+{
+  "renderer": {
+    "componentOverrides": {
+      "$": {
+        "definition": "@widget/c/clientProfileCard",
+        "attributes": {
+          "clientName": "{!$attrs.clientName}",
+          "clientInitials": "{!$attrs.clientInitials}",
+          "clientTitle": "{!$attrs.clientTitle}",
+          "segment": "{!$attrs.segment}",
+          "investableAssets": "{!$attrs.investableAssets}",
+          "mortgageOutstanding": "{!$attrs.mortgageOutstanding}",
+          "netWorth": "{!$attrs.netWorth}",
+          "relationshipPipeline": "{!$attrs.relationshipPipeline}",
+          "relationshipPipelineRaw": "{!$attrs.relationshipPipelineRaw}",
+          "wonLifetime": "{!$attrs.wonLifetime}",
+          "wonLifetimeRaw": "{!$attrs.wonLifetimeRaw}",
+          "openOppCount": "{!$attrs.openOppCount}",
+          "advisorSnapshot": "{!$attrs.advisorSnapshot}",
+          "advisorName": "{!$attrs.advisorName}",
+          "householdName": "{!$attrs.householdName}",
+          "householdCount": "{!$attrs.householdCount}",
+          "householdOverflow": "{!$attrs.householdOverflow}",
+          "largestOpenDealId": "{!$attrs.largestOpenDealId}",
+          "largestOpenDealName": "{!$attrs.largestOpenDealName}",
+          "goals": "{!$attrs.goals}",
+          "household": "{!$attrs.household}",
+          "actionItems": "{!$attrs.actionItems}",
+          "accounts": "{!$attrs.accounts}",
+          "cases": "{!$attrs.cases}",
+          "recordUrl": "{!$attrs.recordUrl}",
+          "householdUrl": "{!$attrs.householdUrl}"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "plan" : {
+      "title" : "Action Plan",
+      "description" : "Flattened, caller-driven action grid (title/subtitle/note/labels + rows[].cells[]) for the actionPlan HXL widget",
+      "lightning:type" : "@apexClassType/c__ActionPlanAction$ActionPlan",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

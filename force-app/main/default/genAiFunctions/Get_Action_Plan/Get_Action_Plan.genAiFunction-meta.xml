@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Renders a generic, caller-driven editable action grid. Pass a JSON `spec` describing the columns (key/label/type: readonly|text|select|switch, with options for selects) and the rows (an id plus a value per column key). The action flattens it into typed, data-bound cells the user reviews, adjusts, and confirms in the card; a Confirm gathers the whole revised grid as one payload. Call with no spec to show a portable demo triage plan.</description>
+    <developerName>Get_Action_Plan</developerName>
+    <invocationTarget>ActionPlanAction</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Action_Plan</localDeveloperName>
+    <masterLabel>Get Action Plan</masterLabel>
+</GenAiFunction>

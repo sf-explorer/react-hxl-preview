@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Client Profile Card</masterLabel>
+    <description>Wealth client profile overview: identity, investable assets, financial goals, accounts, and household. Built for HXL rendering in Agentforce and MCP channels.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

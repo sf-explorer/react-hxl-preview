@@ -1,0 +1,14 @@
+{
+  "title": "Client Profile Output Values",
+  "description": "Payload fields from the ClientProfileAction response",
+  "type": "object",
+  "lightning:type": "lightning__objectType",
+  "unevaluatedProperties": false,
+  "lightning:tags": ["mcp"],
+  "properties": {
+    "clientProfile": {
+      "title": "Client Profile",
+      "lightning:type": "@apexClassType/c__ClientProfileAction$ClientProfile"
+    }
+  }
+}

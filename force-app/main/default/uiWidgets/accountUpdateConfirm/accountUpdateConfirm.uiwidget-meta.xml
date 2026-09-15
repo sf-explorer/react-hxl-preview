@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Update Account (Dynamic Payload)</masterLabel>
+    <description>Editable account-update confirmation card: each field binds to {!$attrs.&lt;id&gt;} so seed values are editable, and Confirm re-gathers the live input values as the dispatched payload. Built for HXL rendering in Agentforce and MCP channels.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

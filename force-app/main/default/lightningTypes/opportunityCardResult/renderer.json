@@ -1,0 +1,61 @@
+{
+  "renderer": {
+    "componentOverrides": {
+      "$": {
+        "definition": "@widget/c/opportunityCard",
+        "attributes": {
+          "oppName": "{!$attrs.outputValues.opportunity.oppName}",
+          "accountName": "{!$attrs.outputValues.opportunity.accountName}",
+          "householdName": "{!$attrs.outputValues.opportunity.householdName}",
+          "stageName": "{!$attrs.outputValues.opportunity.stageName}",
+          "amount": "{!$attrs.outputValues.opportunity.amount}",
+          "amountRaw": "{!$attrs.outputValues.opportunity.amountRaw}",
+          "closeDate": "{!$attrs.outputValues.opportunity.closeDate}",
+          "daysToClose": "{!$attrs.outputValues.opportunity.daysToClose}",
+          "ownerName": "{!$attrs.outputValues.opportunity.ownerName}",
+          "probability": "{!$attrs.outputValues.opportunity.probability}",
+          "forecastCategory": "{!$attrs.outputValues.opportunity.forecastCategory}",
+          "nextStep": "{!$attrs.outputValues.opportunity.nextStep}",
+          "objective": "{!$attrs.outputValues.opportunity.objective}",
+          "nextMeetingLabel": "{!$attrs.outputValues.opportunity.nextMeetingLabel}",
+          "stageProgressPct": "{!$attrs.outputValues.opportunity.stageProgressPct}",
+          "daysInStage": "{!$attrs.outputValues.opportunity.daysInStage}",
+          "daysInStageLabel": "{!$attrs.outputValues.opportunity.daysInStageLabel}",
+          "dealHealthScore": "{!$attrs.outputValues.opportunity.dealHealthScore}",
+          "dealHealthLabel": "{!$attrs.outputValues.opportunity.dealHealthLabel}",
+          "healthColor": "{!$attrs.outputValues.opportunity.healthColor}",
+          "healthVariant": "{!$attrs.outputValues.opportunity.healthVariant}",
+          "healthHeadline": "{!$attrs.outputValues.opportunity.healthHeadline}",
+          "healthReasons": "{!$attrs.outputValues.opportunity.healthReasons}",
+          "dealSnapshot": "{!$attrs.outputValues.opportunity.dealSnapshot}",
+          "recommendedSteps": "{!$attrs.outputValues.opportunity.recommendedSteps}",
+          "recommendedStepList": "{!$attrs.outputValues.opportunity.recommendedStepList}",
+          "relationshipPipeline": "{!$attrs.outputValues.opportunity.relationshipPipeline}",
+          "relationshipPipelineRaw": "{!$attrs.outputValues.opportunity.relationshipPipelineRaw}",
+          "wonLifetime": "{!$attrs.outputValues.opportunity.wonLifetime}",
+          "wonLifetimeRaw": "{!$attrs.outputValues.opportunity.wonLifetimeRaw}",
+          "openOppCount": "{!$attrs.outputValues.opportunity.openOppCount}",
+          "relatedOppsLabel": "{!$attrs.outputValues.opportunity.relatedOppsLabel}",
+          "householdLabel": "{!$attrs.outputValues.opportunity.householdLabel}",
+          "casesLabel": "{!$attrs.outputValues.opportunity.casesLabel}",
+          "activitiesLabel": "{!$attrs.outputValues.opportunity.activitiesLabel}",
+          "openCaseCount": "{!$attrs.outputValues.opportunity.openCaseCount}",
+          "lastTouchLabel": "{!$attrs.outputValues.opportunity.lastTouchLabel}",
+          "householdMarkdown": "{!$attrs.outputValues.opportunity.householdMarkdown}",
+          "activityMarkdown": "{!$attrs.outputValues.opportunity.activityMarkdown}",
+          "hasProducts": "{!$attrs.outputValues.opportunity.hasProducts}",
+          "stakeholders": "{!$attrs.outputValues.opportunity.stakeholders}",
+          "activities": "{!$attrs.outputValues.opportunity.activities}",
+          "products": "{!$attrs.outputValues.opportunity.products}",
+          "relatedOpps": "{!$attrs.outputValues.opportunity.relatedOpps}",
+          "household": "{!$attrs.outputValues.opportunity.household}",
+          "cases": "{!$attrs.outputValues.opportunity.cases}",
+          "recordUrl": "{!$attrs.outputValues.opportunity.recordUrl}",
+          "accountUrl": "{!$attrs.outputValues.opportunity.accountUrl}",
+          "householdCount": "{!$attrs.outputValues.opportunity.householdCount}",
+          "householdOverflow": "{!$attrs.outputValues.opportunity.householdOverflow}"
+        }
+      }
+    }
+  }
+}

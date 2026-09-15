@@ -1,0 +1,78 @@
+{
+  "_comment": "Render-time payload for the GENERIC actionPlan widget, exactly as ActionPlanAction.getActionPlan flattens a caller spec: the widget renders whatever rows[].cells[] it is given. Each cell carries its own data-bound inputId (<column-key>_<row-id>), one is* type flag (readonly/select/text/switch), its value or checked state, and — for selects — its own options list. Edit rows/cells to change the grid; there is no widget-specific logic. This example reproduces the absence-triage plan (six tasks to reassign/reschedule).",
+  "attributes": {
+    "title": "Plan d'actions proposé",
+    "subtitle": "Revoyez, ajustez et confirmez avant votre absence",
+    "note": "Confirmer rassemble le plan révisé (action, owner, échéance et inclusion pour chaque tâche) en un seul payload — visible dans le toast.",
+    "confirmLabel": "Confirmer le plan",
+    "cancelLabel": "Annuler",
+    "rows": [
+      {
+        "id": "opers",
+        "cells": [
+          { "key": "task", "label": "Tâche", "type": "readonly", "inputId": "task_opers", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Réclamation sensible OPERS" },
+          { "key": "justification", "label": "Justification", "type": "readonly", "inputId": "justification_opers", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Risque client + revue manager" },
+          { "key": "action", "label": "Action", "type": "select", "inputId": "action_opers", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "REASSIGN", "options": [ { "label": "Réassigner", "value": "REASSIGN" }, { "label": "Reporter", "value": "RESCHEDULE" } ] },
+          { "key": "owner", "label": "Nouvel owner", "type": "select", "inputId": "owner_opers", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "Vanessa Central", "options": [ { "label": "Vanessa Central", "value": "Vanessa Central" }, { "label": "Tania Djama", "value": "Tania Djama" }, { "label": "Vance Channel", "value": "Vance Channel" }, { "label": "Vous (retour)", "value": "Vous (retour)" } ] },
+          { "key": "due", "label": "Échéance", "type": "text", "inputId": "due_opers", "isReadonly": false, "isText": true, "isSelect": false, "isSwitch": false, "value": "24h", "placeholder": "24h · J+3 · Après retour" },
+          { "key": "approve", "label": "Inclure", "type": "switch", "inputId": "approve_opers", "isReadonly": false, "isText": false, "isSelect": false, "isSwitch": true, "checked": true }
+        ]
+      },
+      {
+        "id": "auto_dubois",
+        "cells": [
+          { "key": "task", "label": "Tâche", "type": "readonly", "inputId": "task_auto_dubois", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Relance renouvellement Auto Dubois" },
+          { "key": "justification", "label": "Justification", "type": "readonly", "inputId": "justification_auto_dubois", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Échéance contractuelle proche" },
+          { "key": "action", "label": "Action", "type": "select", "inputId": "action_auto_dubois", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "REASSIGN", "options": [ { "label": "Réassigner", "value": "REASSIGN" }, { "label": "Reporter", "value": "RESCHEDULE" } ] },
+          { "key": "owner", "label": "Nouvel owner", "type": "select", "inputId": "owner_auto_dubois", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "Tania Djama", "options": [ { "label": "Vanessa Central", "value": "Vanessa Central" }, { "label": "Tania Djama", "value": "Tania Djama" }, { "label": "Vance Channel", "value": "Vance Channel" }, { "label": "Vous (retour)", "value": "Vous (retour)" } ] },
+          { "key": "due", "label": "Échéance", "type": "text", "inputId": "due_auto_dubois", "isReadonly": false, "isText": true, "isSelect": false, "isSwitch": false, "value": "48h", "placeholder": "24h · J+3 · Après retour" },
+          { "key": "approve", "label": "Inclure", "type": "switch", "inputId": "approve_auto_dubois", "isReadonly": false, "isText": false, "isSelect": false, "isSwitch": true, "checked": true }
+        ]
+      },
+      {
+        "id": "mutuelle_btp",
+        "cells": [
+          { "key": "task", "label": "Tâche", "type": "readonly", "inputId": "task_mutuelle_btp", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Suivi Mutuelle Collective BTP" },
+          { "key": "justification", "label": "Justification", "type": "readonly", "inputId": "justification_mutuelle_btp", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Continuité relation client" },
+          { "key": "action", "label": "Action", "type": "select", "inputId": "action_mutuelle_btp", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "REASSIGN", "options": [ { "label": "Réassigner", "value": "REASSIGN" }, { "label": "Reporter", "value": "RESCHEDULE" } ] },
+          { "key": "owner", "label": "Nouvel owner", "type": "select", "inputId": "owner_mutuelle_btp", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "Tania Djama", "options": [ { "label": "Vanessa Central", "value": "Vanessa Central" }, { "label": "Tania Djama", "value": "Tania Djama" }, { "label": "Vance Channel", "value": "Vance Channel" }, { "label": "Vous (retour)", "value": "Vous (retour)" } ] },
+          { "key": "due", "label": "Échéance", "type": "text", "inputId": "due_mutuelle_btp", "isReadonly": false, "isText": true, "isSelect": false, "isSwitch": false, "value": "J+4", "placeholder": "24h · J+3 · Après retour" },
+          { "key": "approve", "label": "Inclure", "type": "switch", "inputId": "approve_mutuelle_btp", "isReadonly": false, "isText": false, "isSelect": false, "isSwitch": true, "checked": true }
+        ]
+      },
+      {
+        "id": "mrp_rcpro",
+        "cells": [
+          { "key": "task", "label": "Tâche", "type": "readonly", "inputId": "task_mrp_rcpro", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Finaliser devis Package MRP+RC Pro" },
+          { "key": "justification", "label": "Justification", "type": "readonly", "inputId": "justification_mrp_rcpro", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Opportunité en cours (1 680 USD)" },
+          { "key": "action", "label": "Action", "type": "select", "inputId": "action_mrp_rcpro", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "REASSIGN", "options": [ { "label": "Réassigner", "value": "REASSIGN" }, { "label": "Reporter", "value": "RESCHEDULE" } ] },
+          { "key": "owner", "label": "Nouvel owner", "type": "select", "inputId": "owner_mrp_rcpro", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "Vance Channel", "options": [ { "label": "Vanessa Central", "value": "Vanessa Central" }, { "label": "Tania Djama", "value": "Tania Djama" }, { "label": "Vance Channel", "value": "Vance Channel" }, { "label": "Vous (retour)", "value": "Vous (retour)" } ] },
+          { "key": "due", "label": "Échéance", "type": "text", "inputId": "due_mrp_rcpro", "isReadonly": false, "isText": true, "isSelect": false, "isSwitch": false, "value": "J+3", "placeholder": "24h · J+3 · Après retour" },
+          { "key": "approve", "label": "Inclure", "type": "switch", "inputId": "approve_mrp_rcpro", "isReadonly": false, "isText": false, "isSelect": false, "isSwitch": true, "checked": true }
+        ]
+      },
+      {
+        "id": "comite_portefeuille",
+        "cells": [
+          { "key": "task", "label": "Tâche", "type": "readonly", "inputId": "task_comite_portefeuille", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Préparer comité portefeuille" },
+          { "key": "justification", "label": "Justification", "type": "readonly", "inputId": "justification_comite_portefeuille", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Non bloquant, reportable" },
+          { "key": "action", "label": "Action", "type": "select", "inputId": "action_comite_portefeuille", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "RESCHEDULE", "options": [ { "label": "Réassigner", "value": "REASSIGN" }, { "label": "Reporter", "value": "RESCHEDULE" } ] },
+          { "key": "owner", "label": "Nouvel owner", "type": "select", "inputId": "owner_comite_portefeuille", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "Vous (retour)", "options": [ { "label": "Vanessa Central", "value": "Vanessa Central" }, { "label": "Tania Djama", "value": "Tania Djama" }, { "label": "Vance Channel", "value": "Vance Channel" }, { "label": "Vous (retour)", "value": "Vous (retour)" } ] },
+          { "key": "due", "label": "Échéance", "type": "text", "inputId": "due_comite_portefeuille", "isReadonly": false, "isText": true, "isSelect": false, "isSwitch": false, "value": "J+7", "placeholder": "24h · J+3 · Après retour" },
+          { "key": "approve", "label": "Inclure", "type": "switch", "inputId": "approve_comite_portefeuille", "isReadonly": false, "isText": false, "isSelect": false, "isSwitch": true, "checked": true }
+        ]
+      },
+      {
+        "id": "formation_rgpd",
+        "cells": [
+          { "key": "task", "label": "Tâche", "type": "readonly", "inputId": "task_formation_rgpd", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Formation interne RGPD" },
+          { "key": "justification", "label": "Justification", "type": "readonly", "inputId": "justification_formation_rgpd", "isReadonly": true, "isText": false, "isSelect": false, "isSwitch": false, "value": "Reste à votre nom" },
+          { "key": "action", "label": "Action", "type": "select", "inputId": "action_formation_rgpd", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "RESCHEDULE", "options": [ { "label": "Réassigner", "value": "REASSIGN" }, { "label": "Reporter", "value": "RESCHEDULE" } ] },
+          { "key": "owner", "label": "Nouvel owner", "type": "select", "inputId": "owner_formation_rgpd", "isReadonly": false, "isText": false, "isSelect": true, "isSwitch": false, "value": "Vous (retour)", "options": [ { "label": "Vanessa Central", "value": "Vanessa Central" }, { "label": "Tania Djama", "value": "Tania Djama" }, { "label": "Vance Channel", "value": "Vance Channel" }, { "label": "Vous (retour)", "value": "Vous (retour)" } ] },
+          { "key": "due", "label": "Échéance", "type": "text", "inputId": "due_formation_rgpd", "isReadonly": false, "isText": true, "isSelect": false, "isSwitch": false, "value": "Après retour", "placeholder": "24h · J+3 · Après retour" },
+          { "key": "approve", "label": "Inclure", "type": "switch", "inputId": "approve_formation_rgpd", "isReadonly": false, "isText": false, "isSelect": false, "isSwitch": true, "checked": true }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Notify Teammates (Multi-Select Demo)",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": {},
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "md" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "sm", "align": "center", "justify": "start" },
+                  "children": [
+                    {
+                      "definition": "tile/icon",
+                      "attributes": { "name": "bell", "size": "lg", "color": "default" }
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "none" },
+                      "children": [
+                        {
+                          "definition": "tile/text",
+                          "attributes": { "text": "Notify teammates", "variant": "h3", "weight": "bold" }
+                        },
+                        {
+                          "definition": "tile/text",
+                          "attributes": { "text": "Toggle who gets the update", "variant": "caption", "color": "muted" }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/separator",
+                  "attributes": { "orientation": "horizontal" }
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": { "gap": "sm", "width": "full" },
+                  "children": [
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.teammates}", "forItem": "$member" },
+                      "attributes": { "gap": "sm", "align": "center", "justify": "between", "width": "full" },
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "width": "stretch" },
+                          "children": [
+                            {
+                              "definition": "tile/text",
+                              "attributes": { "text": "{!$member.name}", "variant": "body", "weight": "semibold" }
+                            },
+                            {
+                              "definition": "tile/text",
+                              "attributes": { "text": "{!$member.role}", "variant": "caption", "color": "muted" }
+                            }
+                          ]
+                        },
+                        {
+                          "definition": "tile/switch",
+                          "attributes": {
+                            "id": "notify_{!$member.id}",
+                            "isChecked": "{!$member.selected}"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/text",
+                  "attributes": {
+                    "text": "Each row's switch has a data-bound id (notify_<id>), so Confirm gathers every toggle as one { id: on/off } payload — watch the toast.",
+                    "variant": "caption",
+                    "color": "muted"
+                  }
+                },
+                {
+                  "definition": "tile/spacer",
+                  "attributes": { "size": "md" }
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "sm", "justify": "end" },
+                  "children": [
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "Cancel",
+                        "variant": "secondary",
+                        "actions": { "click": [ { "definition": "notifyCancel", "attributes": {}, "inputs": "none" } ] }
+                      }
+                    },
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "Send Updates",
+                        "variant": "primary",
+                        "actions": { "click": [ { "definition": "notifyConfirm", "attributes": {}, "inputs": "auto" } ] }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

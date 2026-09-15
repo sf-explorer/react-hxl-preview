@@ -7,6 +7,11 @@ that renders a JSON component tree whose props bind to typed inputs through
 Give it `{ experience, inputs }` and it paints. Change `inputs` and the same
 tree re-evaluates. Same experience + same inputs → same UI.
 
+**▶ [Live demo](https://sf-explorer.github.io/react-hxl-preview/)** — an
+interactive playground of the real gallery widgets. Pick a widget, edit its
+`$attrs` JSON, and watch it re-render. Published from `main` on every push
+(see [Deploy](#deploy)).
+
 ## Install
 
 ```bash
@@ -120,14 +125,54 @@ const registry = createDefaultTileRegistry()
   **Account Update (inputs)** gallery fixture is the end-to-end demo.
 
 The renderer is total here too: an unknown `definition` paints a neutral
-placeholder. `src/demo/render.test.tsx` renders the real `clientProfileCard`
-and `opportunityCard` gallery widgets end-to-end.
+placeholder. `src/demo/render.test.tsx` renders the real gallery widgets
+end-to-end.
+
+## Gallery widgets
+
+The playground and tests render the deployable widgets under
+`force-app/main/default/uiWidgets/` — the single source of truth, imported
+directly (no demo-local copies):
+
+| Widget | Shows |
+| --- | --- |
+| **Client Profile Card** | A wealth-client relationship hub: stats, goals, household, action items, cases. |
+| **Opportunity Card** | A deal-review card with a derived readiness score and "what needs attention". |
+| **Account Update (inputs)** | Every interactive input tile (`select` / `textField` / `numberField` / `radio` / `checkbox` / `switch` / `textarea`) plus Confirm/Cancel actions. |
+| **Notify Teammates (multi-select)** | A per-row `switch` over a `meta.forEach` list, each with a data-bound id. |
+| **Action Plan (generic)** | A **caller-driven editable grid**: the widget renders whatever `rows[].cells[]` it is given — each cell typed `readonly` / `select` / `text` / `switch` — and Confirm gathers the whole revised grid as one payload. |
+
+## Salesforce widgets (`force-app`)
+
+Each gallery widget is a Salesforce **HXL custom UI widget** — seven metadata
+pieces wired by ONE field name, the *binding anchor*, that must stay
+byte-identical across four of them (Apex response field → payload CLT →
+GenAiFunction output → wrapper renderer path `{!$attrs.outputValues.<anchor>…}`).
+An Apex `@InvocableMethod` returns the payload; Agentforce/MCP renders it into
+the `tile/*` tree.
+
+The **Action Plan** widget is the generic one: `ActionPlanAction` (anchor
+`plan`) takes a single JSON `spec` describing columns + rows and *flattens* it
+into typed, data-bound cells so the widget stays pure UI. Call it with no `spec`
+to get a portable demo triage plan. Because the flattening happens in Apex, the
+widget's binding surface is only `forEach` + `meta.if <boolean>` — no operators
+or dynamic key access — so it renders identically in the preview and in the live
+HXL runtime.
 
 ## Develop
 
 ```bash
 npm install
-npm run dev        # live playground: pick a fixture, edit the inputs JSON
-npm test           # evaluator test suite
+npm run dev        # live playground: pick a widget, edit its $attrs JSON
+npm test           # evaluator + render test suite
 npm run build      # library build → dist/ (ESM + CJS + d.ts + styles.css)
+npm run build:demo # static demo build → dist-demo/ (what GitHub Pages serves)
 ```
+
+## Deploy
+
+The demo is published to **GitHub Pages** on every push to `main` by
+`.github/workflows/deploy-demo.yml` (test → `build:demo` → deploy). It's served
+from the project sub-path `/react-hxl-preview/`, which `vite.config.ts` sets as
+the build `base`. One-time setup: in the repo's **Settings → Pages**, set
+**Source** to **GitHub Actions**.

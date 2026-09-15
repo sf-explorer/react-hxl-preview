@@ -1,0 +1,22 @@
+{
+  "title": "Update Account (Dynamic Payload) Widget",
+  "description": "Editable account-update confirmation card: each field binds to {!$attrs.<id>} and Confirm re-gathers the live input values as the dispatched payload",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "accountName": { "title": "Account Name", "description": "Account name (editable text input)",          "lightning:type": "lightning__textType" },
+        "ownerName":   { "title": "Owner Name",   "description": "Account owner (editable text input)",         "lightning:type": "lightning__textType" },
+        "phone":       { "title": "Phone",        "description": "Phone number (editable text input)",          "lightning:type": "lightning__textType" },
+        "industry":    { "title": "Industry",     "description": "Industry (editable text/picklist input)",     "lightning:type": "lightning__textType" },
+        "website":     { "title": "Website",      "description": "Website domain (editable text input)",        "lightning:type": "lightning__textType" },
+        "employees":   { "title": "Employees",    "description": "Employee count (editable number input)",      "lightning:type": "lightning__numberType" },
+        "rating":      { "title": "Rating",       "description": "Account rating (editable text/picklist input)","lightning:type": "lightning__textType" },
+        "active":      { "title": "Active",       "description": "Active toggle (editable switch)",             "lightning:type": "lightning__booleanType" },
+        "autoRenew":   { "title": "Auto Renew",   "description": "Auto-renew toggle (editable switch)",         "lightning:type": "lightning__booleanType" },
+        "description": { "title": "Description",  "description": "Free-text description (editable text area)",  "lightning:type": "lightning__textType" }
+      }
+    }
+  }
+}
