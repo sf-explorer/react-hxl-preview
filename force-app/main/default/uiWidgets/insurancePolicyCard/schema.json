@@ -1,0 +1,145 @@
+{
+  "title": "Contrat d'assurance Widget",
+  "description": "Sample $attrs for the Contrat d'assurance (insurancePolicy) card — single-policy detail: header + status, premium/échéance/ancienneté stat tiles (stats[] each {iconName,label,value}), a GARANTIES list, and optional recent claims. French insurance context. show* flags gate the callout, claims and CTA. A reference snapshot — illustrative values.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "iconName": {
+          "title": "Icon Name",
+          "description": "Icon Name",
+          "lightning:type": "lightning__textType"
+        },
+        "productName": {
+          "title": "Product Name",
+          "description": "Product Name",
+          "lightning:type": "lightning__textType"
+        },
+        "policyLine": {
+          "title": "Policy Line",
+          "description": "Policy Line",
+          "lightning:type": "lightning__textType"
+        },
+        "statusLabel": {
+          "title": "Status Label",
+          "description": "Status Label",
+          "lightning:type": "lightning__textType"
+        },
+        "statusVariant": {
+          "title": "Status Variant",
+          "description": "Status Variant",
+          "lightning:type": "lightning__textType"
+        },
+        "showHeadline": {
+          "title": "Show Headline",
+          "description": "Show Headline",
+          "lightning:type": "lightning__booleanType"
+        },
+        "headlineTitle": {
+          "title": "Headline Title",
+          "description": "Headline Title",
+          "lightning:type": "lightning__textType"
+        },
+        "headlineDetail": {
+          "title": "Headline Detail",
+          "description": "Headline Detail",
+          "lightning:type": "lightning__textType"
+        },
+        "headlineVariant": {
+          "title": "Headline Variant",
+          "description": "Headline Variant",
+          "lightning:type": "lightning__textType"
+        },
+        "stats": {
+          "title": "Stats",
+          "description": "Stats",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "iconName": {
+                "title": "Icon Name",
+                "description": "Icon Name",
+                "lightning:type": "lightning__textType"
+              },
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "value": {
+                "title": "Value",
+                "description": "Value",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showCoverages": {
+          "title": "Show Coverages",
+          "description": "Show Coverages",
+          "lightning:type": "lightning__booleanType"
+        },
+        "coverages": {
+          "title": "Coverages",
+          "description": "Coverages",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "name": {
+                "title": "Name",
+                "description": "Name",
+                "lightning:type": "lightning__textType"
+              },
+              "detail": {
+                "title": "Detail",
+                "description": "Detail",
+                "lightning:type": "lightning__textType"
+              },
+              "tag": {
+                "title": "Tag",
+                "description": "Tag",
+                "lightning:type": "lightning__textType"
+              },
+              "tagVariant": {
+                "title": "Tag Variant",
+                "description": "Tag Variant",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showClaims": {
+          "title": "Show Claims",
+          "description": "Show Claims",
+          "lightning:type": "lightning__booleanType"
+        },
+        "claims": {
+          "title": "Claims",
+          "description": "Claims",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__textType"
+          }
+        },
+        "showCta": {
+          "title": "Show Cta",
+          "description": "Show Cta",
+          "lightning:type": "lightning__booleanType"
+        },
+        "ctaLabel": {
+          "title": "Cta Label",
+          "description": "Cta Label",
+          "lightning:type": "lightning__textType"
+        },
+        "ctaUrl": {
+          "title": "Cta Url",
+          "description": "Cta Url",
+          "lightning:type": "lightning__urlType"
+        }
+      }
+    }
+  }
+}

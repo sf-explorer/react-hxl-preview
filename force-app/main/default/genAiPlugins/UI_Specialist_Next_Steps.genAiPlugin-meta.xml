@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
+    <canEscalate>false</canEscalate>
+    <description>Displays a set of proposed next steps / next best actions as a rich, on-brand card. Use this topic whenever the user asks what to do next, for a plan, follow-ups, an action list, or recommended actions — rather than reading them back as prose. The agent DECIDES and SUPPLIES the steps from the context it already has; this topic does not fetch data.</description>
+    <developerName>UI_Specialist_Next_Steps</developerName>
+    <genAiFunctions>
+        <functionName>Get_Next_Steps</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>When the user wants to know what to do next, or asks for a plan, follow-ups, or recommended actions, call Get Next Steps. Build the JSON spec yourself from the context already in the conversation — do not ask the user for JSON.</description>
+        <developerName>instruction_0</developerName>
+        <language>en_US</language>
+        <masterLabel>route_to_next_steps</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Propose the steps yourself. Each step needs a clear, action-first title; add a one-line detail (what to do) and a rationale (why / expected outcome). Order steps by what to do first. Leave order blank and it is auto-numbered.</description>
+        <developerName>instruction_1</developerName>
+        <language>en_US</language>
+        <masterLabel>compose_the_steps</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Use a priorityLabel with priorityVariant (danger for urgent, warning for soon, neutral otherwise) on the steps that matter most. Use the meta line for owner, due date and effort. Pick a fitting Lucide iconName per step. Add a per-step link or a footer CTA only when there is a real destination. Keep every label in the language the user is speaking.</description>
+        <developerName>instruction_2</developerName>
+        <language>en_US</language>
+        <masterLabel>enrich_the_steps</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Never invent data. Only propose steps grounded in the records and context already retrieved. If there is nothing to act on, do not call this action.</description>
+        <developerName>instruction_3</developerName>
+        <language>en_US</language>
+        <masterLabel>stay_grounded</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>UI Specialist - Next Steps</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to turn the context the calling agent already has into a single, well-designed next-steps card. You propose the steps, order them, and write each step's detail and rationale. You never retrieve data and you never answer the underlying business question in prose — you render the plan.</scope>
+</GenAiPlugin>

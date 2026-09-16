@@ -1,0 +1,14 @@
+{
+  "title": "Next Steps Output Values",
+  "description": "Payload fields from the NextStepsAction response",
+  "type": "object",
+  "lightning:type": "lightning__objectType",
+  "unevaluatedProperties": false,
+  "lightning:tags": ["mcp"],
+  "properties": {
+    "nextSteps": {
+      "title": "Next Steps",
+      "lightning:type": "@apexClassType/c__NextStepsAction$NextSteps"
+    }
+  }
+}

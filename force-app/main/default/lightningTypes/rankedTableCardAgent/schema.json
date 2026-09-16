@@ -1,0 +1,5 @@
+{
+  "title" : "Ranked Table (Agentforce)",
+  "description" : "Agentforce action-output CLT for the Ranked Table widget. Typed at the RankedTableAction Apex inner class so it binds flat ($attrs.<field>) as the action's Output Rendering in LEX. Same widget & Apex as MCP wrapper CLT rankedTableCardResult.",
+  "lightning:type" : "@apexClassType/c__RankedTableAction$RankedTable"
+}

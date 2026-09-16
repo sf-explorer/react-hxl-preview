@@ -1,0 +1,121 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Rapport d'envoi",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": { "borderless": true, "variant": "default" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "lg", "align": "stretch", "width": "full" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "md", "align": "center", "justify": "between", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.title}", "variant": "h2", "weight": "semibold" } },
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.dateLabel}", "variant": "caption", "color": "muted" } }
+                      ]
+                    },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.countBadges}", "forItem": "$b", "forIndex": "$bi" },
+                      "attributes": { "gap": "sm", "align": "center", "justify": "start", "isWrapped": true },
+                      "children": [
+                        { "definition": "tile/badge", "attributes": { "label": "{!$b.label}", "variant": "{!$b.variant}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "attributes": { "title": "{!$attrs.metricTitle}", "description": "{!$attrs.metricDetail}", "variant": "{!$attrs.metricVariant}" }
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showRecords}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "{!$attrs.recordsCaption}", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/table",
+                      "attributes": {
+                        "caption": "{!$attrs.recordsCaption}",
+                        "appearance": "striped",
+                        "isStickyHeader": true,
+                        "columns": "{!$attrs.columns}",
+                        "rows": "{!$attrs.rows}"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showExceptions}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "{!$attrs.exceptionsCaption}", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.exceptions}", "forItem": "$ex", "forIndex": "$ei" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "bell", "size": "sm", "color": "warning", "alt": "Exception" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$ex.title}", "variant": "body", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$ex.detail}", "variant": "caption", "color": "muted" } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showTasks}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "{!$attrs.tasksCaption}", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.tasks}", "forItem": "$task", "forIndex": "$ti" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "check-circle", "size": "sm", "color": "primary", "alt": "Tâche" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$task.label}", "variant": "body" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$task.ownerDue}", "variant": "caption", "color": "muted" } }
+                          ]
+                        },
+                        { "definition": "tile/badge", "attributes": { "label": "{!$task.tag}", "variant": "{!$task.tagVariant}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/button",
+                  "meta": { "if": "{!$attrs.showCta}" },
+                  "attributes": { "label": "{!$attrs.ctaLabel}", "href": "{!$attrs.ctaUrl}", "variant": "primary" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

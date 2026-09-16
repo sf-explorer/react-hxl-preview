@@ -1,0 +1,129 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Santé de l'affaire",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": { "borderless": true, "variant": "default" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "lg", "align": "stretch", "width": "full" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "md", "align": "center", "justify": "between", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.oppName}", "variant": "h2", "weight": "semibold" } },
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.accountLine}", "variant": "caption", "color": "muted" } }
+                      ]
+                    },
+                    { "definition": "tile/badge", "attributes": { "label": "{!$attrs.statusLabel}", "variant": "{!$attrs.statusVariant}" } }
+                  ]
+                },
+                {
+                  "definition": "tile/container",
+                  "attributes": { "borderless": false, "variant": "default" },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "full" },
+                      "children": [
+                        {
+                          "definition": "tile/row",
+                          "attributes": { "gap": "sm", "align": "center", "justify": "between", "isWrapped": false },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "Score global de santé", "variant": "body", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$attrs.overallLabel}", "variant": "h6", "weight": "bold", "color": "default" } }
+                          ]
+                        },
+                        {
+                          "definition": "tile/progress",
+                          "attributes": { "value": "{!$attrs.overallScore}", "shape": "linear", "size": "sm", "color": "{!$attrs.statusVariant}", "label": "Score global" }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "attributes": { "title": "{!$attrs.headline}", "description": "{!$attrs.headlineDetail}", "variant": "{!$attrs.statusVariant}" }
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "SCORES PAR DIMENSION", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/column",
+                      "meta": { "forEach": "{!$attrs.dimensions}", "forItem": "$dim", "forIndex": "$di" },
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "full" },
+                      "children": [
+                        { "definition": "tile/text", "attributes": { "text": "{!$dim.captionLabel}", "variant": "caption" } },
+                        { "definition": "tile/progress", "attributes": { "value": "{!$dim.pct}", "shape": "linear", "size": "sm", "color": "{!$dim.color}", "label": "{!$dim.name}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "RISQUES CLÉS", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.risks}", "forItem": "$risk", "forIndex": "$ri" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "bell", "size": "sm", "color": "warning", "alt": "Risque" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$risk.title}", "variant": "body", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$risk.evidence}", "variant": "caption", "color": "muted" } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "PLAN DE REDRESSEMENT", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.recoveryActions}", "forItem": "$action", "forIndex": "$ci" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "check-circle", "size": "sm", "color": "primary", "alt": "Action" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$action.label}", "variant": "body" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$action.ownerDue}", "variant": "caption", "color": "muted" } }
+                          ]
+                        },
+                        { "definition": "tile/badge", "attributes": { "label": "{!$action.tag}", "variant": "{!$action.tagVariant}" } }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Brief de réunion</masterLabel>
+    <description>Sample $attrs for the Brief de réunion (meetingPrep) card, matching the prepare-next-meeting skill output. French corporate-insurance context. Sections gate on show* flags. A reference snapshot — illustrative values.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

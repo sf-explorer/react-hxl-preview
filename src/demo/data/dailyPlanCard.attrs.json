@@ -1,0 +1,28 @@
+{
+  "_comment": "Sample $attrs for the Plan de journée (daily plan) card, matching the plan-my-day skill output. French insurance-agency context. A reference snapshot — values are illustrative, not a live org capture.",
+  "attributes": {
+    "agentName": "Sophie Marchand",
+    "agentInitials": "SM",
+    "greeting": "Bonjour Sophie",
+    "dateLabel": "Lundi 14 septembre 2026 · Agence Paris 12e",
+    "availabilityLabel": "3 créneaux libres",
+    "metricTitle": "Métrique du jour : 4 renouvellements à échéance cette semaine",
+    "metricDetail": "2 300 € de primes à sécuriser. Priorisez les relances avant vendredi pour éviter tout impayé.",
+    "alerts": [
+      { "title": "Devis MRP+RC Pro sans relance", "detail": "Karim Ben Ali · 1 680 € · dormant depuis 12 jours", "statusLabel": "Urgent", "statusVariant": "danger" },
+      { "title": "Renouvellement auto à valider", "detail": "Annie Dubois · échéance dans 6 jours", "statusLabel": "À traiter", "statusVariant": "warning" },
+      { "title": "Pièce KYC manquante", "detail": "Foyer Lemoine · justificatif de domicile", "statusLabel": "En attente", "statusVariant": "primary" }
+    ],
+    "readyMessages": [
+      { "subject": "Relance devis — Karim Ben Ali", "recipient": "karim.benali@example.fr", "channel": "E-mail", "url": "#" },
+      { "subject": "Rappel renouvellement — Annie Dubois", "recipient": "annie.dubois@example.fr", "channel": "E-mail", "url": "#" }
+    ],
+    "nextActions": [
+      { "label": "Appeler le foyer Lemoine pour le justificatif KYC", "timeLabel": "09:30 · 15 min" },
+      { "label": "Préparer le rendez-vous de renouvellement Dubois", "timeLabel": "11:00 · 30 min" },
+      { "label": "Bloquer un créneau de relance pipeline", "timeLabel": "16:00 · 45 min" }
+    ],
+    "ctaLabel": "Ouvrir mon agenda",
+    "ctaUrl": "#"
+  }
+}

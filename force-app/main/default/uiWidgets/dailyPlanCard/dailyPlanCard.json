@@ -1,0 +1,132 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Plan de journée",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": { "borderless": true, "variant": "default" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "lg", "align": "stretch", "width": "full" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "md", "align": "center", "justify": "between", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/row",
+                      "attributes": { "gap": "md", "align": "center", "justify": "start", "isWrapped": false },
+                      "children": [
+                        {
+                          "definition": "tile/avatar",
+                          "attributes": { "initials": "{!$attrs.agentInitials}", "alt": "{!$attrs.agentName}", "iconName": "user", "shape": "circle", "size": "lg" }
+                        },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$attrs.greeting}", "variant": "h2", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$attrs.dateLabel}", "variant": "caption", "color": "muted" } }
+                          ]
+                        }
+                      ]
+                    },
+                    { "definition": "tile/badge", "attributes": { "label": "{!$attrs.availabilityLabel}", "variant": "primary" } }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "attributes": { "title": "{!$attrs.metricTitle}", "description": "{!$attrs.metricDetail}", "variant": "info" }
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "ALERTES PRIORITAIRES", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/column",
+                      "meta": { "forEach": "{!$attrs.alerts}", "forItem": "$alert", "forIndex": "$ai" },
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "full" },
+                      "children": [
+                        {
+                          "definition": "tile/row",
+                          "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                          "children": [
+                            { "definition": "tile/icon", "attributes": { "name": "bell", "size": "sm", "color": "warning", "alt": "Alerte" } },
+                            {
+                              "definition": "tile/column",
+                              "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                              "children": [
+                                { "definition": "tile/text", "attributes": { "text": "{!$alert.title}", "variant": "body", "weight": "semibold" } },
+                                { "definition": "tile/text", "attributes": { "text": "{!$alert.detail}", "variant": "caption", "color": "muted" } }
+                              ]
+                            },
+                            { "definition": "tile/badge", "attributes": { "label": "{!$alert.statusLabel}", "variant": "{!$alert.statusVariant}" } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "MESSAGES PRÊTS À ENVOYER", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.readyMessages}", "forItem": "$msg", "forIndex": "$mi" },
+                      "attributes": { "gap": "md", "align": "center", "justify": "between", "isWrapped": true },
+                      "children": [
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/link", "attributes": { "text": "{!$msg.subject}", "href": "{!$msg.url}", "variant": "primary" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$msg.recipient}", "variant": "caption", "color": "muted" } }
+                          ]
+                        },
+                        { "definition": "tile/badge", "attributes": { "label": "{!$msg.channel}", "variant": "primary" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": { "gap": "xs", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "PROCHAINES ACTIONS", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.nextActions}", "forItem": "$act", "forIndex": "$ni" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "check-circle", "size": "sm", "color": "success", "alt": "Action" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$act.label}", "variant": "body" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$act.timeLabel}", "variant": "caption", "color": "muted" } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/button",
+                  "attributes": { "label": "{!$attrs.ctaLabel}", "href": "{!$attrs.ctaUrl}", "variant": "primary" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

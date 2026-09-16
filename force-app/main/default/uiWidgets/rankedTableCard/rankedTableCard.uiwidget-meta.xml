@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Tableau priorisé</masterLabel>
+    <description>Generic, caller-driven ranked/prioritized table for HXL in Agentforce and MCP. The agent supplies columns + rows as a JSON spec (RankedTableAction); the action flattens them into columns[] + rows[].cells[] so the card binds with plain forEach only.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

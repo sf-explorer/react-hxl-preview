@@ -50,3 +50,38 @@ export type {
   HxlComponentRegistry,
   HxlRenderContext,
 } from "./types"
+
+// Host-agnostic AI widget editing (pluggable backend + agentic loop)
+export {
+  createTileAiClient,
+  isTileAiAvailable,
+  editWidget,
+  runAgent,
+  createWidget,
+  blankWidget,
+  WIDGET_TOOLS,
+  lintWidgetBundle,
+  TILE_CATALOG,
+  KNOWN_TILE_DEFINITIONS,
+  catalogReference,
+  SYSTEM_PROMPT,
+  extractJson,
+} from "./ai"
+export type {
+  AiClient,
+  AiCompleteOptions,
+  AiTier,
+  TileAiClientConfig,
+  EditWidgetParams,
+  EditWidgetResult,
+  EditProgress,
+  RunAgentParams,
+  RunAgentResult,
+  CreateWidgetParams,
+  AgentProgress,
+  AgentTool,
+  AgentDraft,
+  LintResult,
+  TileComponentSpec,
+  TileAttrSpec,
+} from "./ai"

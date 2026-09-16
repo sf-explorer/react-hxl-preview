@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>HXL Next Steps</label>
+    <description>Grants Apex access to NextStepsAction, the data source for the generic Next Steps widget (Agentforce/LEX &amp; Slackbot/MCP). Assign to any user who runs the Get Next Steps action or MCP tool, e.g. the UI Specialist agent's running user.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <classAccesses>
+        <apexClass>NextStepsAction</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+</PermissionSet>

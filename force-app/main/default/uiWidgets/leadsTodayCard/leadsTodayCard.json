@@ -1,0 +1,70 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Leads du jour",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": { "borderless": true, "variant": "default" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "lg", "align": "stretch", "width": "full" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "md", "align": "center", "justify": "between", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/text", "attributes": { "text": "Leads reçus aujourd'hui", "variant": "h2", "weight": "semibold" } },
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.dateLabel}", "variant": "caption", "color": "muted" } }
+                      ]
+                    },
+                    {
+                      "definition": "tile/row",
+                      "attributes": { "gap": "sm", "align": "center", "justify": "start", "isWrapped": true },
+                      "children": [
+                        { "definition": "tile/badge", "attributes": { "label": "{!$attrs.totalLabel}", "variant": "primary" } },
+                        { "definition": "tile/badge", "attributes": { "label": "{!$attrs.urgentLabel}", "variant": "danger" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "attributes": { "title": "{!$attrs.summaryTitle}", "description": "{!$attrs.summaryDetail}", "variant": "info" }
+                },
+                {
+                  "definition": "tile/table",
+                  "attributes": {
+                    "caption": "Leads du jour, triés par score de priorité",
+                    "appearance": "striped",
+                    "isStickyHeader": true,
+                    "sort": { "key": "score", "direction": "desc" },
+                    "columns": [
+                      { "key": "name", "header": "Contact", "isFilterable": true },
+                      { "key": "product", "header": "Produit", "isFilterable": true },
+                      { "key": "source", "header": "Source" },
+                      { "key": "priority", "header": "Priorité" },
+                      { "key": "score", "header": "Score", "align": "right", "isSortable": true }
+                    ],
+                    "rows": "{!$attrs.leads}"
+                  }
+                },
+                {
+                  "definition": "tile/button",
+                  "attributes": { "label": "{!$attrs.ctaLabel}", "href": "{!$attrs.ctaUrl}", "variant": "primary" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

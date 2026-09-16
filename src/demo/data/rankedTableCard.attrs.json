@@ -1,0 +1,82 @@
+{
+  "_comment": "Sample $attrs for the generic Tableau priorisé (rankedTableCard) card, in the RankedTableAction OUTPUT shape (columns[] + rows[].cells[], flattened). The agent supplies a JSON `spec` (columns + keyed rows) to Get_Ranked_Table; the Apex action flattens it into this render-time payload so the widget binds with plain forEach only (no dynamic key access), rendering identically in this preview and in the production HXL runtime. The same card serves opportunity-prioritizer, client-portfolio-analysis, contact-outreach-advisor, replanifier-semaine-prochaine, commercial-portfolio-review, urgent-claims-processing. A reference snapshot — illustrative values.",
+  "attributes": {
+    "title": "Opportunités priorisées",
+    "subtitle": "Agence Roussel · Bordeaux · cette semaine",
+    "badges": [
+      { "label": "3 opportunités", "variant": "primary" },
+      { "label": "1 en palier 1", "variant": "danger" }
+    ],
+    "showSummary": true,
+    "summaryTitle": "Concentrez-vous sur Delaunay et Vidal",
+    "summaryDetail": "Multirisque PME Delaunay est proche de la clôture et à forte confiance — envoyez le devis signable dès aujourd'hui.",
+    "tableCaption": "Opportunités ouvertes, triées par indice de priorité",
+    "columns": [
+      { "key": "opp", "header": "Opportunité", "align": "start" },
+      { "key": "amount", "header": "Montant", "align": "end" },
+      { "key": "stage", "header": "Étape", "align": "start" },
+      { "key": "tier", "header": "Palier", "align": "start" },
+      { "key": "score", "header": "Indice", "align": "end" }
+    ],
+    "rows": [
+      {
+        "id": "delaunay",
+        "cells": [
+          { "value": "Multirisque PME Delaunay", "align": "start", "weight": "semibold" },
+          { "value": "42 000 €", "align": "end", "weight": "regular" },
+          { "value": "Négociation", "align": "start", "weight": "regular" },
+          { "value": "Palier 1", "align": "start", "weight": "regular" },
+          { "value": "88", "align": "end", "weight": "regular" }
+        ],
+        "c1": "Multirisque PME Delaunay", "c1Show": true, "c1Align": "start",
+        "c2": "42 000 €", "c2Show": true, "c2Align": "end",
+        "c3": "Négociation", "c3Show": true, "c3Align": "start",
+        "c4": "Palier 1", "c4Show": true, "c4Align": "start",
+        "c5": "88", "c5Show": true, "c5Align": "end",
+        "c6": null, "c6Show": false, "c6Align": "start"
+      },
+      {
+        "id": "vidal",
+        "cells": [
+          { "value": "Flotte auto Transports Vidal", "align": "start", "weight": "semibold" },
+          { "value": "31 000 €", "align": "end", "weight": "regular" },
+          { "value": "Proposition", "align": "start", "weight": "regular" },
+          { "value": "Palier 2", "align": "start", "weight": "regular" },
+          { "value": "74", "align": "end", "weight": "regular" }
+        ],
+        "c1": "Flotte auto Transports Vidal", "c1Show": true, "c1Align": "start",
+        "c2": "31 000 €", "c2Show": true, "c2Align": "end",
+        "c3": "Proposition", "c3Show": true, "c3Align": "start",
+        "c4": "Palier 2", "c4Show": true, "c4Align": "start",
+        "c5": "74", "c5Show": true, "c5Align": "end",
+        "c6": null, "c6Show": false, "c6Align": "start"
+      },
+      {
+        "id": "meyer",
+        "cells": [
+          { "value": "Santé collective Cabinet Meyer", "align": "start", "weight": "semibold" },
+          { "value": "12 500 €", "align": "end", "weight": "regular" },
+          { "value": "Découverte", "align": "start", "weight": "regular" },
+          { "value": "Palier 3", "align": "start", "weight": "regular" },
+          { "value": "41", "align": "end", "weight": "regular" }
+        ],
+        "c1": "Santé collective Cabinet Meyer", "c1Show": true, "c1Align": "start",
+        "c2": "12 500 €", "c2Show": true, "c2Align": "end",
+        "c3": "Découverte", "c3Show": true, "c3Align": "start",
+        "c4": "Palier 3", "c4Show": true, "c4Align": "start",
+        "c5": "41", "c5Show": true, "c5Align": "end",
+        "c6": null, "c6Show": false, "c6Align": "start"
+      }
+    ],
+    "showHighlights": true,
+    "highlightsCaption": "FOCUS DE LA SEMAINE",
+    "highlights": [
+      { "iconName": "trending-up", "iconColor": "success", "title": "Multirisque PME Delaunay", "detail": "Clôture imminente, forte confiance — envoyer le devis signable." },
+      { "iconName": "clock", "iconColor": "warning", "title": "Flotte Transports Vidal", "detail": "Relevé de sinistralité manquant — à relancer avant de caler le closing." },
+      { "iconName": "bell", "iconColor": "danger", "title": "Santé collective Cabinet Meyer", "detail": "Décideur RH non identifié — à déprioriser pour l'instant." }
+    ],
+    "showCta": true,
+    "ctaLabel": "Ouvrir le pipeline",
+    "ctaUrl": "#"
+  }
+}

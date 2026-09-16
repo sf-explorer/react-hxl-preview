@@ -1,0 +1,122 @@
+{
+  "title": "Confirmer les mises à jour Widget",
+  "description": "Sample $attrs for the interactive Confirmer les mises à jour (recordUpdateConfirm) card — an editable 'edit & confirm' form (0.1.1 input tiles: select/textField/textarea/radio/checkbox/switch) with Confirm/Cancel buttons that gather the field values at click time (inputs 'auto' / 'none'), modelled on the HXL gallery 'account-update-confirm'. Matches post-meeting-crm-updates. select/radio options are {label,value} arrays; isChecked binds a boolean. A reference snapshot — illustrative values.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "iconName": {
+          "title": "Icon Name",
+          "description": "Icon Name",
+          "lightning:type": "lightning__textType"
+        },
+        "recordName": {
+          "title": "Record Name",
+          "description": "Record Name",
+          "lightning:type": "lightning__textType"
+        },
+        "recordType": {
+          "title": "Record Type",
+          "description": "Record Type",
+          "lightning:type": "lightning__textType"
+        },
+        "showSummary": {
+          "title": "Show Summary",
+          "description": "Show Summary",
+          "lightning:type": "lightning__booleanType"
+        },
+        "summaryTitle": {
+          "title": "Summary Title",
+          "description": "Summary Title",
+          "lightning:type": "lightning__textType"
+        },
+        "summaryText": {
+          "title": "Summary Text",
+          "description": "Summary Text",
+          "lightning:type": "lightning__textType"
+        },
+        "stageValue": {
+          "title": "Stage Value",
+          "description": "Stage Value",
+          "lightning:type": "lightning__textType"
+        },
+        "stageOptions": {
+          "title": "Stage Options",
+          "description": "Stage Options",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "value": {
+                "title": "Value",
+                "description": "Value",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "closeDate": {
+          "title": "Close Date",
+          "description": "Close Date",
+          "lightning:type": "lightning__textType"
+        },
+        "note": {
+          "title": "Note",
+          "description": "Note",
+          "lightning:type": "lightning__textType"
+        },
+        "priorityValue": {
+          "title": "Priority Value",
+          "description": "Priority Value",
+          "lightning:type": "lightning__textType"
+        },
+        "priorityOptions": {
+          "title": "Priority Options",
+          "description": "Priority Options",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "value": {
+                "title": "Value",
+                "description": "Value",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "createTasks": {
+          "title": "Create Tasks",
+          "description": "Create Tasks",
+          "lightning:type": "lightning__booleanType"
+        },
+        "notifyManager": {
+          "title": "Notify Manager",
+          "description": "Notify Manager",
+          "lightning:type": "lightning__booleanType"
+        },
+        "confirmLabel": {
+          "title": "Confirm Label",
+          "description": "Confirm Label",
+          "lightning:type": "lightning__textType"
+        },
+        "cancelLabel": {
+          "title": "Cancel Label",
+          "description": "Cancel Label",
+          "lightning:type": "lightning__textType"
+        }
+      }
+    }
+  }
+}

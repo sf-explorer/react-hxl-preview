@@ -1,0 +1,22 @@
+{
+  "renderer": {
+    "componentOverrides": {
+      "$": {
+        "definition": "@widget/c/nextStepsCard",
+        "attributes": {
+          "title": "{!$attrs.outputValues.nextSteps.title}",
+          "subtitle": "{!$attrs.outputValues.nextSteps.subtitle}",
+          "badges": "{!$attrs.outputValues.nextSteps.badges}",
+          "showSummary": "{!$attrs.outputValues.nextSteps.showSummary}",
+          "summaryTitle": "{!$attrs.outputValues.nextSteps.summaryTitle}",
+          "summaryDetail": "{!$attrs.outputValues.nextSteps.summaryDetail}",
+          "stepsCaption": "{!$attrs.outputValues.nextSteps.stepsCaption}",
+          "steps": "{!$attrs.outputValues.nextSteps.steps}",
+          "showCta": "{!$attrs.outputValues.nextSteps.showCta}",
+          "ctaLabel": "{!$attrs.outputValues.nextSteps.ctaLabel}",
+          "ctaUrl": "{!$attrs.outputValues.nextSteps.ctaUrl}"
+        }
+      }
+    }
+  }
+}

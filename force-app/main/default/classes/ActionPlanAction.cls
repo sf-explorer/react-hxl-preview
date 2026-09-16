@@ -19,7 +19,8 @@
  * (title / subtitle / note / confirmLabel / cancelLabel / rows) match the widget attributes so the
  * Agentforce (agent) renderer binds them flat as {!$attrs.title} etc.
  *
- * spec JSON shape (all optional; called with no args -> a portable demo triage plan renders):
+ * spec JSON shape (all optional; called with no args -> a neutral empty placeholder renders, since
+ * this action holds no business data of its own -- the caller supplies every column and row):
  * {
  *   "title": "…", "subtitle": "…", "note": "…",
  *   "confirmLabel": "…", "cancelLabel": "…",
@@ -35,7 +36,7 @@ global with sharing class ActionPlanAction {
 
     // ---- Invocable input ----
     global class Request {
-        @InvocableVariable(label='Grid spec (JSON)' description='JSON describing the grid: optional title/subtitle/note/confirmLabel/cancelLabel, a "columns" array (key,label,type[readonly|text|select|switch],options?,placeholder?) and a "rows" array (each row has an "id" plus a value per column key). Leave blank to render a portable demo triage plan.' required=false)
+        @InvocableVariable(label='Grid spec (JSON)' description='JSON describing the grid: optional title/subtitle/note/confirmLabel/cancelLabel, a "columns" array (key,label,type[readonly|text|select|switch],options?,placeholder?) and a "rows" array (each row has an "id" plus a value per column key). Leave blank to render a neutral empty placeholder (this action stores no rows of its own).' required=false)
         global String spec;
     }
 
@@ -80,13 +81,13 @@ global with sharing class ActionPlanAction {
         @InvocableVariable global String value;
     }
 
-    @InvocableMethod(label='Get Action Plan' description='Renders a generic, caller-driven editable action grid in the actionPlan HXL widget. Pass a JSON spec of columns + rows; the action flattens it into typed, data-bound cells the user reviews, adjusts, and confirms. Call with no spec to show a portable demo triage plan.')
+    @InvocableMethod(label='Get Action Plan' description='Renders a generic, caller-driven editable action grid in the actionPlan HXL widget. Pass a JSON spec of columns + rows; the action flattens it into typed, data-bound cells the user reviews, adjusts, and confirms. Call with no spec to render a neutral empty placeholder (the action holds no rows of its own).')
     global static List<ActionPlanResponse> getActionPlan(List<Request> requests) {
         String spec = (requests != null && !requests.isEmpty()) ? requests[0].spec : null;
 
         Map<String, Object> parsed;
         if (String.isBlank(spec)) {
-            parsed = demoSpec();
+            parsed = emptyState();
         } else {
             try {
                 parsed = (Map<String, Object>) JSON.deserializeUntyped(spec);
@@ -199,65 +200,14 @@ global with sharing class ActionPlanAction {
         return String.isNotBlank(a) ? a : b;
     }
 
-    // A portable, self-contained demo triage plan so a no-argument call still renders a meaningful
-    // card (mirrors src/demo/data/actionPlan.attrs.json). Built as Maps/Lists to avoid escaping the
-    // accented French labels inside a JSON string literal.
-    private static Map<String, Object> demoSpec() {
-        List<Object> actionTypeOpts = new List<Object>{
-            opt('Réassigner', 'REASSIGN'),
-            opt('Reporter', 'RESCHEDULE')
-        };
-        List<Object> ownerOpts = new List<Object>{
-            opt('Vanessa Central', 'Vanessa Central'),
-            opt('Tania Djama', 'Tania Djama'),
-            opt('Vance Channel', 'Vance Channel'),
-            opt('Vous (retour)', 'Vous (retour)')
-        };
-
-        List<Object> columns = new List<Object>{
-            col('task', 'Tâche', 'readonly', null, null),
-            col('justification', 'Justification', 'readonly', null, null),
-            col('action', 'Action', 'select', actionTypeOpts, null),
-            col('owner', 'Nouvel owner', 'select', ownerOpts, null),
-            col('due', 'Échéance', 'text', null, '24h · J+3 · Après retour'),
-            col('approve', 'Inclure', 'switch', null, null)
-        };
-
-        List<Object> rows = new List<Object>{
-            triageRow('opers', 'Réclamation sensible OPERS', 'Risque client + revue manager', 'REASSIGN', 'Vanessa Central', '24h', true),
-            triageRow('auto_dubois', 'Relance renouvellement Auto Dubois', 'Échéance contractuelle proche', 'REASSIGN', 'Tania Djama', '48h', true),
-            triageRow('mutuelle_btp', 'Suivi Mutuelle Collective BTP', 'Continuité relation client', 'REASSIGN', 'Tania Djama', 'J+4', true),
-            triageRow('mrp_rcpro', 'Finaliser devis Package MRP+RC Pro', 'Opportunité en cours (1 680 USD)', 'REASSIGN', 'Vance Channel', 'J+3', true),
-            triageRow('comite_portefeuille', 'Préparer comité portefeuille', 'Non bloquant, reportable', 'RESCHEDULE', 'Vous (retour)', 'J+7', true),
-            triageRow('formation_rgpd', 'Formation interne RGPD', 'Reste à votre nom', 'RESCHEDULE', 'Vous (retour)', 'Après retour', true)
-        };
-
+    // No spec supplied: the caller (agent/planner) owns ALL content — this action only flattens
+    // what it is given — so we hardcode NO business data. Render a neutral, empty placeholder that
+    // says the grid is caller-driven. (Illustrative sample data lives in the React preview harness,
+    // src/demo/data/actionPlan.attrs.json, not in this platform code.)
+    private static Map<String, Object> emptyState() {
         return new Map<String, Object>{
-            'title'        => 'Plan d\'actions proposé',
-            'subtitle'     => 'Revoyez, ajustez et confirmez avant votre absence',
-            'note'         => 'Confirmer rassemble le plan révisé (action, owner, échéance et inclusion pour chaque tâche) en un seul payload.',
-            'confirmLabel' => 'Confirmer le plan',
-            'cancelLabel'  => 'Annuler',
-            'columns'      => columns,
-            'rows'         => rows
-        };
-    }
-
-    private static Map<String, Object> opt(String label, String value) {
-        return new Map<String, Object>{ 'label' => label, 'value' => value };
-    }
-
-    private static Map<String, Object> col(String key, String label, String type, List<Object> options, String placeholder) {
-        Map<String, Object> c = new Map<String, Object>{ 'key' => key, 'label' => label, 'type' => type };
-        if (options != null) c.put('options', options);
-        if (placeholder != null) c.put('placeholder', placeholder);
-        return c;
-    }
-
-    private static Map<String, Object> triageRow(String id, String task, String justification, String action, String owner, String due, Boolean approve) {
-        return new Map<String, Object>{
-            'id' => id, 'task' => task, 'justification' => justification,
-            'action' => action, 'owner' => owner, 'due' => due, 'approve' => approve
+            'title' => 'Plan d\'actions',
+            'note'  => 'Cette grille affiche un plan d\'actions fourni par l\'agent appelant. Fournissez un spec JSON (columns[] + rows[]) pour la remplir.'
         };
     }
 }

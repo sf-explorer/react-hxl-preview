@@ -1,0 +1,15 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "nextSteps" : {
+      "title" : "Next Steps",
+      "description" : "Normalized, caller-driven next steps (title/subtitle/badges/summary + ordered steps[] + CTA) for the nextStepsCard HXL widget",
+      "lightning:type" : "@apexClassType/c__NextStepsAction$NextSteps",
+      "lightning:isPII" : false,
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true,
+      "copilotAction:useHydratedPrompt" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

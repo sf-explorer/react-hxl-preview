@@ -1,0 +1,30 @@
+{
+  "_comment": "Sample $attrs for the interactive Confirmer les mises à jour (recordUpdateConfirm) card — an editable 'edit & confirm' form (0.1.1 input tiles: select/textField/textarea/radio/checkbox/switch) with Confirm/Cancel buttons that gather the field values at click time (inputs 'auto' / 'none'), modelled on the HXL gallery 'account-update-confirm'. Matches post-meeting-crm-updates. select/radio options are {label,value} arrays; isChecked binds a boolean. A reference snapshot — illustrative values.",
+  "attributes": {
+    "iconName": "user",
+    "recordName": "Karim Ben Ali",
+    "recordType": "Meeting with Lead · 15h00–16h00 · mise à jour CRM",
+    "showSummary": true,
+    "summaryTitle": "Synthèse du rendez-vous",
+    "summaryText": "Besoin de mutuelle collective confirmé pour 14 salariés BTP. Compare une offre concurrente, sensible au budget. Intérêt pour ajouter une RC Pro. Décision attendue sous 2 semaines.",
+    "stageValue": "Proposal/Quote",
+    "stageOptions": [
+      { "label": "Discovery", "value": "Discovery" },
+      { "label": "Proposal/Quote", "value": "Proposal/Quote" },
+      { "label": "Negotiation", "value": "Negotiation" },
+      { "label": "Closed Won", "value": "Closed Won" }
+    ],
+    "closeDate": "2026-08-03",
+    "note": "Comparaison concurrent en cours, sensible au prix.",
+    "priorityValue": "haute",
+    "priorityOptions": [
+      { "label": "Haute", "value": "haute" },
+      { "label": "Moyenne", "value": "moyenne" },
+      { "label": "Basse", "value": "basse" }
+    ],
+    "createTasks": true,
+    "notifyManager": false,
+    "confirmLabel": "Confirmer les mises à jour",
+    "cancelLabel": "Annuler"
+  }
+}

@@ -1,0 +1,217 @@
+{
+  "title": "Brief de réunion Widget",
+  "description": "Sample $attrs for the Brief de réunion (meetingPrep) card, matching the prepare-next-meeting skill output. French corporate-insurance context. Sections gate on show* flags. A reference snapshot — illustrative values.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "meetingTitle": {
+          "title": "Meeting Title",
+          "description": "Meeting Title",
+          "lightning:type": "lightning__textType"
+        },
+        "accountLine": {
+          "title": "Account Line",
+          "description": "Account Line",
+          "lightning:type": "lightning__textType"
+        },
+        "meetingWhen": {
+          "title": "Meeting When",
+          "description": "Meeting When",
+          "lightning:type": "lightning__textType"
+        },
+        "objectiveTitle": {
+          "title": "Objective Title",
+          "description": "Objective Title",
+          "lightning:type": "lightning__textType"
+        },
+        "objectiveDetail": {
+          "title": "Objective Detail",
+          "description": "Objective Detail",
+          "lightning:type": "lightning__textType"
+        },
+        "showStakeholders": {
+          "title": "Show Stakeholders",
+          "description": "Show Stakeholders",
+          "lightning:type": "lightning__booleanType"
+        },
+        "stakeholders": {
+          "title": "Stakeholders",
+          "description": "Stakeholders",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "name": {
+                "title": "Name",
+                "description": "Name",
+                "lightning:type": "lightning__textType"
+              },
+              "role": {
+                "title": "Role",
+                "description": "Role",
+                "lightning:type": "lightning__textType"
+              },
+              "engagement": {
+                "title": "Engagement",
+                "description": "Engagement",
+                "lightning:type": "lightning__textType"
+              },
+              "engagementVariant": {
+                "title": "Engagement Variant",
+                "description": "Engagement Variant",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showChanges": {
+          "title": "Show Changes",
+          "description": "Show Changes",
+          "lightning:type": "lightning__booleanType"
+        },
+        "changes": {
+          "title": "Changes",
+          "description": "Changes",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "text": {
+                "title": "Text",
+                "description": "Text",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showRisks": {
+          "title": "Show Risks",
+          "description": "Show Risks",
+          "lightning:type": "lightning__booleanType"
+        },
+        "risks": {
+          "title": "Risks",
+          "description": "Risks",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "title": {
+                "title": "Title",
+                "description": "Title",
+                "lightning:type": "lightning__textType"
+              },
+              "evidence": {
+                "title": "Evidence",
+                "description": "Evidence",
+                "lightning:type": "lightning__textType"
+              },
+              "mitigation": {
+                "title": "Mitigation",
+                "description": "Mitigation",
+                "lightning:type": "lightning__textType"
+              },
+              "severity": {
+                "title": "Severity",
+                "description": "Severity",
+                "lightning:type": "lightning__textType"
+              },
+              "severityVariant": {
+                "title": "Severity Variant",
+                "description": "Severity Variant",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showObjectives": {
+          "title": "Show Objectives",
+          "description": "Show Objectives",
+          "lightning:type": "lightning__booleanType"
+        },
+        "objectives": {
+          "title": "Objectives",
+          "description": "Objectives",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "text": {
+                "title": "Text",
+                "description": "Text",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showQuestions": {
+          "title": "Show Questions",
+          "description": "Show Questions",
+          "lightning:type": "lightning__booleanType"
+        },
+        "questions": {
+          "title": "Questions",
+          "description": "Questions",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "text": {
+                "title": "Text",
+                "description": "Text",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showActions": {
+          "title": "Show Actions",
+          "description": "Show Actions",
+          "lightning:type": "lightning__booleanType"
+        },
+        "postActions": {
+          "title": "Post Actions",
+          "description": "Post Actions",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "ownerDue": {
+                "title": "Owner Due",
+                "description": "Owner Due",
+                "lightning:type": "lightning__textType"
+              },
+              "tag": {
+                "title": "Tag",
+                "description": "Tag",
+                "lightning:type": "lightning__textType"
+              },
+              "tagVariant": {
+                "title": "Tag Variant",
+                "description": "Tag Variant",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "ctaLabel": {
+          "title": "Cta Label",
+          "description": "Cta Label",
+          "lightning:type": "lightning__textType"
+        },
+        "ctaUrl": {
+          "title": "Cta Url",
+          "description": "Cta Url",
+          "lightning:type": "lightning__urlType"
+        }
+      }
+    }
+  }
+}

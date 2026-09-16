@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Mise à jour de la fiche client</masterLabel>
+    <description>Sample $attrs for the interactive Mise à jour de la fiche client (clientRecordUpdate) card — an editable KYC/contact confirm form (0.1.1 input tiles) modelled on the HXL gallery 'account-update-confirm'. Confirm gathers every field value at click time (inputs 'auto'); Cancel gathers none. select/radio options are {label,value} arrays; isChecked / value bind from attrs. Matches the client-record-update skill. A reference snapshot — illustrative values.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

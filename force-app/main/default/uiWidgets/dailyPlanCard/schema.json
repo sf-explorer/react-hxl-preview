@@ -1,0 +1,137 @@
+{
+  "title": "Plan de journée Widget",
+  "description": "Sample $attrs for the Plan de journée (daily plan) card, matching the plan-my-day skill output. French insurance-agency context. A reference snapshot — values are illustrative, not a live org capture.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "agentName": {
+          "title": "Agent Name",
+          "description": "Agent Name",
+          "lightning:type": "lightning__textType"
+        },
+        "agentInitials": {
+          "title": "Agent Initials",
+          "description": "Agent Initials",
+          "lightning:type": "lightning__textType"
+        },
+        "greeting": {
+          "title": "Greeting",
+          "description": "Greeting",
+          "lightning:type": "lightning__textType"
+        },
+        "dateLabel": {
+          "title": "Date Label",
+          "description": "Date Label",
+          "lightning:type": "lightning__textType"
+        },
+        "availabilityLabel": {
+          "title": "Availability Label",
+          "description": "Availability Label",
+          "lightning:type": "lightning__textType"
+        },
+        "metricTitle": {
+          "title": "Metric Title",
+          "description": "Metric Title",
+          "lightning:type": "lightning__textType"
+        },
+        "metricDetail": {
+          "title": "Metric Detail",
+          "description": "Metric Detail",
+          "lightning:type": "lightning__textType"
+        },
+        "alerts": {
+          "title": "Alerts",
+          "description": "Alerts",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "title": {
+                "title": "Title",
+                "description": "Title",
+                "lightning:type": "lightning__textType"
+              },
+              "detail": {
+                "title": "Detail",
+                "description": "Detail",
+                "lightning:type": "lightning__textType"
+              },
+              "statusLabel": {
+                "title": "Status Label",
+                "description": "Status Label",
+                "lightning:type": "lightning__textType"
+              },
+              "statusVariant": {
+                "title": "Status Variant",
+                "description": "Status Variant",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "readyMessages": {
+          "title": "Ready Messages",
+          "description": "Ready Messages",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "subject": {
+                "title": "Subject",
+                "description": "Subject",
+                "lightning:type": "lightning__textType"
+              },
+              "recipient": {
+                "title": "Recipient",
+                "description": "Recipient",
+                "lightning:type": "lightning__textType"
+              },
+              "channel": {
+                "title": "Channel",
+                "description": "Channel",
+                "lightning:type": "lightning__textType"
+              },
+              "url": {
+                "title": "Url",
+                "description": "Url",
+                "lightning:type": "lightning__urlType"
+              }
+            }
+          }
+        },
+        "nextActions": {
+          "title": "Next Actions",
+          "description": "Next Actions",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "timeLabel": {
+                "title": "Time Label",
+                "description": "Time Label",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "ctaLabel": {
+          "title": "Cta Label",
+          "description": "Cta Label",
+          "lightning:type": "lightning__textType"
+        },
+        "ctaUrl": {
+          "title": "Cta Url",
+          "description": "Cta Url",
+          "lightning:type": "lightning__urlType"
+        }
+      }
+    }
+  }
+}

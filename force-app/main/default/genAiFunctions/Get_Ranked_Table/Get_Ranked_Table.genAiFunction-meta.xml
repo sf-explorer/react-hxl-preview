@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Renders a generic, caller-driven ranked/prioritized table grounded in real CRM data (never invent placeholder records). The inputs are typed: set `columns` — a list of {header, align} (align is one of [start, end, center], use "end" for numbers/amounts) — left to right, AT MOST 6 (extras are dropped, a card is narrow). Set `records` to a JSON array string of rows, each row a list of the display values in the SAME order as the columns, e.g. [["Multirisque PME Delaunay","42 000 €","Négociation"],["Flotte Vidal","31 000 €","Proposition"]]. Add a `summary` (one-line key takeaway, shown as a callout) and a `description` (subtitle under the title), plus an optional `title`. Optional extras: `badges` ({label, variant}), `highlights` ({iconName, iconColor, title, detail}) and a CTA (ctaLabel, ctaUrl). Ignore the legacy `spec` field. STRICT VOCABULARIES — exact tokens only, never CSS colors or SLDS names: badge.variant = one of [primary, success, warning, danger, neutral] (NOT "info"/"critical"); highlight.iconColor = one of [success, warning, danger, default] (NOT "blue"/"green"); highlight.iconName = a Lucide slug from [phone, mail, file-text, clipboard-list, calendar, clock, bell, user, users, building, credit-card, check-circle, activity, trending-up] (NOT "document"/"call"/"assessment"). The action lays each value under its column into the card. Call with no input to render a neutral empty placeholder.</description>
+    <developerName>Get_Ranked_Table</developerName>
+    <invocationTarget>RankedTableAction</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Ranked_Table</localDeveloperName>
+    <masterLabel>Get Ranked Table</masterLabel>
+</GenAiFunction>

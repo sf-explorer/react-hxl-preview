@@ -1,0 +1,26 @@
+{
+  "renderer": {
+    "componentOverrides": {
+      "$": {
+        "definition": "@widget/c/rankedTableCard",
+        "attributes": {
+          "title": "{!$attrs.title}",
+          "subtitle": "{!$attrs.subtitle}",
+          "badges": "{!$attrs.badges}",
+          "showSummary": "{!$attrs.showSummary}",
+          "summaryTitle": "{!$attrs.summaryTitle}",
+          "summaryDetail": "{!$attrs.summaryDetail}",
+          "tableCaption": "{!$attrs.tableCaption}",
+          "columns": "{!$attrs.columns}",
+          "rows": "{!$attrs.rows}",
+          "showHighlights": "{!$attrs.showHighlights}",
+          "highlightsCaption": "{!$attrs.highlightsCaption}",
+          "highlights": "{!$attrs.highlights}",
+          "showCta": "{!$attrs.showCta}",
+          "ctaLabel": "{!$attrs.ctaLabel}",
+          "ctaUrl": "{!$attrs.ctaUrl}"
+        }
+      }
+    }
+  }
+}

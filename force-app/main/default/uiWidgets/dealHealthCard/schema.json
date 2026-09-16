@@ -1,0 +1,132 @@
+{
+  "title": "Santé de l'affaire Widget",
+  "description": "Sample $attrs for the Santé de l'affaire (deal health) card, matching the deal-health-reviewer skill output. French wealth-management context, euros. statusVariant is one of success (Sain, 80-100) / warning (À surveiller, 60-79) / error (À risque, 0-59). A reference snapshot — illustrative values.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "oppName": {
+          "title": "Opp Name",
+          "description": "Opp Name",
+          "lightning:type": "lightning__textType"
+        },
+        "accountLine": {
+          "title": "Account Line",
+          "description": "Account Line",
+          "lightning:type": "lightning__textType"
+        },
+        "statusLabel": {
+          "title": "Status Label",
+          "description": "Status Label",
+          "lightning:type": "lightning__textType"
+        },
+        "statusVariant": {
+          "title": "Status Variant",
+          "description": "Status Variant",
+          "lightning:type": "lightning__textType"
+        },
+        "overallScore": {
+          "title": "Overall Score",
+          "description": "Overall Score",
+          "lightning:type": "lightning__numberType"
+        },
+        "overallLabel": {
+          "title": "Overall Label",
+          "description": "Overall Label",
+          "lightning:type": "lightning__textType"
+        },
+        "headline": {
+          "title": "Headline",
+          "description": "Headline",
+          "lightning:type": "lightning__textType"
+        },
+        "headlineDetail": {
+          "title": "Headline Detail",
+          "description": "Headline Detail",
+          "lightning:type": "lightning__textType"
+        },
+        "dimensions": {
+          "title": "Dimensions",
+          "description": "Dimensions",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "name": {
+                "title": "Name",
+                "description": "Name",
+                "lightning:type": "lightning__textType"
+              },
+              "pct": {
+                "title": "Pct",
+                "description": "Pct",
+                "lightning:type": "lightning__numberType"
+              },
+              "color": {
+                "title": "Color",
+                "description": "Color",
+                "lightning:type": "lightning__textType"
+              },
+              "captionLabel": {
+                "title": "Caption Label",
+                "description": "Caption Label",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "risks": {
+          "title": "Risks",
+          "description": "Risks",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "title": {
+                "title": "Title",
+                "description": "Title",
+                "lightning:type": "lightning__textType"
+              },
+              "evidence": {
+                "title": "Evidence",
+                "description": "Evidence",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "recoveryActions": {
+          "title": "Recovery Actions",
+          "description": "Recovery Actions",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "ownerDue": {
+                "title": "Owner Due",
+                "description": "Owner Due",
+                "lightning:type": "lightning__textType"
+              },
+              "tag": {
+                "title": "Tag",
+                "description": "Tag",
+                "lightning:type": "lightning__textType"
+              },
+              "tagVariant": {
+                "title": "Tag Variant",
+                "description": "Tag Variant",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

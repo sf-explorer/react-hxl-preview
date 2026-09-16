@@ -1,0 +1,162 @@
+{
+  "title": "Mise à jour de la fiche client Widget",
+  "description": "Sample $attrs for the interactive Mise à jour de la fiche client (clientRecordUpdate) card — an editable KYC/contact confirm form (0.1.1 input tiles) modelled on the HXL gallery 'account-update-confirm'. Confirm gathers every field value at click time (inputs 'auto'); Cancel gathers none. select/radio options are {label,value} arrays; isChecked / value bind from attrs. Matches the client-record-update skill. A reference snapshot — illustrative values.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "clientName": {
+          "title": "Client Name",
+          "description": "Client Name",
+          "lightning:type": "lightning__textType"
+        },
+        "clientSub": {
+          "title": "Client Sub",
+          "description": "Client Sub",
+          "lightning:type": "lightning__textType"
+        },
+        "statusLabel": {
+          "title": "Status Label",
+          "description": "Status Label",
+          "lightning:type": "lightning__textType"
+        },
+        "statusVariant": {
+          "title": "Status Variant",
+          "description": "Status Variant",
+          "lightning:type": "lightning__textType"
+        },
+        "showNotice": {
+          "title": "Show Notice",
+          "description": "Show Notice",
+          "lightning:type": "lightning__booleanType"
+        },
+        "noticeTitle": {
+          "title": "Notice Title",
+          "description": "Notice Title",
+          "lightning:type": "lightning__textType"
+        },
+        "noticeDetail": {
+          "title": "Notice Detail",
+          "description": "Notice Detail",
+          "lightning:type": "lightning__textType"
+        },
+        "noticeVariant": {
+          "title": "Notice Variant",
+          "description": "Notice Variant",
+          "lightning:type": "lightning__textType"
+        },
+        "advisor": {
+          "title": "Advisor",
+          "description": "Advisor",
+          "lightning:type": "lightning__textType"
+        },
+        "advisorOptions": {
+          "title": "Advisor Options",
+          "description": "Advisor Options",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "value": {
+                "title": "Value",
+                "description": "Value",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "phone": {
+          "title": "Phone",
+          "description": "Phone",
+          "lightning:type": "lightning__textType"
+        },
+        "email": {
+          "title": "Email",
+          "description": "Email",
+          "lightning:type": "lightning__textType"
+        },
+        "segment": {
+          "title": "Segment",
+          "description": "Segment",
+          "lightning:type": "lightning__textType"
+        },
+        "segmentOptions": {
+          "title": "Segment Options",
+          "description": "Segment Options",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "value": {
+                "title": "Value",
+                "description": "Value",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "address": {
+          "title": "Address",
+          "description": "Address",
+          "lightning:type": "lightning__textType"
+        },
+        "household": {
+          "title": "Household",
+          "description": "Household",
+          "lightning:type": "lightning__numberType"
+        },
+        "channel": {
+          "title": "Channel",
+          "description": "Channel",
+          "lightning:type": "lightning__textType"
+        },
+        "channelOptions": {
+          "title": "Channel Options",
+          "description": "Channel Options",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "value": {
+                "title": "Value",
+                "description": "Value",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "marketingConsent": {
+          "title": "Marketing Consent",
+          "description": "Marketing Consent",
+          "lightning:type": "lightning__booleanType"
+        },
+        "autoDebit": {
+          "title": "Auto Debit",
+          "description": "Auto Debit",
+          "lightning:type": "lightning__booleanType"
+        },
+        "notes": {
+          "title": "Notes",
+          "description": "Notes",
+          "lightning:type": "lightning__textType"
+        }
+      }
+    }
+  }
+}

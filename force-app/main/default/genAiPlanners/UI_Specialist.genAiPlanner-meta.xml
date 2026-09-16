@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlanner xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>UI Specialist</masterLabel>
+    <description>The UI Specialist agent. A generic, presentation-only Agentforce agent whose single job is to render structured data as HXL cards. Other agents (or a human) hand it the data; it decides the best card and builds the action input. Kept as a DEDICATED agent so display logic never pollutes the reasoning of task agents — see README "UI Specialist agent" for the strategy. Today it owns the Ranked Table topic; add one topic per card as the gallery grows.</description>
+    <plannerType>AiCopilot__ReAct</plannerType>
+    <genAiPlugins>
+        <genAiPluginName>UI_Specialist_Ranked_Table</genAiPluginName>
+    </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>UI_Specialist_Next_Steps</genAiPluginName>
+    </genAiPlugins>
+</GenAiPlanner>

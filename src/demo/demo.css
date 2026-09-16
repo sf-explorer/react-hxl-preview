@@ -177,3 +177,223 @@ body {
 .demo-preview--full {
   width: 100%;
 }
+
+/* -------------------------------------------------------------------------- */
+/* Edit with AI                                                               */
+/* -------------------------------------------------------------------------- */
+
+.demo-ai {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  padding: 0.5rem 1rem 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.demo-ai--off {
+  background: #f7fafc;
+}
+
+.demo-ai code {
+  background: #edf2f7;
+  border-radius: 4px;
+  padding: 0.05rem 0.3rem;
+  font-size: 0.8em;
+}
+
+.demo-ai-modes {
+  display: inline-flex;
+  gap: 2px;
+  margin-bottom: 0.625rem;
+  padding: 2px;
+  background: #edf2f7;
+  border-radius: 8px;
+}
+
+.demo-ai-mode {
+  padding: 0.3125rem 0.75rem;
+  border: none;
+  background: transparent;
+  color: #4a5568;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.demo-ai-mode.active {
+  background: #fff;
+  color: #00829a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.demo-ai-mode:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.demo-ai-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.demo-ai-input {
+  flex: 1 1 auto;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 0.875rem;
+}
+
+.demo-ai-input:focus {
+  outline: none;
+  border-color: #00829a;
+  box-shadow: 0 0 0 2px #e6f4f1;
+}
+
+.demo-ai-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #00829a;
+  background: #00829a;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.demo-ai-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.demo-ai-btn--stop {
+  background: #e53e3e;
+  border-color: #e53e3e;
+}
+
+.demo-ai-btn--continue {
+  background: #fff;
+  color: #00829a;
+}
+
+.demo-ai-paused {
+  margin-top: 0.5rem;
+}
+
+.demo-ai-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+}
+
+.demo-ai-chip {
+  padding: 0.25rem 0.5rem;
+  border: 1px dashed #cbd5e0;
+  background: #f7fafc;
+  color: #4a5568;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  cursor: pointer;
+}
+
+.demo-ai-chip:hover:not(:disabled) {
+  border-color: #00829a;
+  color: #00829a;
+}
+
+.demo-ai-log {
+  margin: 0.75rem 0 0;
+  padding: 0.5rem 0.75rem;
+  background: #1a202c;
+  color: #cbd5e0;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  max-height: 240px;
+  overflow: auto;
+}
+
+.demo-ai-step {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.1rem 0;
+}
+
+.demo-ai-step-icon {
+  flex: 0 0 auto;
+  width: 1rem;
+  text-align: center;
+  font-weight: 700;
+}
+
+.demo-ai-step-text {
+  flex: 1 1 auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Tones — the icon is coloured, the text stays readable on the dark log. */
+.demo-ai-step--think .demo-ai-step-icon {
+  color: #718096;
+}
+.demo-ai-step--action .demo-ai-step-icon {
+  color: #63b3ed;
+}
+.demo-ai-step--observe {
+  color: #a0aec0;
+}
+.demo-ai-step--observe .demo-ai-step-icon {
+  color: #a0aec0;
+}
+.demo-ai-step--commit .demo-ai-step-icon {
+  color: #68d391;
+}
+.demo-ai-step--commit .demo-ai-step-text {
+  color: #9ae6b4;
+}
+.demo-ai-step--invalid .demo-ai-step-icon,
+.demo-ai-step--invalid .demo-ai-step-text {
+  color: #fc8181;
+}
+.demo-ai-step--done .demo-ai-step-icon,
+.demo-ai-step--done .demo-ai-step-text {
+  color: #68d391;
+  font-weight: 600;
+}
+.demo-ai-step--limit .demo-ai-step-icon,
+.demo-ai-step--limit .demo-ai-step-text {
+  color: #f6ad55;
+}
+
+/* "working…" spinner in the panel header. */
+.demo-ai-working {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #00829a;
+}
+
+.demo-ai-spinner {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid #b2dfe6;
+  border-top-color: #00829a;
+  border-radius: 50%;
+  animation: demo-ai-spin 0.7s linear infinite;
+}
+
+@keyframes demo-ai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-ai-spinner {
+    animation-duration: 2s;
+  }
+}

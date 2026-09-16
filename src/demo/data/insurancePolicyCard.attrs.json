@@ -1,0 +1,31 @@
+{
+  "_comment": "Sample $attrs for the Contrat d'assurance (insurancePolicy) card — single-policy detail: header + status, premium/échéance/ancienneté stat tiles (stats[] each {iconName,label,value}), a GARANTIES list, and optional recent claims. French insurance context. show* flags gate the callout, claims and CTA. A reference snapshot — illustrative values.",
+  "attributes": {
+    "iconName": "credit-card",
+    "productName": "Assurance Auto",
+    "policyLine": "Contrat AUTO-2019-4471 · Annie Dubois · Assurance Générale",
+    "statusLabel": "À renouveler",
+    "statusVariant": "warning",
+    "showHeadline": true,
+    "headlineTitle": "Échéance le 15/08/2026 — renouvellement à confirmer",
+    "headlineDetail": "Cliente fidèle depuis 2019. Sinistre dégât des eaux 2026 bien géré (satisfaction 4/5). Opportunité d'extension habitation à proposer en parallèle.",
+    "headlineVariant": "warning",
+    "stats": [
+      { "iconName": "credit-card", "label": "Prime annuelle", "value": "1 140 €" },
+      { "iconName": "calendar", "label": "Prochaine échéance", "value": "15/08/2026" },
+      { "iconName": "clock", "label": "Ancienneté", "value": "Cliente depuis 2019" }
+    ],
+    "showCoverages": true,
+    "coverages": [
+      { "name": "Responsabilité civile", "detail": "Dommages corporels illimités", "tag": "Incluse", "tagVariant": "success" },
+      { "name": "Tous risques", "detail": "Franchise 300 €", "tag": "Incluse", "tagVariant": "success" },
+      { "name": "Bris de glace", "detail": "Sans franchise", "tag": "Incluse", "tagVariant": "success" },
+      { "name": "Assistance 0 km", "detail": "Véhicule de remplacement", "tag": "Option", "tagVariant": "primary" }
+    ],
+    "showClaims": false,
+    "claims": [],
+    "showCta": true,
+    "ctaLabel": "Préparer le renouvellement",
+    "ctaUrl": "#"
+  }
+}

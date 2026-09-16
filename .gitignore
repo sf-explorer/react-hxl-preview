@@ -1,9 +1,11 @@
 node_modules
 dist
 dist-demo
+dist-demo.zip
 *.log
 .DS_Store
 hxl-widget-gallery
 .sf
 .sfdx
 .cursor
+claude.md

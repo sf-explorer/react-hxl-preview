@@ -1,0 +1,30 @@
+{
+  "_comment": "Sample $attrs for the Santé de l'affaire (deal health) card, matching the deal-health-reviewer skill output. French wealth-management context, euros. statusVariant is one of success (Sain, 80-100) / warning (À surveiller, 60-79) / error (À risque, 0-59). A reference snapshot — illustrative values.",
+  "attributes": {
+    "oppName": "Flotte Logitrans",
+    "accountLine": "Négociation · 180 000 € · clôture 25/09/2026",
+    "statusLabel": "À risque",
+    "statusVariant": "danger",
+    "overallScore": 48,
+    "overallLabel": "48 / 100",
+    "headline": "Affaire à risque : dynamique en berne",
+    "headlineDetail": "Date de clôture repoussée 3 fois depuis juin et prochaine étape non renseignée. Verrouillez une date de décision cette semaine.",
+    "dimensions": [
+      { "name": "Dynamique",                       "pct": 50, "color": "warning", "captionLabel": "Dynamique : 50 / 100" },
+      { "name": "Qualité de l'étape",               "pct": 45, "color": "warning", "captionLabel": "Qualité de l'étape : 45 / 100" },
+      { "name": "Couverture des parties prenantes", "pct": 55, "color": "warning", "captionLabel": "Couverture des parties prenantes : 55 / 100" },
+      { "name": "Rigueur d'exécution",              "pct": 35, "color": "danger",  "captionLabel": "Rigueur d'exécution : 35 / 100" },
+      { "name": "Confiance commerciale",            "pct": 55, "color": "warning", "captionLabel": "Confiance commerciale : 55 / 100" }
+    ],
+    "risks": [
+      { "title": "Glissement de la date de clôture", "evidence": "Date repoussée 3 fois depuis juin" },
+      { "title": "Rigueur d'exécution faible",        "evidence": "Prochaine étape non renseignée dans le CRM" },
+      { "title": "Couverture mono-interlocuteur",     "evidence": "Un seul contact identifié côté décision" }
+    ],
+    "recoveryActions": [
+      { "label": "Appeler le décideur pour verrouiller une date de décision", "ownerDue": "Marc Delaunay · échéance 12/09", "tag": "Gain rapide", "tagVariant": "success" },
+      { "label": "Renseigner la prochaine étape dans le CRM",                  "ownerDue": "Marc Delaunay · échéance 13/09", "tag": "Priorité", "tagVariant": "warning" },
+      { "label": "Préparer une contre-proposition tarifaire de repli",        "ownerDue": "Marc Delaunay · échéance 18/09", "tag": "À planifier", "tagVariant": "primary" }
+    ]
+  }
+}

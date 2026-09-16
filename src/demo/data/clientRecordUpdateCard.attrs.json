@@ -1,0 +1,39 @@
+{
+  "_comment": "Sample $attrs for the interactive Mise à jour de la fiche client (clientRecordUpdate) card — an editable KYC/contact confirm form (0.1.1 input tiles) modelled on the HXL gallery 'account-update-confirm'. Confirm gathers every field value at click time (inputs 'auto'); Cancel gathers none. select/radio options are {label,value} arrays; isChecked / value bind from attrs. Matches the client-record-update skill. A reference snapshot — illustrative values.",
+  "attributes": {
+    "clientName": "Annie Dubois",
+    "clientSub": "Fiche client · particulier · Agence Paris 12e",
+    "statusLabel": "Vérification KYC",
+    "statusVariant": "warning",
+    "showNotice": true,
+    "noticeTitle": "Coordonnées non vérifiées depuis plus de 12 mois",
+    "noticeDetail": "Confirmez ou corrigez les informations ci-dessous pour finaliser la revue KYC. Les champs pré-remplis proviennent du dossier client.",
+    "noticeVariant": "info",
+    "advisor": "Romain Laurent",
+    "advisorOptions": [
+      { "label": "Romain Laurent", "value": "Romain Laurent" },
+      { "label": "Sophie Marchand", "value": "Sophie Marchand" },
+      { "label": "Marc Delaunay", "value": "Marc Delaunay" }
+    ],
+    "phone": "06 12 34 56 78",
+    "email": "annie.dubois@exemple.fr",
+    "segment": "Particulier fidèle",
+    "segmentOptions": [
+      { "label": "Particulier fidèle", "value": "Particulier fidèle" },
+      { "label": "Particulier standard", "value": "Particulier standard" },
+      { "label": "Patrimonial", "value": "Patrimonial" },
+      { "label": "Professionnel / TNS", "value": "Professionnel / TNS" }
+    ],
+    "address": "14 rue des Lilas, 75012 Paris",
+    "household": 3,
+    "channel": "email",
+    "channelOptions": [
+      { "label": "E-mail", "value": "email" },
+      { "label": "Téléphone", "value": "phone" },
+      { "label": "Courrier", "value": "mail" }
+    ],
+    "marketingConsent": true,
+    "autoDebit": true,
+    "notes": "Cliente fidèle depuis 2019 (auto + habitation). Renouvellement auto au 15/08/2026. Sinistre dégât des eaux 2026 clos, satisfaction 4/5."
+  }
+}

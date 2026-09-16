@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Prochaines étapes</masterLabel>
+    <description>Generic, caller-driven next steps for HXL (Agentforce/MCP). The agent supplies steps as a JSON spec (NextStepsAction), normalized in Apex to a typed steps[]. Set selectable=true for an actionable card: a checkbox per step plus Confirm/Cancel buttons.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

@@ -1,0 +1,13 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "spec" : {
+      "title" : "Table spec (JSON)",
+      "description" : "JSON describing the ranked table: optional title/subtitle, a 'badges' array (label, variant), an optional summary callout (showSummary, summaryTitle, summaryDetail), a 'columns' array (key, header, align[start|end|center]) and a 'rows' array (each row has an optional 'id' plus a value per column key), optional 'highlights' (iconName, iconColor, title, detail) and an optional CTA (ctaLabel, ctaUrl). Leave blank to render a portable demo pipeline.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
