@@ -6,4 +6,7 @@
     <genAiPlugins>
         <genAiPluginName>UI_Specialist_Ranked_Table</genAiPluginName>
     </genAiPlugins>
+    <genAiPlugins>
+        <genAiPluginName>UI_Specialist_Next_Steps</genAiPluginName>
+    </genAiPlugins>
 </GenAiPlanner>

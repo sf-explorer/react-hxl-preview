@@ -1,5 +1,5 @@
 {
-  "_comment": "Sample $attrs for the Brief de réunion (meetingPrep) card, matching the prepare-next-meeting skill output. French / AXA France entreprises context. Sections gate on show* flags. A reference snapshot — illustrative values.",
+  "_comment": "Sample $attrs for the Brief de réunion (meetingPrep) card, matching the prepare-next-meeting skill output. French corporate-insurance context. Sections gate on show* flags. A reference snapshot — illustrative values.",
   "attributes": {
     "meetingTitle": "Négociation — Flotte 120 véhicules",
     "accountLine": "Transports Vallon · Négociation · 340 000 € · clôture 30/09/2026",

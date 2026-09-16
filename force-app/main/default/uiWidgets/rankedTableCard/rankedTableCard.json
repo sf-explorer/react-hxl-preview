@@ -47,7 +47,7 @@
                     { "definition": "tile/text", "meta": { "if": "{!$attrs.tableCaption}" }, "attributes": { "text": "{!$attrs.tableCaption}", "variant": "caption", "color": "muted" } },
                     {
                       "definition": "tile/row",
-                      "attributes": { "gap": "md", "align": "end", "justify": "start", "isWrapped": false, "width": "full" },
+                      "attributes": { "gap": "md", "align": "end", "justify": "start", "isWrapped": false },
                       "children": [
                         {
                           "definition": "tile/column",
@@ -67,16 +67,14 @@
                       "children": [
                         {
                           "definition": "tile/row",
-                          "attributes": { "gap": "md", "align": "center", "justify": "start", "isWrapped": false, "width": "full" },
+                          "attributes": { "gap": "md", "align": "center", "justify": "start", "isWrapped": false },
                           "children": [
-                            {
-                              "definition": "tile/column",
-                              "meta": { "forEach": "{!$row.cells}", "forItem": "$cell", "forIndex": "$cei" },
-                              "attributes": { "gap": "none", "align": "{!$cell.align}", "width": "stretch" },
-                              "children": [
-                                { "definition": "tile/text", "attributes": { "text": "{!$cell.value}", "variant": "body", "weight": "{!$cell.weight}" } }
-                              ]
-                            }
+                            { "definition": "tile/column", "meta": { "if": "{!$row.c1Show}" }, "attributes": { "gap": "none", "align": "{!$row.c1Align}", "width": "stretch" }, "children": [ { "definition": "tile/text", "attributes": { "text": "{!$row.c1}", "variant": "body", "weight": "semibold" } } ] },
+                            { "definition": "tile/column", "meta": { "if": "{!$row.c2Show}" }, "attributes": { "gap": "none", "align": "{!$row.c2Align}", "width": "stretch" }, "children": [ { "definition": "tile/text", "attributes": { "text": "{!$row.c2}", "variant": "body" } } ] },
+                            { "definition": "tile/column", "meta": { "if": "{!$row.c3Show}" }, "attributes": { "gap": "none", "align": "{!$row.c3Align}", "width": "stretch" }, "children": [ { "definition": "tile/text", "attributes": { "text": "{!$row.c3}", "variant": "body" } } ] },
+                            { "definition": "tile/column", "meta": { "if": "{!$row.c4Show}" }, "attributes": { "gap": "none", "align": "{!$row.c4Align}", "width": "stretch" }, "children": [ { "definition": "tile/text", "attributes": { "text": "{!$row.c4}", "variant": "body" } } ] },
+                            { "definition": "tile/column", "meta": { "if": "{!$row.c5Show}" }, "attributes": { "gap": "none", "align": "{!$row.c5Align}", "width": "stretch" }, "children": [ { "definition": "tile/text", "attributes": { "text": "{!$row.c5}", "variant": "body" } } ] },
+                            { "definition": "tile/column", "meta": { "if": "{!$row.c6Show}" }, "attributes": { "gap": "none", "align": "{!$row.c6Align}", "width": "stretch" }, "children": [ { "definition": "tile/text", "attributes": { "text": "{!$row.c6}", "variant": "body" } } ] }
                           ]
                         },
                         { "definition": "tile/separator", "attributes": { "orientation": "horizontal" } }
@@ -109,9 +107,9 @@
                   ]
                 },
                 {
-                  "definition": "tile/button",
+                  "definition": "tile/link",
                   "meta": { "if": "{!$attrs.showCta}" },
-                  "attributes": { "label": "{!$attrs.ctaLabel}", "href": "{!$attrs.ctaUrl}", "variant": "primary" }
+                  "attributes": { "text": "{!$attrs.ctaLabel}", "href": "{!$attrs.ctaUrl}", "variant": "primary" }
                 }
               ]
             }

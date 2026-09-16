@@ -52,7 +52,7 @@
                       "children": [
                         {
                           "definition": "tile/row",
-                          "attributes": { "gap": "md", "align": "start", "justify": "start", "isWrapped": false, "width": "full" },
+                          "attributes": { "gap": "md", "align": "start", "justify": "start", "isWrapped": false },
                           "children": [
                             { "definition": "tile/badge", "attributes": { "label": "{!$s.order}", "variant": "primary" } },
                             { "definition": "tile/icon", "meta": { "if": "{!$s.iconName}" }, "attributes": { "name": "{!$s.iconName}", "size": "sm", "color": "{!$s.iconColor}", "alt": "" } },
@@ -62,7 +62,7 @@
                               "children": [
                                 {
                                   "definition": "tile/row",
-                                  "attributes": { "gap": "sm", "align": "center", "justify": "between", "isWrapped": true, "width": "full" },
+                                  "attributes": { "gap": "sm", "align": "center", "justify": "between", "isWrapped": true },
                                   "children": [
                                     { "definition": "tile/text", "attributes": { "text": "{!$s.title}", "variant": "body", "weight": "semibold" } },
                                     { "definition": "tile/badge", "meta": { "if": "{!$s.priorityLabel}" }, "attributes": { "label": "{!$s.priorityLabel}", "variant": "{!$s.priorityVariant}" } }
@@ -71,7 +71,7 @@
                                 { "definition": "tile/text", "meta": { "if": "{!$s.detail}" }, "attributes": { "text": "{!$s.detail}", "variant": "body", "color": "default" } },
                                 { "definition": "tile/text", "meta": { "if": "{!$s.rationale}" }, "attributes": { "text": "{!$s.rationale}", "variant": "caption", "color": "muted" } },
                                 { "definition": "tile/text", "meta": { "if": "{!$s.meta}" }, "attributes": { "text": "{!$s.meta}", "variant": "caption", "color": "muted" } },
-                                { "definition": "tile/link", "meta": { "if": "{!$s.showCta}" }, "attributes": { "label": "{!$s.ctaLabel}", "href": "{!$s.ctaUrl}" } }
+                                { "definition": "tile/link", "meta": { "if": "{!$s.showCta}" }, "attributes": { "text": "{!$s.ctaLabel}", "href": "{!$s.ctaUrl}", "variant": "primary" } }
                               ]
                             }
                           ]
@@ -82,9 +82,9 @@
                   ]
                 },
                 {
-                  "definition": "tile/button",
+                  "definition": "tile/link",
                   "meta": { "if": "{!$attrs.showCta}" },
-                  "attributes": { "label": "{!$attrs.ctaLabel}", "href": "{!$attrs.ctaUrl}", "variant": "primary" }
+                  "attributes": { "text": "{!$attrs.ctaLabel}", "href": "{!$attrs.ctaUrl}", "variant": "primary" }
                 }
               ]
             }

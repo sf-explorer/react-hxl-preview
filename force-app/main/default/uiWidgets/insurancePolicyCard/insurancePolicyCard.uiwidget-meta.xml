@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <masterLabel>Contrat d'assurance</masterLabel>
-    <description>Sample $attrs for the Contrat d'assurance (insurancePolicy) card — single-policy detail: header + status, premium/échéance/ancienneté stat tiles (stats[] each {iconName,label,value}), a GARANTIES list, and optional recent claims. French / AXA France. show* flags gate the callout, claims and CTA. A reference snapshot — illustrative values.</description>
+    <description>Sample $attrs for the Contrat d'assurance (insurancePolicy) card — single-policy detail: header + status, premium/échéance/ancienneté stat tiles (stats[] each {iconName,label,value}), a GARANTIES list, and optional recent claims. French insurance context. show* flags gate the callout, claims and CTA. A reference snapshot — illustrative values.</description>
     <widgetType>JSON</widgetType>
 </UiWidgetBundle>

@@ -1,6 +1,6 @@
 {
   "title": "Santé de l'affaire Widget",
-  "description": "Sample $attrs for the Santé de l'affaire (deal health) card, matching the deal-health-reviewer skill output. French / AXA France context, euros. statusVariant is one of success (Sain, 80-100) / warning (À surveiller, 60-79) / error (À risque, 0-59). A reference snapshot — illustrative values.",
+  "description": "Sample $attrs for the Santé de l'affaire (deal health) card, matching the deal-health-reviewer skill output. French wealth-management context, euros. statusVariant is one of success (Sain, 80-100) / warning (À surveiller, 60-79) / error (À risque, 0-59). A reference snapshot — illustrative values.",
   "type": "object",
   "properties": {
     "attributes": {

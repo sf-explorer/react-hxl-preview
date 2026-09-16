@@ -1,6 +1,6 @@
 {
   "title": "Brief de réunion Widget",
-  "description": "Sample $attrs for the Brief de réunion (meetingPrep) card, matching the prepare-next-meeting skill output. French / AXA France entreprises context. Sections gate on show* flags. A reference snapshot — illustrative values.",
+  "description": "Sample $attrs for the Brief de réunion (meetingPrep) card, matching the prepare-next-meeting skill output. French corporate-insurance context. Sections gate on show* flags. A reference snapshot — illustrative values.",
   "type": "object",
   "properties": {
     "attributes": {

@@ -1,5 +1,5 @@
 {
-  "_comment": "Sample $attrs for the Leads du jour card, matching the received-leads-today skill output. French / AXA France agency context. The `leads` array feeds a tile/table (each row is keyed by the column keys: name, product, source, priority, score). A reference snapshot — illustrative values.",
+  "_comment": "Sample $attrs for the Leads du jour card, matching the received-leads-today skill output. French insurance-agency context. The `leads` array feeds a tile/table (each row is keyed by the column keys: name, product, source, priority, score). A reference snapshot — illustrative values.",
   "attributes": {
     "dateLabel": "Lundi 14 septembre 2026 · Agence Paris 12e",
     "totalLabel": "7 leads",

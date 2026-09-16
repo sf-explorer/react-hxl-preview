@@ -1,0 +1,81 @@
+{
+  "_comment": "Sample $attrs for the generic Prochaines étapes (nextStepsCard) card, in the NextStepsAction OUTPUT shape (ordered steps[]). THE AGENT SUPPLIES THE STEPS: it sends a JSON `spec` (a steps array) to Get_Next_Steps; the Apex action normalizes it (auto-numbering order) into this render-time payload so the widget binds with plain forEach only, rendering identically in this preview and in the production HXL runtime. This snapshot shows the ACTIONABLE mode (selectable=true): each step gets a checkbox (id step_<stepId>, initial state from `selected`) and the footer shows Confirm/Cancel, so the user picks which steps to act on before submitting. The same card serves meeting follow-ups, deal action plans, onboarding checklists, service resolution paths, and advisor next-best-actions. A reference snapshot — illustrative values.",
+  "attributes": {
+    "title": "Prochaines étapes",
+    "subtitle": "Agence Roussel · Bordeaux · cette semaine",
+    "badges": [
+      { "label": "4 étapes", "variant": "primary" },
+      { "label": "2 prioritaires", "variant": "danger" }
+    ],
+    "showSummary": true,
+    "summaryTitle": "Commencez par Delaunay et Vidal",
+    "summaryDetail": "Deux gestes rapides débloquent les deux plus grosses opportunités : envoyez le devis Delaunay et récupérez la sinistralité de Vidal.",
+    "stepsCaption": "PLAN D'ACTION",
+    "steps": [
+      {
+        "order": "1",
+        "stepId": "1",
+        "selected": true,
+        "title": "Envoyer le devis signable à Delaunay",
+        "detail": "Générer le devis Multirisque PME et le transmettre pour signature électronique.",
+        "rationale": "Clôture imminente, forte confiance — c'est le levier le plus rentable de la semaine.",
+        "iconName": "file-text",
+        "iconColor": "success",
+        "priorityLabel": "Prioritaire",
+        "priorityVariant": "danger",
+        "meta": "Vous · aujourd'hui · 15 min",
+        "showCta": true,
+        "ctaLabel": "Ouvrir le devis",
+        "ctaUrl": "#"
+      },
+      {
+        "order": "2",
+        "stepId": "2",
+        "selected": true,
+        "title": "Relancer Transports Vidal pour la sinistralité",
+        "detail": "Appeler le gestionnaire pour obtenir le relevé de sinistralité manquant.",
+        "rationale": "Pièce bloquante avant de caler le closing de la flotte auto.",
+        "iconName": "phone",
+        "iconColor": "warning",
+        "priorityLabel": "Prioritaire",
+        "priorityVariant": "danger",
+        "meta": "Vous · avant jeudi · 10 min",
+        "showCta": false
+      },
+      {
+        "order": "3",
+        "stepId": "3",
+        "selected": true,
+        "title": "Qualifier le décideur RH chez Cabinet Meyer",
+        "detail": "Identifier et contacter le responsable RH pour la santé collective.",
+        "rationale": "Sans décideur identifié, l'opportunité reste bloquée en découverte.",
+        "iconName": "users",
+        "iconColor": "default",
+        "priorityLabel": "À planifier",
+        "priorityVariant": "warning",
+        "meta": "Vous · cette semaine",
+        "showCta": false
+      },
+      {
+        "order": "4",
+        "stepId": "4",
+        "selected": false,
+        "title": "Préparer la revue de portefeuille",
+        "detail": "Compiler les indices de priorité pour le point hebdo de l'agence.",
+        "rationale": "Aligne l'équipe sur les 3 dossiers à pousser en priorité.",
+        "iconName": "clipboard-list",
+        "iconColor": "default",
+        "priorityLabel": null,
+        "priorityVariant": "neutral",
+        "meta": "Vous · vendredi",
+        "showCta": false
+      }
+    ],
+    "showCta": false,
+    "ctaLabel": "Tout ajouter à mes tâches",
+    "ctaUrl": "#",
+    "selectable": true,
+    "confirmLabel": "Ajouter les étapes sélectionnées",
+    "cancelLabel": "Annuler"
+  }
+}

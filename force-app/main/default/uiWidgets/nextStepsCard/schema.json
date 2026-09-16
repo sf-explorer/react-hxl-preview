@@ -32,6 +32,8 @@
             "lightning:type": "lightning__objectType",
             "properties": {
               "order": { "title": "Order", "description": "Step number badge (1, 2, 3 …)", "lightning:type": "lightning__textType" },
+              "stepId": { "title": "Step Id", "description": "Stable per-step key for the checkbox id (step_<stepId>) when selectable; defaults to order", "lightning:type": "lightning__textType" },
+              "selected": { "title": "Selected", "description": "Initial checkbox state when selectable (default true)", "lightning:type": "lightning__booleanType" },
               "title": { "title": "Title", "description": "Step title (the action to take)", "lightning:type": "lightning__textType" },
               "detail": { "title": "Detail", "description": "What to do, in one line", "lightning:type": "lightning__textType" },
               "rationale": { "title": "Rationale", "description": "Why this step / expected outcome", "lightning:type": "lightning__textType" },
@@ -48,7 +50,10 @@
         },
         "showCta": { "title": "Show Cta", "description": "Toggle for the footer CTA button", "lightning:type": "lightning__booleanType" },
         "ctaLabel": { "title": "Cta Label", "description": "CTA button label", "lightning:type": "lightning__textType" },
-        "ctaUrl": { "title": "Cta Url", "description": "CTA button href", "lightning:type": "lightning__urlType" }
+        "ctaUrl": { "title": "Cta Url", "description": "CTA button href", "lightning:type": "lightning__urlType" },
+        "selectable": { "title": "Selectable", "description": "When true, each step shows a checkbox and the footer shows Confirm/Cancel buttons (actionable mode); suppresses the navigating footer CTA", "lightning:type": "lightning__booleanType" },
+        "confirmLabel": { "title": "Confirm Label", "description": "Primary submit button label shown when selectable", "lightning:type": "lightning__textType" },
+        "cancelLabel": { "title": "Cancel Label", "description": "Secondary cancel button label shown when selectable", "lightning:type": "lightning__textType" }
       }
     }
   }

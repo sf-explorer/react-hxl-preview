@@ -16,7 +16,7 @@
     "columns": [
       { "key": "client", "header": "Client" },
       { "key": "contract", "header": "Contrat" },
-      { "key": "premium", "header": "Prime", "align": "right" },
+      { "key": "premium", "header": "Prime" },
       { "key": "due", "header": "Échéance" }
     ],
     "rows": [

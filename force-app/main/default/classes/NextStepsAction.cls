@@ -21,27 +21,35 @@
  * (title / subtitle / badges / steps / ...) match the widget attributes so the Agentforce (agent)
  * renderer binds them flat as {!$attrs.title} etc.
  *
- * spec JSON shape (all optional; called with no args -> a portable demo plan renders):
+ * spec JSON shape (all optional; called with no args -> a neutral empty placeholder renders, since
+ * this action holds no business data of its own -- the caller supplies every step):
  * {
  *   "title": "…", "subtitle": "…",
  *   "badges": [ { "label": "…", "variant": "primary|success|warning|danger|neutral" } ],
  *   "showSummary": true, "summaryTitle": "…", "summaryDetail": "…",
  *   "stepsCaption": "…",
  *   "steps": [ {
- *     "order": "1", "title": "…", "detail": "…", "rationale": "…",
+ *     "order": "1", "stepId": "…", "selected": true, "title": "…", "detail": "…", "rationale": "…",
  *     "iconName": "phone", "iconColor": "success|warning|danger|default",
  *     "priorityLabel": "…", "priorityVariant": "primary|success|warning|danger|neutral",
  *     "meta": "…", "showCta": true, "ctaLabel": "…", "ctaUrl": "…"
  *   } ],
- *   "showCta": true, "ctaLabel": "…", "ctaUrl": "…"
+ *   "showCta": true, "ctaLabel": "…", "ctaUrl": "…",
+ *   "selectable": true, "confirmLabel": "…", "cancelLabel": "…"
  * }
  * The `order` badge is auto-numbered (1..n) for any step that omits it.
+ *
+ * Actionable mode: set "selectable": true to let the user PICK which steps to act on before
+ * submitting. Each step then renders a checkbox (id "step_<stepId>", initial state from "selected",
+ * default checked) and the footer shows Confirm/Cancel buttons. Confirm dispatches the "stepsConfirm"
+ * action with inputs:"auto" — one { "step_<stepId>": true|false } payload the calling agent handles;
+ * Cancel dispatches "stepsCancel". Selectable suppresses the navigating footer CTA.
  */
 global with sharing class NextStepsAction {
 
     // ---- Invocable input ----
     global class Request {
-        @InvocableVariable(label='Next steps spec (JSON)' description='JSON describing the proposed next steps: optional title/subtitle, a "badges" array, an optional summary callout (showSummary/summaryTitle/summaryDetail), and a "steps" array where each step has a title plus optional detail, rationale, iconName, iconColor, priorityLabel, priorityVariant, meta line and a per-step link (showCta/ctaLabel/ctaUrl). Leave blank to render a portable demo plan.' required=false)
+        @InvocableVariable(label='Next steps spec (JSON)' description='JSON describing the proposed next steps: optional title/subtitle, a "badges" array, an optional summary callout (showSummary/summaryTitle/summaryDetail), and a "steps" array where each step has a title plus optional detail, rationale, iconName, iconColor, priorityLabel, priorityVariant, meta line and a per-step link (showCta/ctaLabel/ctaUrl). Set "selectable": true (with confirmLabel/cancelLabel) to make the card actionable — a checkbox per step (initial state via each step\'s "selected", default checked) and Confirm/Cancel buttons that submit the chosen steps. Leave blank to render a neutral empty placeholder (this action stores no steps of its own).' required=false)
         global String spec;
     }
 
@@ -69,18 +77,24 @@ global with sharing class NextStepsAction {
         global String stepsCaption;
         @InvocableVariable(label='Steps' description='Ordered list of proposed next steps (rendered top to bottom).')
         global List<StepVM> steps;
-        @InvocableVariable(label='Show CTA' description='Toggle for the footer CTA button; derived from ctaLabel when omitted.')
+        @InvocableVariable(label='Show CTA' description='Toggle for the footer CTA button; derived from ctaLabel when omitted. Forced off when selectable is true.')
         global Boolean showCta;
         @InvocableVariable(label='CTA Label' description='Footer CTA button label.')
         global String ctaLabel;
         @InvocableVariable(label='CTA URL' description='Footer CTA button href.')
         global String ctaUrl;
+        @InvocableVariable(label='Selectable' description='When true the card becomes actionable: each step shows a checkbox and the footer shows Confirm/Cancel buttons so the user picks which steps to act on before submitting. Suppresses the navigating footer CTA. Default false (read-only list).')
+        global Boolean selectable;
+        @InvocableVariable(label='Confirm Label' description='Label of the primary submit button shown when selectable is true.')
+        global String confirmLabel;
+        @InvocableVariable(label='Cancel Label' description='Label of the secondary cancel button shown when selectable is true.')
+        global String cancelLabel;
     }
 
     global class Badge {
         @InvocableVariable(label='Label' description='Badge text.')
         global String label;
-        @InvocableVariable(label='Variant' description='primary | success | warning | danger | neutral.')
+        @InvocableVariable(label='Variant' description='Color token. MUST be EXACTLY one of: primary | success | warning | danger | neutral. Do NOT use any other word — not "info", not "critical", not a CSS color like "blue"/"green". Any unlisted value renders as a plain grey badge.')
         global String variant;
     }
 
@@ -88,37 +102,41 @@ global with sharing class NextStepsAction {
     global class StepVM {
         @InvocableVariable(label='Order' description='Step number badge (1..n); auto-numbered when the agent leaves it blank.')
         global String order;
+        @InvocableVariable(label='Step Id' description='Stable per-step key used to build the checkbox id (step_<stepId>) when the card is selectable; defaults to the order number.')
+        global String stepId;
+        @InvocableVariable(label='Selected' description='Initial checkbox state when the card is selectable (default true — the user unchecks the steps they will skip).')
+        global Boolean selected;
         @InvocableVariable(label='Title' description='Step title — the action to take.')
         global String title;
         @InvocableVariable(label='Detail' description='What to do, in one line.')
         global String detail;
         @InvocableVariable(label='Rationale' description='Why this step / the expected outcome.')
         global String rationale;
-        @InvocableVariable(label='Icon Name' description='Lucide icon slug shown next to the step.')
+        @InvocableVariable(label='Icon Name' description='A LUCIDE icon slug (lucide.dev), NOT an SLDS name. Pick from: phone, mail, file-text, clipboard-list, calendar, clock, bell, user, users, building, credit-card, check-circle, activity, trending-up. Do NOT use SLDS names like "document", "call", "assessment", "task" — they will not render. If unsure, omit it.')
         global String iconName;
-        @InvocableVariable(label='Icon Color' description='success | warning | danger | default.')
+        @InvocableVariable(label='Icon Color' description='Color token. MUST be EXACTLY one of: success | warning | danger | default. Do NOT use a CSS color like "blue"/"green"/"purple" — those render as the default grey.')
         global String iconColor;
-        @InvocableVariable(label='Priority Label' description='Optional priority/effort chip text.')
+        @InvocableVariable(label='Priority Label' description='Optional priority/effort chip text (free text, e.g. "Prioritaire", "À planifier").')
         global String priorityLabel;
-        @InvocableVariable(label='Priority Variant' description='primary | success | warning | danger | neutral.')
+        @InvocableVariable(label='Priority Variant' description='Color token for the priority chip. MUST be EXACTLY one of: primary | success | warning | danger | neutral. Do NOT use "critical"/"high"/"info" or a CSS color. Use "danger" for the most urgent.')
         global String priorityVariant;
         @InvocableVariable(label='Meta' description='Supporting line (owner, due date, effort).')
         global String meta;
-        @InvocableVariable(label='Show CTA' description='Toggle for the per-step link; derived from ctaLabel when omitted.')
+        @InvocableVariable(label='Show CTA' description='Toggle for the per-step action link; derived from ctaLabel when omitted.')
         global Boolean showCta;
-        @InvocableVariable(label='CTA Label' description='Per-step link label.')
+        @InvocableVariable(label='CTA Label' description='Per-step action link — give each step ONE so it is actionable. Use a short imperative matching the step, e.g. "Ouvrir le devis", "Appeler le client", "Créer la tâche", "Planifier". Set the ctaUrl alongside it.')
         global String ctaLabel;
-        @InvocableVariable(label='CTA URL' description='Per-step link href.')
+        @InvocableVariable(label='CTA URL' description='Per-step link href (the record/page/action the label opens). Use "#" only if no real target is available.')
         global String ctaUrl;
     }
 
-    @InvocableMethod(label='Get Next Steps' description='Renders a generic, caller-driven list of proposed next steps in the nextStepsCard HXL widget. THE AGENT SUPPLIES THE STEPS: pass a JSON spec of steps (plus optional badges, summary and a CTA); the action normalizes them into an ordered, typed steps[] the user reads. Call with no spec to show a portable demo plan.')
+    @InvocableMethod(label='Get Next Steps' description='Renders a generic, caller-driven list of proposed next steps in the nextStepsCard HXL widget. THE AGENT SUPPLIES THE STEPS: pass a JSON spec of steps (plus optional badges, summary and a CTA); the action normalizes them into an ordered, typed steps[] the user reads. Call with no spec to render a neutral empty placeholder (the action holds no steps of its own).')
     global static List<NextStepsResponse> getNextSteps(List<Request> requests) {
         String spec = (requests != null && !requests.isEmpty()) ? requests[0].spec : null;
 
         Map<String, Object> parsed;
         if (String.isBlank(spec)) {
-            parsed = demoSpec();
+            parsed = emptyState();
         } else {
             try {
                 parsed = (Map<String, Object>) JSON.deserializeUntyped(spec);
@@ -155,6 +173,8 @@ global with sharing class NextStepsAction {
             index++;
             StepVM s = new StepVM();
             s.order           = firstNonBlank(str(m.get('order')), String.valueOf(index));
+            s.stepId          = firstNonBlank(str(m.get('stepId')), s.order);
+            s.selected        = boolOr(m.get('selected'), true);
             s.title           = str(m.get('title'));
             s.detail          = str(m.get('detail'));
             s.rationale       = str(m.get('rationale'));
@@ -172,6 +192,16 @@ global with sharing class NextStepsAction {
         // Section toggles: honor an explicit boolean, else derive from content.
         n.showSummary = boolOr(spec.get('showSummary'), String.isNotBlank(n.summaryTitle) || String.isNotBlank(n.summaryDetail));
         n.showCta     = boolOr(spec.get('showCta'), String.isNotBlank(n.ctaLabel));
+
+        // selectable / confirmLabel / cancelLabel are RESERVED for an interactive runtime
+        // (checkbox-per-step + Confirm). The live HXL Beta runtime on some orgs rejects input
+        // tiles and action buttons (see live-validator-deltas Delta 7), so the deployable card is
+        // read-only + navigational links: each step's own CTA (showCta/ctaLabel/ctaUrl) is the
+        // action. We still pass these fields through so the same spec drives an interactive
+        // runtime unchanged where one is available.
+        n.selectable   = boolOr(spec.get('selectable'), false);
+        n.confirmLabel = str(spec.get('confirmLabel'));
+        n.cancelLabel  = str(spec.get('cancelLabel'));
         return n;
     }
 
@@ -208,58 +238,16 @@ global with sharing class NextStepsAction {
         return String.isNotBlank(a) ? a : b;
     }
 
-    // A portable, self-contained demo plan so a no-argument call still renders a meaningful card
-    // (mirrors src/demo/data/nextStepsCard.attrs.json). Built as Maps/Lists to avoid escaping the
-    // accented French labels inside a JSON string literal.
-    private static Map<String, Object> demoSpec() {
-        List<Object> badges = new List<Object>{
-            badge('4 étapes', 'primary'),
-            badge('2 prioritaires', 'danger')
-        };
-
-        List<Object> steps = new List<Object>{
-            step('1', 'Envoyer le devis signable à Delaunay', 'Générer le devis Multirisque PME et le transmettre pour signature électronique.',
-                 'Clôture imminente, forte confiance — c\'est le levier le plus rentable de la semaine.', 'file-text', 'success',
-                 'Prioritaire', 'danger', 'Vous · aujourd\'hui · 15 min', 'Ouvrir le devis', '#'),
-            step('2', 'Relancer Transports Vidal pour la sinistralité', 'Appeler le gestionnaire pour obtenir le relevé de sinistralité manquant.',
-                 'Pièce bloquante avant de caler le closing de la flotte auto.', 'phone', 'warning',
-                 'Prioritaire', 'danger', 'Vous · avant jeudi · 10 min', null, null),
-            step('3', 'Qualifier le décideur RH chez Cabinet Meyer', 'Identifier et contacter le responsable RH pour la santé collective.',
-                 'Sans décideur identifié, l\'opportunité reste bloquée en découverte.', 'users', 'default',
-                 'À planifier', 'warning', 'Vous · cette semaine', null, null),
-            step('4', 'Préparer la revue de portefeuille', 'Compiler les indices de priorité pour le point hebdo de l\'agence.',
-                 'Aligne l\'équipe sur les 3 dossiers à pousser en priorité.', 'clipboard-list', 'default',
-                 null, 'neutral', 'Vous · vendredi', null, null)
-        };
-
+    // No spec supplied: the caller (agent/planner) owns ALL content — this action only normalizes
+    // what it is given — so we hardcode NO business data. Render a neutral, empty placeholder that
+    // says the card is caller-driven. (Illustrative sample data lives in the React preview harness,
+    // src/demo/data/nextStepsCard.attrs.json, not in this platform code.)
+    private static Map<String, Object> emptyState() {
         return new Map<String, Object>{
             'title'         => 'Prochaines étapes',
-            'subtitle'      => 'Agence Roussel · Bordeaux · cette semaine',
-            'badges'        => badges,
             'showSummary'   => true,
-            'summaryTitle'  => 'Commencez par Delaunay et Vidal',
-            'summaryDetail' => 'Deux gestes rapides débloquent les deux plus grosses opportunités : envoyez le devis Delaunay et récupérez la sinistralité de Vidal.',
-            'stepsCaption'  => 'PLAN D\'ACTION',
-            'steps'         => steps,
-            'showCta'       => true,
-            'ctaLabel'      => 'Tout ajouter à mes tâches',
-            'ctaUrl'        => '#'
+            'summaryTitle'  => 'Aucune étape fournie',
+            'summaryDetail' => 'Cette carte affiche les prochaines étapes proposées par l\'agent appelant. Fournissez un spec JSON (steps[]) pour la remplir.'
         };
-    }
-
-    private static Map<String, Object> badge(String label, String variant) {
-        return new Map<String, Object>{ 'label' => label, 'variant' => variant };
-    }
-
-    private static Map<String, Object> step(String order, String title, String detail, String rationale, String iconName,
-                                            String iconColor, String priorityLabel, String priorityVariant, String meta,
-                                            String ctaLabel, String ctaUrl) {
-        Map<String, Object> m = new Map<String, Object>{
-            'order' => order, 'title' => title, 'detail' => detail, 'rationale' => rationale,
-            'iconName' => iconName, 'iconColor' => iconColor, 'priorityLabel' => priorityLabel,
-            'priorityVariant' => priorityVariant, 'meta' => meta
-        };
-        if (ctaLabel != null) { m.put('ctaLabel', ctaLabel); m.put('ctaUrl', ctaUrl); }
-        return m;
     }
 }

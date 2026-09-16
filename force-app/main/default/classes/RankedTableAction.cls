@@ -6,14 +6,19 @@
  * planner) provides. This action is the interface: the agent supplies a single JSON `spec` describing
  * the header (title/subtitle/badges), an optional summary callout, the table (columns + rows, where
  * each row is keyed by the column keys), optional highlights, and an optional CTA. The action
- * FLATTENS the keyed rows into the render-time payload the widget consumes: rows[].cells[], where
- * each cell carries its display value, alignment, and weight in COLUMN ORDER.
+ * FLATTENS the keyed rows into the render-time payload the widget consumes: each row becomes a set
+ * of FIXED positional cell scalars (c1..c6, each with a cNShow / cNAlign sibling) in COLUMN ORDER,
+ * plus a mirrored cells[] list. Columns are capped at 6 (a card is too narrow for more).
  *
  * Why flatten in Apex rather than in the widget: Apex @InvocableVariable cannot express a
  * dynamic-keyed row (a Map), and a native tile/table bound to arbitrary keys cannot be produced from
  * a typed CLT. Flattening keeps the widget's binding surface to plain `forEach` + `meta.if <boolean>`
- * only -- no operators, no dynamic key access -- so the same JSON renders identically in the local
- * preview and in the production HXL runtime. (Same rationale as ActionPlanAction.)
+ * only -- no operators, no dynamic key access. Crucially the widget binds the row cells as FIXED
+ * positional scalars ({!$row.c1}...), NOT as a nested forEach over the row's own cells[]: the live
+ * HXL runtime does not resolve a forEach over a property of the outer loop item (single-level loops
+ * over a top-level $attrs list work; a loop over {!$row.cells} renders empty), so positional scalars
+ * are what make the table render identically in the local preview and the production HXL runtime.
+ * (See hxl-widget-build live-validator-deltas Delta 8. Same flatten rationale as ActionPlanAction.)
  *
  * Binding anchor: the single @InvocableVariable field `table` (RankedTableResponse.table) must stay
  * byte-identical across the payload CLT (rankedTableCardOutputValues), the GenAiFunction output, and
@@ -21,27 +26,67 @@
  * (title / subtitle / badges / columns / rows / ...) match the widget attributes so the Agentforce
  * (agent) renderer binds them flat as {!$attrs.title} etc.
  *
- * spec JSON shape (all optional; called with no args -> a portable demo pipeline renders):
- * {
- *   "title": "…", "subtitle": "…",
- *   "badges": [ { "label": "…", "variant": "primary|success|warning|danger|neutral" } ],
- *   "showSummary": true, "summaryTitle": "…", "summaryDetail": "…",
- *   "tableCaption": "…",
- *   "columns": [ { "key": "amount", "header": "Montant", "align": "start|end|center" } ],
- *   "rows":    [ { "id": "r1", "amount": "42 000 €", "…": "…" } ],
- *   "showHighlights": true, "highlightsCaption": "…",
- *   "highlights": [ { "iconName": "trending-up", "iconColor": "success", "title": "…", "detail": "…" } ],
- *   "showCta": true, "ctaLabel": "…", "ctaUrl": "…"
- * }
- * Each row value is looked up by the column key and rendered read-only. The first column is emphasized
- * (semibold); a right-aligned column ("align":"end") is used for numeric/amount columns.
+ * Input is a REAL, typed Request (not a single JSON blob): the statically-shaped parts are strongly
+ * typed @InvocableVariable fields, and only the one irreducibly free-form part — the per-row cell
+ * values — is a JSON string. Concretely:
+ *   title        String  — card title
+ *   description  String  — subtitle under the title (context: who / where / when)
+ *   summary      String  — the single key takeaway, rendered as a callout
+ *   columns      List<ColumnInput>  — TYPED {header, align[start|end|center], key(optional)}, left→right
+ *   records      String  — JSON array of ROWS, each row a list of display values in COLUMN ORDER:
+ *                          [ ["Multirisque PME Delaunay", "42 000 €", "Négociation"], ... ]
+ *                          (a row may also be {"id":"…","values":[…]}, or a key→value object keyed by
+ *                          column.key — all three shapes are accepted)
+ *   badges       List<Badge>      — TYPED {label, variant[primary|success|warning|danger|neutral]}
+ *   highlights   List<Highlight>  — TYPED {iconName, iconColor, title, detail}
+ *   ctaLabel / ctaUrl  String
+ * Why records is a String and not List<SObject> or a typed List: the values are agent-composed DISPLAY
+ * text (formatted amounts, computed scores), not fields of one SObject, and @InvocableVariable has no
+ * Map type, so an arbitrary-keyed row cannot be a typed field. Keeping columns typed (that is where the
+ * align enum lives) while the free-form row values ride in one string is the maximal-typing shape.
+ * The first column is emphasized (semibold); a right-aligned column ("align":"end") suits numeric/amount
+ * columns. Called with no args -> a neutral empty placeholder (this action holds no business data).
+ * Back-compat: the legacy single `spec` JSON string is still accepted (parsed as a whole object) when
+ * no typed field is supplied, so the currently-deployed Agentforce binding keeps working.
  */
 global with sharing class RankedTableAction {
 
-    // ---- Invocable input ----
+    // Fixed number of positional cell slots the widget renders per row (c1..cMAX_COLS). Extra
+    // columns in the spec are dropped — a card is too narrow to show more.
+    private static final Integer MAX_COLS = 6;
+
+    // ---- Invocable input (typed) ----
     global class Request {
-        @InvocableVariable(label='Table spec (JSON)' description='JSON describing the ranked table: optional title/subtitle, a "badges" array, an optional summary callout (showSummary/summaryTitle/summaryDetail), a "columns" array (key,header,align[start|end|center]) and a "rows" array (each row has an optional "id" plus a value per column key), optional "highlights" (iconName,iconColor,title,detail) and an optional CTA (ctaLabel,ctaUrl). Leave blank to render a portable demo pipeline.' required=false)
+        @InvocableVariable(label='Title' description='Card title.' required=false)
+        global String title;
+        @InvocableVariable(label='Description' description='Subtitle under the title (context: who / where / when).' required=false)
+        global String description;
+        @InvocableVariable(label='Summary' description='The single most important takeaway; rendered as a callout.' required=false)
+        global String summary;
+        @InvocableVariable(label='Columns' description='The columns to show, left to right: each is {header, align, key(optional)}. align MUST be one of: start | end | center (use "end" for numeric/amount columns). At most 6 (extras are dropped — a card is too narrow). Row values in "records" align to these positionally.' required=false)
+        global List<ColumnInput> columns;
+        @InvocableVariable(label='Records (JSON rows)' description='JSON array of rows. Each row is a list of display values in COLUMN ORDER, e.g. [["Multirisque PME Delaunay","42 000 €","Négociation"],["Flotte Vidal","31 000 €","Proposition"]]. A row may also be {"id":"…","values":[…]} or an object keyed by the column keys. Pass the rows you already have; the action lays each value under its column.' required=false)
+        global String records;
+        @InvocableVariable(label='Badges' description='Optional header badges: each {label, variant}. variant MUST be one of: primary | success | warning | danger | neutral (NOT "info"/"critical" or a CSS color).' required=false)
+        global List<Badge> badges;
+        @InvocableVariable(label='Highlights' description='Optional per-item callouts: each {iconName, iconColor, title, detail}. iconColor MUST be one of: success | warning | danger | default. iconName is a Lucide slug (e.g. trending-up, clock, bell), NOT an SLDS name.' required=false)
+        global List<Highlight> highlights;
+        @InvocableVariable(label='CTA Label' description='Optional CTA button label.' required=false)
+        global String ctaLabel;
+        @InvocableVariable(label='CTA URL' description='Optional CTA button href.' required=false)
+        global String ctaUrl;
+        @InvocableVariable(label='Spec (JSON, legacy)' description='LEGACY: a single JSON object carrying all of the above fields (title/description/summary/columns/records/badges/highlights/cta). Used only when no typed field is supplied, for back-compat with callers that still send one JSON string. Prefer the typed fields.' required=false)
         global String spec;
+    }
+
+    // ---- Typed column definition (the part with a real enum: align) ----
+    global class ColumnInput {
+        @InvocableVariable(label='Header' description='Column header label.')
+        global String header;
+        @InvocableVariable(label='Align' description='start | end | center (use end for numeric/amount columns). Defaults to start.')
+        global String align;
+        @InvocableVariable(label='Key' description='Optional field key (latent; used only when a record row is a key→value object rather than a values list).')
+        global String key;
     }
 
     // ---- Invocable response wrapper (binding anchor: table) ----
@@ -87,12 +132,12 @@ global with sharing class RankedTableAction {
     global class Badge {
         @InvocableVariable(label='Label' description='Badge text.')
         global String label;
-        @InvocableVariable(label='Variant' description='primary | success | warning | danger | neutral.')
+        @InvocableVariable(label='Variant' description='Color token. MUST be EXACTLY one of: primary | success | warning | danger | neutral. Do NOT use "info"/"critical" or a CSS color like "blue"/"green"; any unlisted value renders as a plain grey badge.')
         global String variant;
     }
 
     global class ColumnVM {
-        @InvocableVariable(label='Key' description='Column key (latent; matches the spec row keys).')
+        @InvocableVariable(label='Key' description='Column key (latent; matches the record field keys the value is looked up by).')
         global String key;
         @InvocableVariable(label='Header' description='Column header label.')
         global String header;
@@ -100,11 +145,35 @@ global with sharing class RankedTableAction {
         global String align;
     }
 
+    // A flattened row. The widget binds the cells as FIXED positional scalars (c1..c6, each with a
+    // matching cNShow / cNAlign) rather than a nested cells[] list: the live HXL runtime does not
+    // resolve a forEach over a property of the outer loop item (see live-validator-deltas Delta 8),
+    // so the render path reads only plain scalar members of the row. cells[] is retained (schema is
+    // append-only, Delta 6) and mirrors the same values for any consumer that wants the list shape.
     global class RowVM {
         @InvocableVariable(label='Id' description='Row id.')
         global String id;
-        @InvocableVariable(label='Cells' description='One cell per column, in column order.')
+        @InvocableVariable(label='Cells' description='One cell per column, in column order (list mirror of c1..c6).')
         global List<CellVM> cells;
+
+        @InvocableVariable(label='Cell 1' description='Value of column 1.') global String c1;
+        @InvocableVariable(label='Cell 1 Show' description='Whether column 1 exists.') global Boolean c1Show;
+        @InvocableVariable(label='Cell 1 Align' description='start | end | center for column 1.') global String c1Align;
+        @InvocableVariable(label='Cell 2' description='Value of column 2.') global String c2;
+        @InvocableVariable(label='Cell 2 Show' description='Whether column 2 exists.') global Boolean c2Show;
+        @InvocableVariable(label='Cell 2 Align' description='start | end | center for column 2.') global String c2Align;
+        @InvocableVariable(label='Cell 3' description='Value of column 3.') global String c3;
+        @InvocableVariable(label='Cell 3 Show' description='Whether column 3 exists.') global Boolean c3Show;
+        @InvocableVariable(label='Cell 3 Align' description='start | end | center for column 3.') global String c3Align;
+        @InvocableVariable(label='Cell 4' description='Value of column 4.') global String c4;
+        @InvocableVariable(label='Cell 4 Show' description='Whether column 4 exists.') global Boolean c4Show;
+        @InvocableVariable(label='Cell 4 Align' description='start | end | center for column 4.') global String c4Align;
+        @InvocableVariable(label='Cell 5' description='Value of column 5.') global String c5;
+        @InvocableVariable(label='Cell 5 Show' description='Whether column 5 exists.') global Boolean c5Show;
+        @InvocableVariable(label='Cell 5 Align' description='start | end | center for column 5.') global String c5Align;
+        @InvocableVariable(label='Cell 6' description='Value of column 6.') global String c6;
+        @InvocableVariable(label='Cell 6 Show' description='Whether column 6 exists.') global Boolean c6Show;
+        @InvocableVariable(label='Cell 6 Align' description='start | end | center for column 6.') global String c6Align;
     }
 
     // One flattened cell, positioned to align with its column.
@@ -118,9 +187,9 @@ global with sharing class RankedTableAction {
     }
 
     global class Highlight {
-        @InvocableVariable(label='Icon Name' description='Lucide icon slug.')
+        @InvocableVariable(label='Icon Name' description='A LUCIDE icon slug (lucide.dev), NOT an SLDS name. Pick from: phone, mail, file-text, clipboard-list, calendar, clock, bell, user, users, building, credit-card, check-circle, activity, trending-up. Do NOT use SLDS names like "document"/"call"/"assessment". If unsure, omit it.')
         global String iconName;
-        @InvocableVariable(label='Icon Color' description='success | warning | danger | default.')
+        @InvocableVariable(label='Icon Color' description='Color token. MUST be EXACTLY one of: success | warning | danger | default. Do NOT use a CSS color like "blue"/"green"/"purple" — those render as the default grey.')
         global String iconColor;
         @InvocableVariable(label='Title' description='Highlight title.')
         global String title;
@@ -128,34 +197,95 @@ global with sharing class RankedTableAction {
         global String detail;
     }
 
-    @InvocableMethod(label='Get Ranked Table' description='Renders a generic, caller-driven ranked/prioritized table in the rankedTableCard HXL widget. Pass a JSON spec of columns + rows (plus optional badges, summary, highlights and a CTA); the action flattens the keyed rows into typed, column-ordered cells the user reads. Call with no spec to show a portable demo pipeline.')
+    @InvocableMethod(label='Get Ranked Table' description='Renders a generic, caller-driven ranked/prioritized table in the rankedTableCard HXL widget. Pass typed columns (header + align) and a records JSON string of rows (values in column order), plus a summary, a description and optional badges, highlights and a CTA; the action lays each value under its column into the payload the user reads. Call with no input to render a neutral empty placeholder (the action holds no records of its own).')
     global static List<RankedTableResponse> getRankedTable(List<Request> requests) {
-        String spec = (requests != null && !requests.isEmpty()) ? requests[0].spec : null;
+        Request req = (requests != null && !requests.isEmpty()) ? requests[0] : null;
 
-        Map<String, Object> parsed;
-        if (String.isBlank(spec)) {
-            parsed = demoSpec();
-        } else {
+        RankedTableResponse res = new RankedTableResponse();
+        if (req != null && hasTypedInput(req)) {
+            // Preferred path: a real, typed Request. Columns are typed; row values ride in a JSON string.
+            res.table = buildFromTyped(req);
+        } else if (req != null && String.isNotBlank(req.spec)) {
+            // Legacy path: a single JSON `spec` object (kept for the currently-deployed Agentforce binding).
+            Map<String, Object> parsed;
             try {
-                parsed = (Map<String, Object>) JSON.deserializeUntyped(spec);
+                parsed = (Map<String, Object>) JSON.deserializeUntyped(req.spec);
             } catch (Exception e) {
                 // Malformed JSON -> render an empty, still-valid card rather than throwing at the planner.
                 parsed = new Map<String, Object>{ 'title' => 'Invalid table spec', 'summaryTitle' => 'The provided JSON could not be parsed.', 'showSummary' => true };
             }
+            res.table = build(parsed);
+        } else {
+            res.table = build(emptyState());
         }
 
-        RankedTableResponse res = new RankedTableResponse();
-        res.table = build(parsed);
-
         return new List<RankedTableResponse>{ res };
+    }
+
+    // True when any typed field carries content (so we prefer the typed path over the legacy `spec`).
+    private static Boolean hasTypedInput(Request r) {
+        return String.isNotBlank(r.title) || String.isNotBlank(r.description) || String.isNotBlank(r.summary)
+            || String.isNotBlank(r.records) || String.isNotBlank(r.ctaLabel) || String.isNotBlank(r.ctaUrl)
+            || (r.columns != null && !r.columns.isEmpty())
+            || (r.badges != null && !r.badges.isEmpty())
+            || (r.highlights != null && !r.highlights.isEmpty());
+    }
+
+    // Build the render-time payload from the typed Request: typed columns + the records JSON string.
+    private static RankedTable buildFromTyped(Request r) {
+        RankedTable t = new RankedTable();
+        t.title        = r.title;
+        t.subtitle     = r.description;   // `description` is the caller-friendly name for the subtitle
+        t.summaryTitle = r.summary;       // the one-line takeaway, shown in the callout
+        t.ctaLabel     = r.ctaLabel;
+        t.ctaUrl       = r.ctaUrl;
+        t.badges       = normalizeBadges(r.badges);
+        t.highlights   = normalizeHighlights(r.highlights);
+
+        // Typed columns -> ColumnVM (header + align; align defaults to start). Capped to MAX_COLS.
+        t.columns = new List<ColumnVM>();
+        if (r.columns != null) {
+            for (ColumnInput ci : r.columns) {
+                if (ci == null) continue;
+                if (t.columns.size() >= MAX_COLS) break;
+                ColumnVM c = new ColumnVM();
+                c.key    = ci.key;
+                c.header = firstNonBlank(ci.header, ci.key);
+                c.align  = firstNonBlank(ci.align, 'start');
+                t.columns.add(c);
+            }
+        }
+
+        // Rows come from the `records` JSON string, laid out in column order (see buildRows()).
+        t.rows = buildRows(parseRecords(r.records), t.columns);
+
+        t.showSummary    = String.isNotBlank(t.summaryTitle) || String.isNotBlank(t.summaryDetail);
+        t.showHighlights = t.highlights != null && !t.highlights.isEmpty();
+        t.showCta        = String.isNotBlank(t.ctaLabel);
+        return t;
+    }
+
+    // Parse the records JSON string into a list of raw row elements (each a List or Map). Lenient:
+    // a blank or malformed string yields no rows (the header still renders).
+    private static List<Object> parseRecords(String recordsJson) {
+        if (String.isBlank(recordsJson)) return new List<Object>();
+        try {
+            Object parsed = JSON.deserializeUntyped(recordsJson);
+            return (parsed instanceof List<Object>) ? (List<Object>) parsed : new List<Object>();
+        } catch (Exception e) {
+            return new List<Object>();
+        }
     }
 
     // Flatten a parsed spec (columns + keyed rows) into the render-time payload (columns[] + rows[].cells[]).
     private static RankedTable build(Map<String, Object> spec) {
         RankedTable t = new RankedTable();
         t.title        = str(spec.get('title'));
-        t.subtitle     = str(spec.get('subtitle'));
-        t.summaryTitle = str(spec.get('summaryTitle'));
+        // `description` is the caller-friendly name for the subtitle; `summary` is the one-line
+        // takeaway shown in the callout. Accept the render-payload field names (subtitle /
+        // summaryTitle / summaryDetail) as back-compat aliases.
+        t.subtitle     = firstNonBlank(str(spec.get('description')), str(spec.get('subtitle')));
+        t.summaryTitle = firstNonBlank(str(spec.get('summary')), str(spec.get('summaryTitle')));
         t.summaryDetail= str(spec.get('summaryDetail'));
         t.tableCaption = str(spec.get('tableCaption'));
         t.highlightsCaption = str(spec.get('highlightsCaption'));
@@ -165,41 +295,34 @@ global with sharing class RankedTableAction {
         t.badges = toBadges(spec.get('badges'));
         t.highlights = toHighlights(spec.get('highlights'));
 
-        // Columns (retain key/header/align; default align to start).
+        // Columns SELECT which record fields to show (by key) and their header/align. A column may
+        // be a plain string (used as both key and header) or an object {key, header|label, align};
+        // align defaults to start. Capped to MAX_COLS: a card is too narrow for more, and the widget
+        // renders MAX_COLS fixed positional slots (see below).
         t.columns = new List<ColumnVM>();
-        List<Object> columns = asList(spec.get('columns'));
-        for (Object colObj : columns) {
-            if (!(colObj instanceof Map<String, Object>)) continue;
-            Map<String, Object> col = (Map<String, Object>) colObj;
+        for (Object colObj : asList(spec.get('columns'))) {
+            if (t.columns.size() >= MAX_COLS) break;
             ColumnVM c = new ColumnVM();
-            c.key    = str(col.get('key'));
-            c.header = str(col.get('header'));
-            c.align  = firstNonBlank(str(col.get('align')), 'start');
+            if (colObj instanceof Map<String, Object>) {
+                Map<String, Object> col = (Map<String, Object>) colObj;
+                c.key    = str(col.get('key'));
+                c.header = firstNonBlank(str(col.get('header')), str(col.get('label')));
+                c.align  = firstNonBlank(str(col.get('align')), 'start');
+            } else if (colObj != null) {
+                c.key    = str(colObj);
+                c.align  = 'start';
+            } else {
+                continue;
+            }
+            c.header = firstNonBlank(c.header, c.key);
             t.columns.add(c);
         }
 
-        // Rows: one cell per column, in column order. The first column is emphasized.
-        t.rows = new List<RowVM>();
-        List<Object> rows = asList(spec.get('rows'));
-        Integer rowIndex = 0;
-        for (Object rowObj : rows) {
-            if (!(rowObj instanceof Map<String, Object>)) continue;
-            Map<String, Object> rowMap = (Map<String, Object>) rowObj;
-            RowVM row = new RowVM();
-            row.id = firstNonBlank(str(rowMap.get('id')), 'row' + rowIndex);
-            rowIndex++;
-            row.cells = new List<CellVM>();
-            Integer colIndex = 0;
-            for (ColumnVM c : t.columns) {
-                CellVM cell = new CellVM();
-                cell.value  = str(rowMap.get(c.key));
-                cell.align  = c.align;
-                cell.weight = (colIndex == 0) ? 'semibold' : 'regular';
-                row.cells.add(cell);
-                colIndex++;
-            }
-            t.rows.add(row);
-        }
+        // Records (legacy shape): raw record objects keyed by column key. Accept `records` (preferred)
+        // or `rows` (older alias). buildRows lays each value under its column.
+        List<Object> records = asList(spec.get('records'));
+        if (records.isEmpty()) records = asList(spec.get('rows'));
+        t.rows = buildRows(records, t.columns);
 
         // Section toggles: honor an explicit boolean, else derive from content.
         t.showSummary    = boolOr(spec.get('showSummary'), String.isNotBlank(t.summaryTitle) || String.isNotBlank(t.summaryDetail));
@@ -209,6 +332,99 @@ global with sharing class RankedTableAction {
     }
 
     // ---- helpers ----
+
+    // Turn raw row elements into flattened RowVMs, one cell per column in column order. A row element
+    // may be: a List of values (values in column order); a Map with a "values" List (+ optional "id");
+    // or a Map keyed by the column keys (legacy). The first column is emphasized. Each row is emitted
+    // BOTH as a cells[] list (mirror) and as fixed positional scalars (c1..c6 + cNShow/cNAlign) — the
+    // widget binds the scalars because the live runtime cannot resolve a forEach over the row's own
+    // cells[] (see live-validator-deltas Delta 8).
+    private static List<RowVM> buildRows(List<Object> rawRows, List<ColumnVM> cols) {
+        List<RowVM> out = new List<RowVM>();
+        Integer rowIndex = 0;
+        for (Object rowObj : rawRows) {
+            List<Object> values = null;   // positional values, in column order
+            Map<String, Object> keyed = null;  // legacy: value looked up by column key
+            String id = null;
+
+            if (rowObj instanceof List<Object>) {
+                values = (List<Object>) rowObj;
+            } else if (rowObj instanceof Map<String, Object>) {
+                Map<String, Object> m = (Map<String, Object>) rowObj;
+                id = str(m.get('id'));
+                if (m.get('values') instanceof List<Object>) {
+                    values = (List<Object>) m.get('values');
+                } else {
+                    keyed = m;
+                }
+            } else {
+                continue;
+            }
+
+            RowVM row = new RowVM();
+            row.id = firstNonBlank(id, 'row' + rowIndex);
+            rowIndex++;
+            row.cells = new List<CellVM>();
+            Integer colIndex = 0;
+            for (ColumnVM c : cols) {
+                CellVM cell = new CellVM();
+                if (values != null) {
+                    cell.value = (colIndex < values.size()) ? str(values[colIndex]) : null;
+                } else {
+                    cell.value = str(keyed.get(c.key));
+                }
+                cell.align  = c.align;
+                cell.weight = (colIndex == 0) ? 'semibold' : 'regular';
+                row.cells.add(cell);
+                colIndex++;
+            }
+            setPositionalCells(row, cols);
+            out.add(row);
+        }
+        return out;
+    }
+
+    // Type-safe normalizers for the typed badge/highlight inputs: drop nulls and default the enum
+    // tokens (mirrors toBadges/toHighlights for the legacy JSON path).
+    private static List<Badge> normalizeBadges(List<Badge> raw) {
+        List<Badge> out = new List<Badge>();
+        if (raw == null) return out;
+        for (Badge b : raw) {
+            if (b == null) continue;
+            b.variant = firstNonBlank(b.variant, 'neutral');
+            out.add(b);
+        }
+        return out;
+    }
+
+    private static List<Highlight> normalizeHighlights(List<Highlight> raw) {
+        List<Highlight> out = new List<Highlight>();
+        if (raw == null) return out;
+        for (Highlight h : raw) {
+            if (h == null) continue;
+            h.iconColor = firstNonBlank(h.iconColor, 'default');
+            out.add(h);
+        }
+        return out;
+    }
+
+    // Copy the row's column-ordered cells into the fixed positional scalars the widget binds.
+    // cNShow marks whether column N exists (so the widget hides trailing empty slots and stays
+    // aligned with the header); cNAlign carries the column alignment. The first column is emphasized
+    // in the widget (static semibold), so only value + align + show are needed here.
+    private static void setPositionalCells(RowVM row, List<ColumnVM> cols) {
+        for (Integer k = 0; k < MAX_COLS; k++) {
+            Boolean present = k < cols.size();
+            String  val   = (present && row.cells != null && k < row.cells.size()) ? row.cells[k].value : null;
+            String  align = present ? cols[k].align : 'start';
+            if (k == 0) { row.c1 = val; row.c1Show = present; row.c1Align = align; }
+            else if (k == 1) { row.c2 = val; row.c2Show = present; row.c2Align = align; }
+            else if (k == 2) { row.c3 = val; row.c3Show = present; row.c3Align = align; }
+            else if (k == 3) { row.c4 = val; row.c4Show = present; row.c4Align = align; }
+            else if (k == 4) { row.c5 = val; row.c5Show = present; row.c5Align = align; }
+            else { row.c6 = val; row.c6Show = present; row.c6Align = align; }
+        }
+    }
 
     private static List<Badge> toBadges(Object raw) {
         List<Badge> out = new List<Badge>();
@@ -256,67 +472,16 @@ global with sharing class RankedTableAction {
         return String.isNotBlank(a) ? a : b;
     }
 
-    // A portable, self-contained demo pipeline so a no-argument call still renders a meaningful card
-    // (mirrors src/demo/data/rankedTableCard.attrs.json). Built as Maps/Lists to avoid escaping the
-    // accented French labels inside a JSON string literal.
-    private static Map<String, Object> demoSpec() {
-        List<Object> columns = new List<Object>{
-            col('opp', 'Opportunité', 'start'),
-            col('amount', 'Montant', 'end'),
-            col('stage', 'Étape', 'start'),
-            col('tier', 'Palier', 'start'),
-            col('score', 'Indice', 'end')
-        };
-
-        List<Object> rows = new List<Object>{
-            row('delaunay', 'Multirisque PME Delaunay', '42 000 €', 'Négociation', 'Palier 1', '88'),
-            row('vidal', 'Flotte auto Transports Vidal', '31 000 €', 'Proposition', 'Palier 2', '74'),
-            row('meyer', 'Santé collective Cabinet Meyer', '12 500 €', 'Découverte', 'Palier 3', '41')
-        };
-
-        List<Object> badges = new List<Object>{
-            badge('3 opportunités', 'primary'),
-            badge('1 en palier 1', 'danger')
-        };
-
-        List<Object> highlights = new List<Object>{
-            highlight('trending-up', 'success', 'Multirisque PME Delaunay', 'Clôture imminente, forte confiance — envoyer le devis signable.'),
-            highlight('clock', 'warning', 'Flotte Transports Vidal', 'Relevé de sinistralité manquant — à relancer avant de caler le closing.'),
-            highlight('bell', 'danger', 'Santé collective Cabinet Meyer', 'Décideur RH non identifié — à déprioriser pour l\'instant.')
-        };
-
+    // No spec supplied: the caller (agent/planner) owns ALL content — this action only flattens
+    // what it is given — so we hardcode NO business data. Render a neutral, empty placeholder that
+    // says the card is caller-driven. (Illustrative sample data lives in the React preview harness,
+    // src/demo/data/rankedTableCard.attrs.json, not in this platform code.)
+    private static Map<String, Object> emptyState() {
         return new Map<String, Object>{
-            'title'         => 'Opportunités priorisées',
-            'subtitle'      => 'Agence Roussel · Bordeaux · cette semaine',
-            'badges'        => badges,
+            'title'         => 'Tableau priorisé',
             'showSummary'   => true,
-            'summaryTitle'  => 'Concentrez-vous sur Delaunay et Vidal',
-            'summaryDetail' => 'Multirisque PME Delaunay est proche de la clôture et à forte confiance — envoyez le devis signable dès aujourd\'hui.',
-            'tableCaption'  => 'Opportunités ouvertes, triées par indice de priorité',
-            'columns'       => columns,
-            'rows'          => rows,
-            'showHighlights'=> true,
-            'highlightsCaption' => 'FOCUS DE LA SEMAINE',
-            'highlights'    => highlights,
-            'showCta'       => true,
-            'ctaLabel'      => 'Ouvrir le pipeline',
-            'ctaUrl'        => '#'
+            'summaryTitle'  => 'Aucune donnée fournie',
+            'summaryDetail' => 'Cette carte affiche un tableau priorisé fourni par l\'agent appelant. Fournissez un spec JSON (columns[] + records[]) pour le remplir.'
         };
-    }
-
-    private static Map<String, Object> col(String key, String header, String align) {
-        return new Map<String, Object>{ 'key' => key, 'header' => header, 'align' => align };
-    }
-
-    private static Map<String, Object> row(String id, String opp, String amount, String stage, String tier, String score) {
-        return new Map<String, Object>{ 'id' => id, 'opp' => opp, 'amount' => amount, 'stage' => stage, 'tier' => tier, 'score' => score };
-    }
-
-    private static Map<String, Object> badge(String label, String variant) {
-        return new Map<String, Object>{ 'label' => label, 'variant' => variant };
-    }
-
-    private static Map<String, Object> highlight(String iconName, String iconColor, String title, String detail) {
-        return new Map<String, Object>{ 'iconName' => iconName, 'iconColor' => iconColor, 'title' => title, 'detail' => detail };
     }
 }

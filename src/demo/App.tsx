@@ -26,7 +26,7 @@ import multiSelectList from "../../force-app/main/default/uiWidgets/multiSelectL
 import multiSelectListAttrs from "./data/multiSelectList.attrs.json"
 import actionPlan from "../../force-app/main/default/uiWidgets/actionPlan/actionPlan.json"
 import actionPlanAttrs from "./data/actionPlan.attrs.json"
-// Additional gallery cards (French / AXA + wealth context), sourced from the
+// Additional gallery cards (French insurance + wealth context), sourced from the
 // same deployable uiWidgets bundles.
 import clientRecordUpdateCard from "../../force-app/main/default/uiWidgets/clientRecordUpdateCard/clientRecordUpdateCard.json"
 import clientRecordUpdateAttrs from "./data/clientRecordUpdateCard.attrs.json"
@@ -46,6 +46,8 @@ import performanceReviewCard from "../../force-app/main/default/uiWidgets/perfor
 import performanceReviewAttrs from "./data/performanceReviewCard.attrs.json"
 import rankedTableCard from "../../force-app/main/default/uiWidgets/rankedTableCard/rankedTableCard.json"
 import rankedTableAttrs from "./data/rankedTableCard.attrs.json"
+import nextStepsCard from "../../force-app/main/default/uiWidgets/nextStepsCard/nextStepsCard.json"
+import nextStepsAttrs from "./data/nextStepsCard.attrs.json"
 import recordUpdateConfirmCard from "../../force-app/main/default/uiWidgets/recordUpdateConfirmCard/recordUpdateConfirmCard.json"
 import recordUpdateConfirmAttrs from "./data/recordUpdateConfirmCard.attrs.json"
 import { buildShareUrl } from "./share"
@@ -109,6 +111,11 @@ const tileFixtures: TileFixture[] = [
     name: "Tableau priorisé",
     widget: rankedTableCard as unknown as TileWidgetBundle,
     attrs: (rankedTableAttrs as any).attributes,
+  },
+  {
+    name: "Prochaines étapes",
+    widget: nextStepsCard as unknown as TileWidgetBundle,
+    attrs: (nextStepsAttrs as any).attributes,
   },
   {
     name: "Rapport d'envoi",

@@ -182,8 +182,9 @@ directly (no demo-local copies):
 | **Notify Teammates (multi-select)** | A per-row `switch` over a `meta.forEach` list, each with a data-bound id. |
 | **Action Plan (generic)** | A **caller-driven editable grid**: the widget renders whatever `rows[].cells[]` it is given — each cell typed `readonly` / `select` / `text` / `switch` — and Confirm gathers the whole revised grid as one payload. |
 | **Ranked Table (generic)** | A **caller-driven ranked/prioritized table**: title, badges, a summary callout, a `columns[]` + `rows[].cells[]` table, per-item highlights and a CTA — all supplied by the agent. The read-only sibling of Action Plan; it renders one card for opportunity prioritization, portfolio analysis, lead triage, weekly replanning, and more. |
+| **Next Steps (generic)** | A **caller-driven list of proposed next steps / next best actions**: title, badges, a summary callout, and an ordered `steps[]` — each step an action-first title with a detail, a rationale, an optional priority chip, an icon, a supporting meta line and an optional link — all supplied by the agent. Renders meeting follow-ups, deal action plans, onboarding checklists, service resolution paths, and advisor next-best-actions. |
 
-A further set of gallery-preview cards (French / AXA + wealth context — *Leads du
+A further set of gallery-preview cards (French insurance + wealth context — *Leads du
 jour*, *Plan de journée*, *Brief de réunion*, *Santé de l'affaire*, *Contrat
 d'assurance*, and others) also ship under `force-app/main/default/uiWidgets/` and
 appear in the playground toolbar.
@@ -197,13 +198,14 @@ GenAiFunction output → wrapper renderer path `{!$attrs.outputValues.<anchor>�
 An Apex `@InvocableMethod` returns the payload; Agentforce/MCP renders it into
 the `tile/*` tree.
 
-The **Action Plan** and **Ranked Table** widgets are the *generic* ones:
-`ActionPlanAction` (anchor `plan`) and `RankedTableAction` (anchor `table`) each
-take a single JSON `spec` describing columns + rows and *flatten* it into typed,
-data-bound cells so the widget stays pure UI. Call either with no `spec` to get a
-portable demo. Because the flattening happens in Apex, the widget's binding
-surface is only `forEach` + `meta.if <boolean>` — no operators or dynamic key
-access — so it renders identically in the preview and in the live HXL runtime.
+The **Action Plan**, **Ranked Table** and **Next Steps** widgets are the *generic*
+ones: `ActionPlanAction` (anchor `plan`), `RankedTableAction` (anchor `table`) and
+`NextStepsAction` (anchor `nextSteps`) each take a single JSON `spec` — the agent
+supplies the content — and *flatten / normalize* it into typed, data-bound items
+so the widget stays pure UI. Call any of them with no `spec` to get a portable
+demo. Because the shaping happens in Apex, the widget's binding surface is only
+`forEach` + `meta.if <boolean>` — no operators or dynamic key access — so it
+renders identically in the preview and in the live HXL runtime.
 
 > **Why flatten instead of `tile/table`?** Apex `@InvocableVariable` can't emit a
 > dynamic-keyed row (a `Map`), and a typed CLT can't feed arbitrary keys to a
@@ -231,7 +233,7 @@ they have something worth showing, delegate the *rendering* to the UI Specialist
 ```
 
 **The agent supplies the input.** The UI Specialist doesn't fetch data — it
-*receives* the rows the calling agent already has, then decides the columns, the
+*receives* the records the calling agent already has, then decides the columns, the
 ordering, the summary and the highlights, and builds the action's JSON `spec`
 itself. The Apex action is generic; the *taste* (what to compare, what to
 foreground) lives in the agent's instructions, not in hard-coded metadata.
@@ -242,23 +244,40 @@ foreground) lives in the agent's instructions, not in hard-coded metadata.
   presentation logic changes in one place.
 - **Consistency** — every card in the org is composed by the same specialist, so
   ranked lists look and behave the same everywhere.
-- **Reuse & scale** — one topic per card. Today the UI Specialist owns
-  **Ranked Table**; adding *Client Profile*, *Opportunity*, *Action Plan*, … is a
-  new `GenAiPlugin` topic pointing at that card's action — no change to the task
-  agents that call it.
+- **Reuse & scale** — one action/topic per card. Today the UI Specialist owns
+  **Ranked Table** and **Next Steps**; adding *Client Profile*, *Opportunity*,
+  *Action Plan*, … is a new action (Agent Script) or `GenAiPlugin` topic pointing
+  at that card's action — no change to the task agents that call it.
 - **Stays agentic** — the specialist *chooses* the card and *composes* the spec
   from context each time; it isn't a fixed template.
+
+### Two ways the agent itself is authored
+
+The same UI Specialist ships in **both** Agentforce authoring formats — keep the
+one that matches how your org builds agents (they define the same agent, so
+deploy one, not both):
+
+- **Agent Script (code-first)** — `aiAuthoringBundles/UI_Specialist/UI_Specialist.agent`.
+  A single presentation state exposing both rendering actions
+  (`get_ranked_table` → `apex://RankedTableAction`, `get_next_steps` →
+  `apex://NextStepsAction`); the LLM picks the card by intent. This is the
+  version-controlled, deterministic path — no `GenAiFunction`/`GenAiPlugin`
+  metadata needed. Publish with `sf agent publish authoring-bundle`.
+- **Agent Builder (declarative)** — `genAiPlanners/UI_Specialist.genAiPlanner-meta.xml`
+  owning the two `GenAiPlugin` topics, each wrapping a `GenAiFunction`. This is
+  the Setup-UI path.
 
 ### What ships in `force-app` for the agent
 
 | Piece | File | Role |
 | --- | --- | --- |
-| **Apex action** | `classes/RankedTableAction.cls` | Generic `@InvocableMethod`; takes a JSON `spec`, returns the flattened `table` payload (binding anchor `table`). |
-| **GenAiFunction** | `genAiFunctions/Get_Ranked_Table/` | Registers the action; `spec` in, displayable `table` out. |
-| **Lightning types** | `lightningTypes/rankedTableCard{Agent,Result,OutputValues}/` | Agent (flat `$attrs`) + MCP wrapper CLTs; renderers bind the payload into `@widget/c/rankedTableCard`. |
-| **Topic** | `genAiPlugins/UI_Specialist_Ranked_Table.genAiPlugin-meta.xml` | *When* to render a ranked table and *how* to build the spec (the agent's instructions). |
-| **Agent (planner)** | `genAiPlanners/UI_Specialist.genAiPlanner-meta.xml` | The UI Specialist itself — owns the topic(s). Add one topic per card as the gallery grows. |
-| **Permission set** | `permissionsets/HXL_Ranked_Table.permissionset-meta.xml` | Grants the agent's running user access to `RankedTableAction`. |
+| **Apex actions** | `classes/RankedTableAction.cls`, `classes/NextStepsAction.cls` | Generic `@InvocableMethod`s; each takes a JSON `spec` and returns its flattened payload (binding anchors `table` / `nextSteps`). |
+| **GenAiFunctions** | `genAiFunctions/Get_Ranked_Table/`, `genAiFunctions/Get_Next_Steps/` | Register the actions for the Builder path; `spec` in, displayable payload out. |
+| **Lightning types** | `lightningTypes/{rankedTableCard,nextStepsCard}{Agent,Result,OutputValues}/` | Agent (flat `$attrs`) + MCP wrapper CLTs; renderers bind each payload into its `@widget/c/…` widget. |
+| **Topics** | `genAiPlugins/UI_Specialist_Ranked_Table.genAiPlugin-meta.xml`, `genAiPlugins/UI_Specialist_Next_Steps.genAiPlugin-meta.xml` | *When* to render each card and *how* to build its spec (the agent's instructions). |
+| **Agent Script bundle** | `aiAuthoringBundles/UI_Specialist/UI_Specialist.agent` | The code-first UI Specialist — both actions in one state. |
+| **Agent (planner)** | `genAiPlanners/UI_Specialist.genAiPlanner-meta.xml` | The declarative UI Specialist — owns the topics. Add one action/topic per card as the gallery grows. |
+| **Permission sets** | `permissionsets/HXL_Ranked_Table.permissionset-meta.xml`, `permissionsets/HXL_Next_Steps.permissionset-meta.xml` | Grant the agent's running user access to the Apex actions. |
 
 **Deploy & activate** (supporting metadata first, then the agent):
 
@@ -268,15 +287,21 @@ sf project deploy start \
   --source-dir force-app/main/default \
   --target-org <ORG> --wait 30
 
-# 2. Assign the action permission to the agent's running user
+# 2. Assign the action permissions to the agent's running user
 sf org assign permset --name HXL_Ranked_Table --target-org <ORG>
+sf org assign permset --name HXL_Next_Steps --target-org <ORG>
+
+# 3a. Code-first path: publish + activate the Agent Script bundle
+sf agent publish authoring-bundle --api-name UI_Specialist --target-org <ORG>
+sf agent activate --api-name UI_Specialist --target-org <ORG>
 ```
 
-Then, in **Setup → Agentforce → Agents**, create/attach the **UI Specialist**
-Employee Agent to the `UI_Specialist` planner, bind a running user that holds
-`HXL_Ranked_Table`, and **activate** it. (The Bot/running-user binding is
-org-specific, so it's finished in Setup rather than committed here.) Other agents
-then reach the specialist as a sub-agent / action to render their results.
+For the **Builder path** instead, go to **Setup → Agentforce → Agents**,
+attach the **UI Specialist** Employee Agent to the `UI_Specialist` planner, bind a
+running user that holds both permission sets, and **activate** it. (The
+Bot/running-user binding is org-specific, so it's finished in Setup rather than
+committed here.) Other agents then reach the specialist as a sub-agent / action
+to render their results.
 
 ## Develop
 

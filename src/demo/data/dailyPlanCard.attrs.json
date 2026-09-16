@@ -1,5 +1,5 @@
 {
-  "_comment": "Sample $attrs for the Plan de journée (daily plan) card, matching the plan-my-day skill output. French / AXA France agency context. A reference snapshot — values are illustrative, not a live org capture.",
+  "_comment": "Sample $attrs for the Plan de journée (daily plan) card, matching the plan-my-day skill output. French insurance-agency context. A reference snapshot — values are illustrative, not a live org capture.",
   "attributes": {
     "agentName": "Sophie Marchand",
     "agentInitials": "SM",

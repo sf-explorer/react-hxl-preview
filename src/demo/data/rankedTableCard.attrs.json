@@ -26,8 +26,14 @@
           { "value": "42 000 €", "align": "end", "weight": "regular" },
           { "value": "Négociation", "align": "start", "weight": "regular" },
           { "value": "Palier 1", "align": "start", "weight": "regular" },
-          { "value": "88", "align": "end", "weight": "semibold" }
-        ]
+          { "value": "88", "align": "end", "weight": "regular" }
+        ],
+        "c1": "Multirisque PME Delaunay", "c1Show": true, "c1Align": "start",
+        "c2": "42 000 €", "c2Show": true, "c2Align": "end",
+        "c3": "Négociation", "c3Show": true, "c3Align": "start",
+        "c4": "Palier 1", "c4Show": true, "c4Align": "start",
+        "c5": "88", "c5Show": true, "c5Align": "end",
+        "c6": null, "c6Show": false, "c6Align": "start"
       },
       {
         "id": "vidal",
@@ -36,8 +42,14 @@
           { "value": "31 000 €", "align": "end", "weight": "regular" },
           { "value": "Proposition", "align": "start", "weight": "regular" },
           { "value": "Palier 2", "align": "start", "weight": "regular" },
-          { "value": "74", "align": "end", "weight": "semibold" }
-        ]
+          { "value": "74", "align": "end", "weight": "regular" }
+        ],
+        "c1": "Flotte auto Transports Vidal", "c1Show": true, "c1Align": "start",
+        "c2": "31 000 €", "c2Show": true, "c2Align": "end",
+        "c3": "Proposition", "c3Show": true, "c3Align": "start",
+        "c4": "Palier 2", "c4Show": true, "c4Align": "start",
+        "c5": "74", "c5Show": true, "c5Align": "end",
+        "c6": null, "c6Show": false, "c6Align": "start"
       },
       {
         "id": "meyer",
@@ -46,8 +58,14 @@
           { "value": "12 500 €", "align": "end", "weight": "regular" },
           { "value": "Découverte", "align": "start", "weight": "regular" },
           { "value": "Palier 3", "align": "start", "weight": "regular" },
-          { "value": "41", "align": "end", "weight": "semibold" }
-        ]
+          { "value": "41", "align": "end", "weight": "regular" }
+        ],
+        "c1": "Santé collective Cabinet Meyer", "c1Show": true, "c1Align": "start",
+        "c2": "12 500 €", "c2Show": true, "c2Align": "end",
+        "c3": "Découverte", "c3Show": true, "c3Align": "start",
+        "c4": "Palier 3", "c4Show": true, "c4Align": "start",
+        "c5": "41", "c5Show": true, "c5Align": "end",
+        "c6": null, "c6Show": false, "c6Align": "start"
       }
     ],
     "showHighlights": true,

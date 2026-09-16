@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
     <canEscalate>false</canEscalate>
-    <description>Displays any ranked, prioritized, or comparative list of records as a rich, on-brand card. Use this topic whenever the user asks to see, compare, rank, prioritize, or triage a set of items in a table — opportunities, accounts, leads, cases, tasks, portfolio lines — rather than reading them back as prose. The topic does NOT fetch data; the calling agent supplies the rows it already has.</description>
+    <description>Displays any ranked, prioritized, or comparative list of records as a rich, on-brand card. Use this topic whenever the user asks to see, compare, rank, prioritize, or triage a set of items in a table — opportunities, accounts, leads, cases, tasks, portfolio lines — rather than reading them back as prose. The topic does NOT fetch data; the calling agent supplies the records it already has.</description>
     <developerName>UI_Specialist_Ranked_Table</developerName>
     <genAiFunctions>
         <functionName>Get_Ranked_Table</functionName>
@@ -13,19 +13,19 @@
         <masterLabel>route_to_ranked_table</masterLabel>
     </genAiPluginInstructions>
     <genAiPluginInstructions>
-        <description>Set columns to the fields worth comparing (key + header). Give each row an id and one value per column key. Right-align numeric or amount columns with align end. Order rows most-important first (highest score, soonest close, greatest risk).</description>
+        <description>Set columns to the few fields worth comparing — each is a header plus an align (start, end, or center; use end for numeric or amount columns), left to right, at most 6. Set records to a JSON array string of rows, where each row lists its display values in the SAME order as the columns (for example [["Multirisque PME Delaunay","42 000 €","Négociation"], ...]). Order records most-important first (highest score, soonest close, greatest risk).</description>
         <developerName>instruction_1</developerName>
         <language>en_US</language>
-        <masterLabel>build_columns_and_rows</masterLabel>
+        <masterLabel>build_columns_and_records</masterLabel>
     </genAiPluginInstructions>
     <genAiPluginInstructions>
-        <description>Use badges for at-a-glance counts, the summary callout for the single most important takeaway, and highlights for per-item next actions. Add a CTA only when there is a real destination. Keep every label in the language the user is speaking.</description>
+        <description>Set summary to the single most important takeaway (it renders as a callout) and description to a short subtitle giving context (who / where / when). Use badges for at-a-glance counts and highlights for per-item next actions. Add a CTA only when there is a real destination. Keep every label in the language the user is speaking.</description>
         <developerName>instruction_2</developerName>
         <language>en_US</language>
         <masterLabel>enrich_the_card</masterLabel>
     </genAiPluginInstructions>
     <genAiPluginInstructions>
-        <description>Never invent data. Only put values into the spec that are grounded in records or context already retrieved. If you have no rows to show, do not call this action.</description>
+        <description>Never invent data. Only put values into the spec that are grounded in records or context already retrieved. If you have no records to show, do not call this action.</description>
         <developerName>instruction_3</developerName>
         <language>en_US</language>
         <masterLabel>stay_grounded</masterLabel>
@@ -33,5 +33,5 @@
     <language>en_US</language>
     <masterLabel>UI Specialist - Ranked Table</masterLabel>
     <pluginType>Topic</pluginType>
-    <scope>Your job is to turn a set of records the calling agent already has into a single, well-designed ranked-table card. You choose the columns, order the rows by importance, and write the summary and highlights. You never retrieve data and you never answer the underlying business question in prose — you render it.</scope>
+    <scope>Your job is to turn a set of records the calling agent already has into a single, well-designed ranked-table card. You choose the columns, order the records by importance, and write the summary and highlights. You never retrieve data and you never answer the underlying business question in prose — you render it.</scope>
 </GenAiPlugin>

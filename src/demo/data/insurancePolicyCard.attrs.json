@@ -1,9 +1,9 @@
 {
-  "_comment": "Sample $attrs for the Contrat d'assurance (insurancePolicy) card — single-policy detail: header + status, premium/échéance/ancienneté stat tiles (stats[] each {iconName,label,value}), a GARANTIES list, and optional recent claims. French / AXA France. show* flags gate the callout, claims and CTA. A reference snapshot — illustrative values.",
+  "_comment": "Sample $attrs for the Contrat d'assurance (insurancePolicy) card — single-policy detail: header + status, premium/échéance/ancienneté stat tiles (stats[] each {iconName,label,value}), a GARANTIES list, and optional recent claims. French insurance context. show* flags gate the callout, claims and CTA. A reference snapshot — illustrative values.",
   "attributes": {
     "iconName": "credit-card",
     "productName": "Assurance Auto",
-    "policyLine": "Contrat AUTO-2019-4471 · Annie Dubois · AXA",
+    "policyLine": "Contrat AUTO-2019-4471 · Annie Dubois · Assurance Générale",
     "statusLabel": "À renouveler",
     "statusVariant": "warning",
     "showHeadline": true,

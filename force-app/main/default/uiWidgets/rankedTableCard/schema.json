@@ -47,7 +47,7 @@
               "id": { "title": "Id", "description": "Row id", "lightning:type": "lightning__textType" },
               "cells": {
                 "title": "Cells",
-                "description": "One cell per column, in column order",
+                "description": "One cell per column, in column order (list mirror of c1..c6)",
                 "lightning:type": "lightning__listType",
                 "items": {
                   "lightning:type": "lightning__objectType",
@@ -57,7 +57,25 @@
                     "weight": { "title": "Weight", "description": "regular | semibold | bold", "lightning:type": "lightning__textType" }
                   }
                 }
-              }
+              },
+              "c1": { "title": "Cell 1", "description": "Value of column 1 (bound as a fixed positional scalar — the live runtime cannot forEach the row's cells[])", "lightning:type": "lightning__textType" },
+              "c1Show": { "title": "Cell 1 Show", "description": "Whether column 1 exists", "lightning:type": "lightning__booleanType" },
+              "c1Align": { "title": "Cell 1 Align", "description": "start | end | center for column 1", "lightning:type": "lightning__textType" },
+              "c2": { "title": "Cell 2", "description": "Value of column 2", "lightning:type": "lightning__textType" },
+              "c2Show": { "title": "Cell 2 Show", "description": "Whether column 2 exists", "lightning:type": "lightning__booleanType" },
+              "c2Align": { "title": "Cell 2 Align", "description": "start | end | center for column 2", "lightning:type": "lightning__textType" },
+              "c3": { "title": "Cell 3", "description": "Value of column 3", "lightning:type": "lightning__textType" },
+              "c3Show": { "title": "Cell 3 Show", "description": "Whether column 3 exists", "lightning:type": "lightning__booleanType" },
+              "c3Align": { "title": "Cell 3 Align", "description": "start | end | center for column 3", "lightning:type": "lightning__textType" },
+              "c4": { "title": "Cell 4", "description": "Value of column 4", "lightning:type": "lightning__textType" },
+              "c4Show": { "title": "Cell 4 Show", "description": "Whether column 4 exists", "lightning:type": "lightning__booleanType" },
+              "c4Align": { "title": "Cell 4 Align", "description": "start | end | center for column 4", "lightning:type": "lightning__textType" },
+              "c5": { "title": "Cell 5", "description": "Value of column 5", "lightning:type": "lightning__textType" },
+              "c5Show": { "title": "Cell 5 Show", "description": "Whether column 5 exists", "lightning:type": "lightning__booleanType" },
+              "c5Align": { "title": "Cell 5 Align", "description": "start | end | center for column 5", "lightning:type": "lightning__textType" },
+              "c6": { "title": "Cell 6", "description": "Value of column 6", "lightning:type": "lightning__textType" },
+              "c6Show": { "title": "Cell 6 Show", "description": "Whether column 6 exists", "lightning:type": "lightning__booleanType" },
+              "c6Align": { "title": "Cell 6 Align", "description": "start | end | center for column 6", "lightning:type": "lightning__textType" }
             }
           }
         },

@@ -9,7 +9,7 @@
     "summaryDetail": "Conversion et valeur signée en hausse ; le nombre de nouvelles opportunités créées recule et fragilise le trimestre prochain.",
     "columns": [
       { "key": "kpi", "header": "Indicateur" },
-      { "key": "value", "header": "Valeur", "align": "right" },
+      { "key": "value", "header": "Valeur" },
       { "key": "trend", "header": "Tendance vs mois préc." }
     ],
     "rows": [
