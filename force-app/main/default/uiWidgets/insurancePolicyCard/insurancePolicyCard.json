@@ -1,0 +1,133 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Contrat d'assurance",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": { "borderless": true, "variant": "default" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "lg", "align": "stretch", "width": "full" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "md", "align": "center", "justify": "between", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/row",
+                      "attributes": { "gap": "md", "align": "center", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "{!$attrs.iconName}", "size": "lg", "color": "primary", "alt": "" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$attrs.productName}", "variant": "h2", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$attrs.policyLine}", "variant": "caption", "color": "muted" } }
+                          ]
+                        }
+                      ]
+                    },
+                    { "definition": "tile/badge", "attributes": { "label": "{!$attrs.statusLabel}", "variant": "{!$attrs.statusVariant}" } }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "meta": { "if": "{!$attrs.showHeadline}" },
+                  "attributes": { "title": "{!$attrs.headlineTitle}", "description": "{!$attrs.headlineDetail}", "variant": "{!$attrs.headlineVariant}" }
+                },
+                {
+                  "definition": "tile/container",
+                  "attributes": { "borderless": false, "variant": "default" },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                      "children": [
+                        {
+                          "definition": "tile/row",
+                          "meta": { "forEach": "{!$attrs.stats}", "forItem": "$stat", "forIndex": "$sti" },
+                          "attributes": { "gap": "sm", "align": "center", "justify": "between", "isWrapped": false },
+                          "children": [
+                            {
+                              "definition": "tile/row",
+                              "attributes": { "gap": "sm", "align": "center", "justify": "start", "isWrapped": false },
+                              "children": [
+                                { "definition": "tile/icon", "attributes": { "name": "{!$stat.iconName}", "size": "sm", "color": "primary", "alt": "" } },
+                                { "definition": "tile/text", "attributes": { "text": "{!$stat.label}", "variant": "body", "color": "muted" } }
+                              ]
+                            },
+                            { "definition": "tile/text", "attributes": { "text": "{!$stat.value}", "variant": "body", "weight": "semibold" } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showCoverages}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "GARANTIES", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.coverages}", "forItem": "$cov", "forIndex": "$ci" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "check-circle", "size": "sm", "color": "success", "alt": "Garantie" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$cov.name}", "variant": "body", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$cov.detail}", "variant": "caption", "color": "muted" } }
+                          ]
+                        },
+                        { "definition": "tile/badge", "attributes": { "label": "{!$cov.tag}", "variant": "{!$cov.tagVariant}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showClaims}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "SINISTRES RÉCENTS", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.claims}", "forItem": "$claim", "forIndex": "$cli" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "activity", "size": "sm", "color": "warning", "alt": "Sinistre" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$claim.subject}", "variant": "body", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$claim.dateLabel}", "variant": "caption", "color": "muted" } }
+                          ]
+                        },
+                        { "definition": "tile/badge", "attributes": { "label": "{!$claim.status}", "variant": "{!$claim.statusVariant}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/button",
+                  "meta": { "if": "{!$attrs.showCta}" },
+                  "attributes": { "label": "{!$attrs.ctaLabel}", "href": "{!$attrs.ctaUrl}", "variant": "primary" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

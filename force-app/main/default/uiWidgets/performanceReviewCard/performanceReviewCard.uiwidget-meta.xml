@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Revue de performance</masterLabel>
+    <description>Sample $attrs for the Revue de performance (performanceReview) card — profile header + KPI table (value + trend vs previous period) + strengths + attention + actions, shared by agency-activity-analysis, manager-monthly-team-review, weekly-activity-summary. show* flags gate the optional lists. A reference snapshot — illustrative values.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

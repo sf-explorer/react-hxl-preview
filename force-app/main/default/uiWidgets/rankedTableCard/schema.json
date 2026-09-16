@@ -1,0 +1,86 @@
+{
+  "title": "Ranked Table Card Widget",
+  "description": "Generic, caller-driven ranked/prioritized table. The agent supplies columns + rows via a JSON spec; the RankedTableAction flattens them into columns[] + rows[].cells[] so the widget binds with plain forEach only (no dynamic key access). Serves many scenarios: opportunity prioritizer, portfolio analysis, outreach advisor, weekly replanning, claims triage.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "title": { "title": "Title", "description": "Card title", "lightning:type": "lightning__textType" },
+        "subtitle": { "title": "Subtitle", "description": "Secondary line under the title", "lightning:type": "lightning__textType" },
+        "badges": {
+          "title": "Badges",
+          "description": "Header badges (label + SLDS variant)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": { "title": "Label", "description": "Badge text", "lightning:type": "lightning__textType" },
+              "variant": { "title": "Variant", "description": "primary | success | warning | danger | neutral", "lightning:type": "lightning__textType" }
+            }
+          }
+        },
+        "showSummary": { "title": "Show Summary", "description": "Toggle for the summary callout", "lightning:type": "lightning__booleanType" },
+        "summaryTitle": { "title": "Summary Title", "description": "Callout title", "lightning:type": "lightning__textType" },
+        "summaryDetail": { "title": "Summary Detail", "description": "Callout body", "lightning:type": "lightning__textType" },
+        "tableCaption": { "title": "Table Caption", "description": "Caption above the table", "lightning:type": "lightning__textType" },
+        "columns": {
+          "title": "Columns",
+          "description": "Column headers (rendered left→right; each row's cells align to these positionally)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "key": { "title": "Key", "description": "Column key (latent; matches the spec row keys)", "lightning:type": "lightning__textType" },
+              "header": { "title": "Header", "description": "Column header label", "lightning:type": "lightning__textType" },
+              "align": { "title": "Align", "description": "start | end | center", "lightning:type": "lightning__textType" }
+            }
+          }
+        },
+        "rows": {
+          "title": "Rows",
+          "description": "Flattened rows: each row has an id and one cell per column, in column order",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "id": { "title": "Id", "description": "Row id", "lightning:type": "lightning__textType" },
+              "cells": {
+                "title": "Cells",
+                "description": "One cell per column, in column order",
+                "lightning:type": "lightning__listType",
+                "items": {
+                  "lightning:type": "lightning__objectType",
+                  "properties": {
+                    "value": { "title": "Value", "description": "Display text for the cell", "lightning:type": "lightning__textType" },
+                    "align": { "title": "Align", "description": "start | end | center (copied from the column)", "lightning:type": "lightning__textType" },
+                    "weight": { "title": "Weight", "description": "regular | semibold | bold", "lightning:type": "lightning__textType" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "showHighlights": { "title": "Show Highlights", "description": "Toggle for the highlights section", "lightning:type": "lightning__booleanType" },
+        "highlightsCaption": { "title": "Highlights Caption", "description": "Caption above the highlights list", "lightning:type": "lightning__textType" },
+        "highlights": {
+          "title": "Highlights",
+          "description": "Callout rows (icon + title + detail)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "iconName": { "title": "Icon Name", "description": "Lucide icon slug", "lightning:type": "lightning__textType" },
+              "iconColor": { "title": "Icon Color", "description": "success | warning | danger | default", "lightning:type": "lightning__textType" },
+              "title": { "title": "Title", "description": "Highlight title", "lightning:type": "lightning__textType" },
+              "detail": { "title": "Detail", "description": "Highlight detail", "lightning:type": "lightning__textType" }
+            }
+          }
+        },
+        "showCta": { "title": "Show Cta", "description": "Toggle for the CTA button", "lightning:type": "lightning__booleanType" },
+        "ctaLabel": { "title": "Cta Label", "description": "CTA button label", "lightning:type": "lightning__textType" },
+        "ctaUrl": { "title": "Cta Url", "description": "CTA button href", "lightning:type": "lightning__urlType" }
+      }
+    }
+  }
+}

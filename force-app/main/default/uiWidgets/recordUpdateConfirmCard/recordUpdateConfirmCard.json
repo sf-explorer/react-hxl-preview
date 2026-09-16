@@ -1,0 +1,115 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Confirmer les mises à jour",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": { "borderless": true, "variant": "default" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "md", "align": "stretch", "width": "full" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "sm", "align": "center", "justify": "start", "isWrapped": false },
+                  "children": [
+                    { "definition": "tile/icon", "attributes": { "name": "{!$attrs.iconName}", "size": "lg", "color": "primary", "alt": "" } },
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.recordName}", "variant": "h3", "weight": "bold" } },
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.recordType}", "variant": "caption", "color": "muted" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "meta": { "if": "{!$attrs.showSummary}" },
+                  "attributes": { "title": "{!$attrs.summaryTitle}", "description": "{!$attrs.summaryText}", "variant": "info" }
+                },
+                { "definition": "tile/separator", "attributes": { "orientation": "horizontal" } },
+                { "definition": "tile/text", "attributes": { "text": "MISES À JOUR PROPOSÉES — AJUSTABLES", "variant": "caption", "weight": "bold", "color": "muted" } },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "lg", "align": "start", "justify": "start", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/select", "attributes": { "id": "stage", "label": "Étape de l'opportunité", "value": "{!$attrs.stageValue}", "options": "{!$attrs.stageOptions}" } }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/textField", "attributes": { "id": "closeDate", "label": "Date de clôture prévisionnelle", "value": "{!$attrs.closeDate}", "type": "date" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/textarea",
+                  "attributes": { "id": "note", "label": "Note client", "value": "{!$attrs.note}", "placeholder": "Note à enregistrer sur la fiche client…" }
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "lg", "align": "start", "justify": "start", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/radio", "attributes": { "id": "priority", "label": "Priorité de suivi", "value": "{!$attrs.priorityValue}", "options": "{!$attrs.priorityOptions}" } }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/checkbox", "attributes": { "id": "createTasks", "label": "Créer les tâches de suivi proposées", "isChecked": "{!$attrs.createTasks}" } },
+                        { "definition": "tile/switch", "attributes": { "id": "notifyManager", "label": "Notifier le manager", "isChecked": "{!$attrs.notifyManager}" } }
+                      ]
+                    }
+                  ]
+                },
+                { "definition": "tile/text", "attributes": { "text": "Ajustez les valeurs si besoin, puis validez — elles sont transmises au CRM au clic.", "variant": "caption", "color": "muted" } },
+                { "definition": "tile/spacer", "attributes": { "size": "sm" } },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "sm", "align": "center", "justify": "end", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "{!$attrs.cancelLabel}",
+                        "variant": "secondary",
+                        "actions": { "click": [ { "definition": "recordUpdateCancel", "attributes": {}, "inputs": "none" } ] }
+                      }
+                    },
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "{!$attrs.confirmLabel}",
+                        "variant": "primary",
+                        "iconName": "check-circle",
+                        "actions": { "click": [ { "definition": "recordUpdateConfirm", "attributes": {}, "inputs": "auto" } ] }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

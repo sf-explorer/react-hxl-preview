@@ -1,0 +1,82 @@
+{
+  "title": "Leads du jour Widget",
+  "description": "Sample $attrs for the Leads du jour card, matching the received-leads-today skill output. French / AXA France agency context. The `leads` array feeds a tile/table (each row is keyed by the column keys: name, product, source, priority, score). A reference snapshot — illustrative values.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "dateLabel": {
+          "title": "Date Label",
+          "description": "Date Label",
+          "lightning:type": "lightning__textType"
+        },
+        "totalLabel": {
+          "title": "Total Label",
+          "description": "Total Label",
+          "lightning:type": "lightning__textType"
+        },
+        "urgentLabel": {
+          "title": "Urgent Label",
+          "description": "Urgent Label",
+          "lightning:type": "lightning__textType"
+        },
+        "summaryTitle": {
+          "title": "Summary Title",
+          "description": "Summary Title",
+          "lightning:type": "lightning__textType"
+        },
+        "summaryDetail": {
+          "title": "Summary Detail",
+          "description": "Summary Detail",
+          "lightning:type": "lightning__textType"
+        },
+        "leads": {
+          "title": "Leads",
+          "description": "Leads",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "name": {
+                "title": "Name",
+                "description": "Name",
+                "lightning:type": "lightning__textType"
+              },
+              "product": {
+                "title": "Product",
+                "description": "Product",
+                "lightning:type": "lightning__textType"
+              },
+              "source": {
+                "title": "Source",
+                "description": "Source",
+                "lightning:type": "lightning__textType"
+              },
+              "priority": {
+                "title": "Priority",
+                "description": "Priority",
+                "lightning:type": "lightning__textType"
+              },
+              "score": {
+                "title": "Score",
+                "description": "Score",
+                "lightning:type": "lightning__numberType"
+              }
+            }
+          }
+        },
+        "ctaLabel": {
+          "title": "Cta Label",
+          "description": "Cta Label",
+          "lightning:type": "lightning__textType"
+        },
+        "ctaUrl": {
+          "title": "Cta Url",
+          "description": "Cta Url",
+          "lightning:type": "lightning__urlType"
+        }
+      }
+    }
+  }
+}

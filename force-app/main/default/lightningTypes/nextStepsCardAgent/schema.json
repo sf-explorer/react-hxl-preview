@@ -1,0 +1,5 @@
+{
+  "title" : "Next Steps (Agentforce)",
+  "description" : "Agentforce action-output CLT for the Next Steps widget. Typed at the NextStepsAction Apex inner class so it binds flat ($attrs.<field>) as the action's Output Rendering in LEX. Same widget & Apex as MCP wrapper CLT nextStepsCardResult.",
+  "lightning:type" : "@apexClassType/c__NextStepsAction$NextSteps"
+}

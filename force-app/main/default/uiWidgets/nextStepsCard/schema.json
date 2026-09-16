@@ -1,0 +1,55 @@
+{
+  "title": "Next Steps Card Widget",
+  "description": "Generic, caller-driven list of proposed next steps / next best actions. The agent supplies the steps via a JSON spec; the NextStepsAction normalizes them into an ordered, typed steps[] the card renders with plain forEach only (no dynamic key access). Serves meeting follow-ups, deal action plans, onboarding checklists, service resolution paths, and advisor next-best-actions.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "title": { "title": "Title", "description": "Card title", "lightning:type": "lightning__textType" },
+        "subtitle": { "title": "Subtitle", "description": "Secondary line under the title", "lightning:type": "lightning__textType" },
+        "badges": {
+          "title": "Badges",
+          "description": "Header badges (label + SLDS variant)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": { "title": "Label", "description": "Badge text", "lightning:type": "lightning__textType" },
+              "variant": { "title": "Variant", "description": "primary | success | warning | danger | neutral", "lightning:type": "lightning__textType" }
+            }
+          }
+        },
+        "showSummary": { "title": "Show Summary", "description": "Toggle for the summary callout", "lightning:type": "lightning__booleanType" },
+        "summaryTitle": { "title": "Summary Title", "description": "Callout title", "lightning:type": "lightning__textType" },
+        "summaryDetail": { "title": "Summary Detail", "description": "Callout body", "lightning:type": "lightning__textType" },
+        "stepsCaption": { "title": "Steps Caption", "description": "Caption above the steps list", "lightning:type": "lightning__textType" },
+        "steps": {
+          "title": "Steps",
+          "description": "Ordered list of proposed next steps (rendered top→bottom)",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "order": { "title": "Order", "description": "Step number badge (1, 2, 3 …)", "lightning:type": "lightning__textType" },
+              "title": { "title": "Title", "description": "Step title (the action to take)", "lightning:type": "lightning__textType" },
+              "detail": { "title": "Detail", "description": "What to do, in one line", "lightning:type": "lightning__textType" },
+              "rationale": { "title": "Rationale", "description": "Why this step / expected outcome", "lightning:type": "lightning__textType" },
+              "iconName": { "title": "Icon Name", "description": "Lucide icon slug", "lightning:type": "lightning__textType" },
+              "iconColor": { "title": "Icon Color", "description": "success | warning | danger | default", "lightning:type": "lightning__textType" },
+              "priorityLabel": { "title": "Priority Label", "description": "Optional priority/effort chip text", "lightning:type": "lightning__textType" },
+              "priorityVariant": { "title": "Priority Variant", "description": "primary | success | warning | danger | neutral", "lightning:type": "lightning__textType" },
+              "meta": { "title": "Meta", "description": "Supporting line (owner · due date · effort)", "lightning:type": "lightning__textType" },
+              "showCta": { "title": "Show Cta", "description": "Toggle for the per-step link", "lightning:type": "lightning__booleanType" },
+              "ctaLabel": { "title": "Cta Label", "description": "Per-step link label", "lightning:type": "lightning__textType" },
+              "ctaUrl": { "title": "Cta Url", "description": "Per-step link href", "lightning:type": "lightning__urlType" }
+            }
+          }
+        },
+        "showCta": { "title": "Show Cta", "description": "Toggle for the footer CTA button", "lightning:type": "lightning__booleanType" },
+        "ctaLabel": { "title": "Cta Label", "description": "CTA button label", "lightning:type": "lightning__textType" },
+        "ctaUrl": { "title": "Cta Url", "description": "CTA button href", "lightning:type": "lightning__urlType" }
+      }
+    }
+  }
+}

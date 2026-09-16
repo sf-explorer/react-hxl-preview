@@ -1,0 +1,44 @@
+{
+  "_comment": "Sample $attrs for the Rapport d'envoi (outreachBatch) card — the records-processed + send-status + exceptions + follow-up-tasks pattern shared by renewal-follow-up, outstanding-quote-follow-up, birthday-email-marketing, manage-customer-complaints, school-certificate-email-processing, update-contact-details-kyc, post-claim-satisfaction-follow-up. show* flags gate the optional sections. A reference snapshot — illustrative values.",
+  "attributes": {
+    "title": "Relances de renouvellement",
+    "dateLabel": "Lundi 20 juillet 2026 · Agence Paris 12e",
+    "countBadges": [
+      { "label": "5 e-mails envoyés", "variant": "success" },
+      { "label": "5 tâches J+7", "variant": "primary" },
+      { "label": "1 exception", "variant": "warning" }
+    ],
+    "metricTitle": "5 e-mails de rappel de renouvellement envoyés",
+    "metricDetail": "Contrats arrivant à échéance sous 30 jours et non renouvelés. Récapitulatif transmis au manager.",
+    "metricVariant": "success",
+    "showRecords": true,
+    "recordsCaption": "CONTRATS RELANCÉS",
+    "columns": [
+      { "key": "client", "header": "Client" },
+      { "key": "contract", "header": "Contrat" },
+      { "key": "premium", "header": "Prime", "align": "right" },
+      { "key": "due", "header": "Échéance" }
+    ],
+    "rows": [
+      { "client": "Annie Dubois", "contract": "Auto", "premium": "1 140 €", "due": "15/08/2026" },
+      { "client": "Foyer Nguyen", "contract": "Habitation (MRH)", "premium": "460 €", "due": "22/08/2026" },
+      { "client": "SARL Bâti-Sud", "contract": "RC Pro", "premium": "1 680 €", "due": "30/08/2026" },
+      { "client": "Léa Fontaine", "contract": "Santé", "premium": "720 €", "due": "02/09/2026" },
+      { "client": "Hugo Marchetti", "contract": "Auto", "premium": "980 €", "due": "05/09/2026" }
+    ],
+    "showExceptions": true,
+    "exceptionsCaption": "EXCEPTIONS",
+    "exceptions": [
+      { "title": "Karim Ben Ali", "detail": "Adresse e-mail manquante → tâche d'appel créée à la place." }
+    ],
+    "showTasks": true,
+    "tasksCaption": "TÂCHES DE SUIVI (J+7)",
+    "tasks": [
+      { "label": "Relancer Annie Dubois en l'absence de réponse", "ownerDue": "Vous · échéance 27/07", "tag": "J+7", "tagVariant": "primary" },
+      { "label": "Appeler Karim Ben Ali (pas d'e-mail au dossier)", "ownerDue": "Vous · échéance 21/07", "tag": "Appel", "tagVariant": "warning" }
+    ],
+    "showCta": false,
+    "ctaLabel": "Voir tous les renouvellements",
+    "ctaUrl": "#"
+  }
+}

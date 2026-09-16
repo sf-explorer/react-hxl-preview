@@ -1,0 +1,173 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Brief de réunion",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": { "borderless": true, "variant": "default" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "lg", "align": "stretch", "width": "full" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "md", "align": "center", "justify": "between", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.meetingTitle}", "variant": "h2", "weight": "semibold" } },
+                        { "definition": "tile/text", "attributes": { "text": "{!$attrs.accountLine}", "variant": "caption", "color": "muted" } }
+                      ]
+                    },
+                    { "definition": "tile/badge", "attributes": { "label": "{!$attrs.meetingWhen}", "variant": "primary" } }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "attributes": { "title": "{!$attrs.objectiveTitle}", "description": "{!$attrs.objectiveDetail}", "variant": "info" }
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showStakeholders}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "PARTICIPANTS", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.stakeholders}", "forItem": "$person", "forIndex": "$pi" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "user", "size": "sm", "color": "primary", "alt": "Participant" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$person.name}", "variant": "body", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$person.role}", "variant": "caption", "color": "muted" } }
+                          ]
+                        },
+                        { "definition": "tile/badge", "attributes": { "label": "{!$person.engagement}", "variant": "{!$person.engagementVariant}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showChanges}" },
+                  "attributes": { "gap": "xs", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "CE QUI A CHANGÉ RÉCEMMENT", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.changes}", "forItem": "$change", "forIndex": "$ci" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "clock", "size": "sm", "color": "primary", "alt": "Changement" } },
+                        { "definition": "tile/text", "attributes": { "text": "{!$change.text}", "variant": "body" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showRisks}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "RISQUES À TRAITER", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.risks}", "forItem": "$risk", "forIndex": "$ri" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "bell", "size": "sm", "color": "warning", "alt": "Risque" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$risk.title}", "variant": "body", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$risk.evidence}", "variant": "caption", "color": "muted" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$risk.mitigation}", "variant": "caption", "color": "primary" } }
+                          ]
+                        },
+                        { "definition": "tile/badge", "attributes": { "label": "{!$risk.severity}", "variant": "{!$risk.severityVariant}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showObjectives}" },
+                  "attributes": { "gap": "xs", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "OBJECTIFS DU RENDEZ-VOUS", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.objectives}", "forItem": "$obj", "forIndex": "$oi" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "check-circle", "size": "sm", "color": "success", "alt": "Objectif" } },
+                        { "definition": "tile/text", "attributes": { "text": "{!$obj.text}", "variant": "body" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showQuestions}" },
+                  "attributes": { "gap": "xs", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "QUESTIONS CLÉS À POSER", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.questions}", "forItem": "$q", "forIndex": "$qi" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "activity", "size": "sm", "color": "primary", "alt": "Question" } },
+                        { "definition": "tile/text", "attributes": { "text": "{!$q.text}", "variant": "body" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showActions}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "ACTIONS POST-RÉUNION", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.postActions}", "forItem": "$act", "forIndex": "$ai" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "check-circle", "size": "sm", "color": "primary", "alt": "Action" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$act.label}", "variant": "body" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$act.ownerDue}", "variant": "caption", "color": "muted" } }
+                          ]
+                        },
+                        { "definition": "tile/badge", "attributes": { "label": "{!$act.tag}", "variant": "{!$act.tagVariant}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/button",
+                  "attributes": { "label": "{!$attrs.ctaLabel}", "href": "{!$attrs.ctaUrl}", "variant": "primary" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

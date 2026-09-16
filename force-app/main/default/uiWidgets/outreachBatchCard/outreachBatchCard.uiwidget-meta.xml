@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Rapport d'envoi</masterLabel>
+    <description>Sample $attrs for the Rapport d'envoi (outreachBatch) card — the records-processed + send-status + exceptions + follow-up-tasks pattern shared by renewal-follow-up, outstanding-quote-follow-up, birthday-email-marketing, manage-customer-complaints, school-certificate-email-processing, update-contact-details-kyc, post-claim-satisfaction-follow-up. show* flags gate the optional sections. A reference snapshot — illustrative values.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

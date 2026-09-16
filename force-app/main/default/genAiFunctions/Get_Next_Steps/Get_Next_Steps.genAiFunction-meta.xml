@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Renders a generic, caller-driven list of proposed next steps. THE AGENT SUPPLIES THE STEPS: pass a JSON `spec` describing optional title/subtitle/badges, an optional summary callout, and a `steps` array (each step has a title plus optional detail, rationale, iconName, iconColor, priorityLabel, priorityVariant, meta line and a per-step link). The action normalizes the steps (auto-numbering their order) into the typed payload the card renders. Call with no spec to show a portable demo plan.</description>
+    <developerName>Get_Next_Steps</developerName>
+    <invocationTarget>NextStepsAction</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Next_Steps</localDeveloperName>
+    <masterLabel>Get Next Steps</masterLabel>
+</GenAiFunction>

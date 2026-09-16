@@ -1,0 +1,45 @@
+{
+  "_comment": "Sample $attrs for the Brief de réunion (meetingPrep) card, matching the prepare-next-meeting skill output. French / AXA France entreprises context. Sections gate on show* flags. A reference snapshot — illustrative values.",
+  "attributes": {
+    "meetingTitle": "Négociation — Flotte 120 véhicules",
+    "accountLine": "Transports Vallon · Négociation · 340 000 € · clôture 30/09/2026",
+    "meetingWhen": "12 sept. 2026 · 10h00",
+    "objectiveTitle": "Résultat visé : accord de principe + date de signature",
+    "objectiveDetail": "Confirmer l'adhésion au devis révisé, neutraliser l'offre concurrente sur la valeur ajoutée et sécuriser une signature avant le 30 sept.",
+    "showStakeholders": true,
+    "stakeholders": [
+      { "name": "Laurent Vallon", "role": "DG · décideur économique · sensible au prix global", "engagement": "Engagement fort", "engagementVariant": "success" },
+      { "name": "Nadia Cherif", "role": "Resp. QSE · évaluateur / champion · appui prévention", "engagement": "Engagement moyen", "engagementVariant": "warning" }
+    ],
+    "showChanges": true,
+    "changes": [
+      { "text": "Devis révisé envoyé le 5 sept. avec franchise ajustée." },
+      { "text": "Laurent Vallon a demandé une comparaison concurrente le 8 sept." },
+      { "text": "2 sinistres matériels déclarés cet été — sujet sensible sur la tarification." }
+    ],
+    "showRisks": true,
+    "risks": [
+      { "title": "Pression concurrentielle", "evidence": "Demande de comparatif le 8 sept.", "mitigation": "→ Valoriser les services de prévention et la gestion sinistres.", "severity": "Élevée", "severityVariant": "danger" },
+      { "title": "Sinistralité récente", "evidence": "2 sinistres matériels cet été.", "mitigation": "→ Proposer un accompagnement prévention et un bonus conditionnel.", "severity": "Moyenne", "severityVariant": "warning" }
+    ],
+    "showObjectives": true,
+    "objectives": [
+      { "text": "Confirmer l'adhésion au devis révisé." },
+      { "text": "Neutraliser l'offre concurrente sur la valeur ajoutée." },
+      { "text": "Sécuriser une signature avant le 30 sept." }
+    ],
+    "showQuestions": true,
+    "questions": [
+      { "text": "Quels critères pèsent le plus dans votre décision finale ?" },
+      { "text": "Le comparatif concurrent porte-t-il sur les garanties ou uniquement le prix ?" },
+      { "text": "Qui doit valider la signature en interne ?" }
+    ],
+    "showActions": true,
+    "postActions": [
+      { "label": "Envoyer la proposition finale ajustée", "ownerDue": "Vous · échéance 13 sept.", "tag": "Priorité", "tagVariant": "warning" },
+      { "label": "Planifier l'audit prévention", "ownerDue": "Nadia Cherif · échéance 20 sept.", "tag": "Suivi", "tagVariant": "primary" }
+    ],
+    "ctaLabel": "Ouvrir l'opportunité",
+    "ctaUrl": "#"
+  }
+}

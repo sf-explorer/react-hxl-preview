@@ -128,6 +128,46 @@ The renderer is total here too: an unknown `definition` paints a neutral
 placeholder. `src/demo/render.test.tsx` renders the real gallery widgets
 end-to-end.
 
+## Edit with AI (host-agnostic)
+
+The playground can rewrite a widget from a plain-English instruction ("add a red
+'High priority' badge next to the title"). It runs an **agentic loop** —
+propose → validate → self-correct — behind a **pluggable backend**, so it drops
+into any host:
+
+```tsx
+import { editWidget, lintWidgetBundle, isTileAiAvailable, createTileAiClient } from "@sf-explorer/react-hxl-viewer"
+import type { AiClient } from "@sf-explorer/react-hxl-viewer"
+
+// 1. Provide a backend. Any object with `complete({prompt, system})` works.
+const client: AiClient = createTileAiClient() // Page Host "Tile AI" proxy adapter
+
+// 2. Edit. The loop lints each reply against the live tile/* catalog and feeds
+//    precise errors back to the model until it returns a valid bundle.
+const { widget, attrs, summary, iterations } = await editWidget({
+  client,
+  widget,          // current .uiwidget bundle
+  attrs,           // current $attrs data
+  instruction: "add a Notes textarea and include it in the confirm payload",
+})
+```
+
+- **`AiClient`** is the only integration point — the loop knows nothing about
+  which provider/proxy is behind it. Ship a mock in tests, a direct call in
+  prod, or the bundled `createTileAiClient` (async submit + poll against a host
+  proxy; `baseUrl` and token resolvers are all configurable).
+- **`createTileAiClient`** targets the Page Host *Tile AI* service, reading the
+  `window.__UPLOAD_ID__` / `window.__PROXY_TOKEN__` globals it injects.
+  `isTileAiAvailable()` reports whether those are present.
+- **`lintWidgetBundle`** is the standalone in-browser linter (the analog of the
+  hxl-widget-build skill's `lint-widget.py`): known definitions only, binding
+  and `meta` sanity, typed/enum attribute checks. It's what makes the loop's
+  self-correction reliable.
+
+In the playground the panel appears above the config; it activates when a
+backend is detected. To wire your own outside the Page Host, set
+`window.__HXL_AI_CLIENT__` to any `AiClient`.
+
 ## Gallery widgets
 
 The playground and tests render the deployable widgets under
@@ -141,6 +181,12 @@ directly (no demo-local copies):
 | **Account Update (inputs)** | Every interactive input tile (`select` / `textField` / `numberField` / `radio` / `checkbox` / `switch` / `textarea`) plus Confirm/Cancel actions. |
 | **Notify Teammates (multi-select)** | A per-row `switch` over a `meta.forEach` list, each with a data-bound id. |
 | **Action Plan (generic)** | A **caller-driven editable grid**: the widget renders whatever `rows[].cells[]` it is given — each cell typed `readonly` / `select` / `text` / `switch` — and Confirm gathers the whole revised grid as one payload. |
+| **Ranked Table (generic)** | A **caller-driven ranked/prioritized table**: title, badges, a summary callout, a `columns[]` + `rows[].cells[]` table, per-item highlights and a CTA — all supplied by the agent. The read-only sibling of Action Plan; it renders one card for opportunity prioritization, portfolio analysis, lead triage, weekly replanning, and more. |
+
+A further set of gallery-preview cards (French / AXA + wealth context — *Leads du
+jour*, *Plan de journée*, *Brief de réunion*, *Santé de l'affaire*, *Contrat
+d'assurance*, and others) also ship under `force-app/main/default/uiWidgets/` and
+appear in the playground toolbar.
 
 ## Salesforce widgets (`force-app`)
 
@@ -151,13 +197,86 @@ GenAiFunction output → wrapper renderer path `{!$attrs.outputValues.<anchor>�
 An Apex `@InvocableMethod` returns the payload; Agentforce/MCP renders it into
 the `tile/*` tree.
 
-The **Action Plan** widget is the generic one: `ActionPlanAction` (anchor
-`plan`) takes a single JSON `spec` describing columns + rows and *flattens* it
-into typed, data-bound cells so the widget stays pure UI. Call it with no `spec`
-to get a portable demo triage plan. Because the flattening happens in Apex, the
-widget's binding surface is only `forEach` + `meta.if <boolean>` — no operators
-or dynamic key access — so it renders identically in the preview and in the live
-HXL runtime.
+The **Action Plan** and **Ranked Table** widgets are the *generic* ones:
+`ActionPlanAction` (anchor `plan`) and `RankedTableAction` (anchor `table`) each
+take a single JSON `spec` describing columns + rows and *flatten* it into typed,
+data-bound cells so the widget stays pure UI. Call either with no `spec` to get a
+portable demo. Because the flattening happens in Apex, the widget's binding
+surface is only `forEach` + `meta.if <boolean>` — no operators or dynamic key
+access — so it renders identically in the preview and in the live HXL runtime.
+
+> **Why flatten instead of `tile/table`?** Apex `@InvocableVariable` can't emit a
+> dynamic-keyed row (a `Map`), and a typed CLT can't feed arbitrary keys to a
+> native `tile/table`. So the generic actions emit `columns[]` + `rows[].cells[]`
+> in column order, and the widget renders the grid with plain `forEach`. The
+> interactive `tile/table` (client-side sort/filter) remains available for cards
+> whose columns are fixed at authoring time.
+
+## UI Specialist agent — keep the UI in a dedicated agent
+
+**Strategy: presentation is its own agent, not a skill bolted onto every task
+agent.** The gallery widgets are "only the UI" — they render whatever a caller
+hands them. The natural counterpart is a single, reusable **UI Specialist**
+Agentforce agent whose *only* job is to turn structured data into the right card.
+Task agents stay agentic — they reason about the *business* problem and, when
+they have something worth showing, delegate the *rendering* to the UI Specialist.
+
+```
+ ┌─────────────────┐   "show these ranked"   ┌──────────────────────┐   spec (JSON)   ┌───────────────────┐
+ │  Task agent      │ ───── data it holds ──► │  UI Specialist agent  │ ─────────────► │  Get Ranked Table  │
+ │ (sales, service) │                         │  (presentation only)  │                │  (Apex action)     │
+ └─────────────────┘                         └──────────────────────┘                └─────────┬─────────┘
+        ▲                                                                                        │ flatten
+        └──────────────────────────── rendered HXL card ◄──────────── rankedTableCard widget ◄──┘
+```
+
+**The agent supplies the input.** The UI Specialist doesn't fetch data — it
+*receives* the rows the calling agent already has, then decides the columns, the
+ordering, the summary and the highlights, and builds the action's JSON `spec`
+itself. The Apex action is generic; the *taste* (what to compare, what to
+foreground) lives in the agent's instructions, not in hard-coded metadata.
+
+**Why a dedicated agent (and not per-agent display code):**
+
+- **Separation of concerns** — reasoning agents don't carry layout rules;
+  presentation logic changes in one place.
+- **Consistency** — every card in the org is composed by the same specialist, so
+  ranked lists look and behave the same everywhere.
+- **Reuse & scale** — one topic per card. Today the UI Specialist owns
+  **Ranked Table**; adding *Client Profile*, *Opportunity*, *Action Plan*, … is a
+  new `GenAiPlugin` topic pointing at that card's action — no change to the task
+  agents that call it.
+- **Stays agentic** — the specialist *chooses* the card and *composes* the spec
+  from context each time; it isn't a fixed template.
+
+### What ships in `force-app` for the agent
+
+| Piece | File | Role |
+| --- | --- | --- |
+| **Apex action** | `classes/RankedTableAction.cls` | Generic `@InvocableMethod`; takes a JSON `spec`, returns the flattened `table` payload (binding anchor `table`). |
+| **GenAiFunction** | `genAiFunctions/Get_Ranked_Table/` | Registers the action; `spec` in, displayable `table` out. |
+| **Lightning types** | `lightningTypes/rankedTableCard{Agent,Result,OutputValues}/` | Agent (flat `$attrs`) + MCP wrapper CLTs; renderers bind the payload into `@widget/c/rankedTableCard`. |
+| **Topic** | `genAiPlugins/UI_Specialist_Ranked_Table.genAiPlugin-meta.xml` | *When* to render a ranked table and *how* to build the spec (the agent's instructions). |
+| **Agent (planner)** | `genAiPlanners/UI_Specialist.genAiPlanner-meta.xml` | The UI Specialist itself — owns the topic(s). Add one topic per card as the gallery grows. |
+| **Permission set** | `permissionsets/HXL_Ranked_Table.permissionset-meta.xml` | Grants the agent's running user access to `RankedTableAction`. |
+
+**Deploy & activate** (supporting metadata first, then the agent):
+
+```bash
+# 1. Deploy the stack (single-package deploy auto-resolves order)
+sf project deploy start \
+  --source-dir force-app/main/default \
+  --target-org <ORG> --wait 30
+
+# 2. Assign the action permission to the agent's running user
+sf org assign permset --name HXL_Ranked_Table --target-org <ORG>
+```
+
+Then, in **Setup → Agentforce → Agents**, create/attach the **UI Specialist**
+Employee Agent to the `UI_Specialist` planner, bind a running user that holds
+`HXL_Ranked_Table`, and **activate** it. (The Bot/running-user binding is
+org-specific, so it's finished in Setup rather than committed here.) Other agents
+then reach the specialist as a sub-agent / action to render their results.
 
 ## Develop
 

@@ -1,0 +1,131 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Revue de performance",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": { "borderless": true, "variant": "default" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "lg", "align": "stretch", "width": "full" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "md", "align": "center", "justify": "between", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/row",
+                      "attributes": { "gap": "md", "align": "center", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/avatar", "attributes": { "initials": "{!$attrs.personInitials}", "alt": "{!$attrs.personName}", "iconName": "user", "shape": "circle", "size": "lg" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$attrs.personName}", "variant": "h2", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$attrs.subtitle}", "variant": "caption", "color": "muted" } }
+                          ]
+                        }
+                      ]
+                    },
+                    { "definition": "tile/badge", "attributes": { "label": "{!$attrs.periodLabel}", "variant": "primary" } }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "attributes": { "title": "{!$attrs.summaryTitle}", "description": "{!$attrs.summaryDetail}", "variant": "info" }
+                },
+                {
+                  "definition": "tile/column",
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "INDICATEURS CLÉS", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/table",
+                      "attributes": {
+                        "caption": "Indicateurs de performance",
+                        "appearance": "striped",
+                        "isStickyHeader": true,
+                        "columns": "{!$attrs.columns}",
+                        "rows": "{!$attrs.rows}"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showStrengths}" },
+                  "attributes": { "gap": "xs", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "POINTS FORTS", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.strengths}", "forItem": "$s", "forIndex": "$si" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "check-circle", "size": "sm", "color": "success", "alt": "Point fort" } },
+                        { "definition": "tile/text", "attributes": { "text": "{!$s.text}", "variant": "body" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showAttention}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "POINTS DE VIGILANCE", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.attention}", "forItem": "$a", "forIndex": "$ai" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "bell", "size": "sm", "color": "warning", "alt": "Vigilance" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$a.title}", "variant": "body", "weight": "semibold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$a.detail}", "variant": "caption", "color": "muted" } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/column",
+                  "meta": { "if": "{!$attrs.showActions}" },
+                  "attributes": { "gap": "sm", "align": "stretch", "width": "full" },
+                  "children": [
+                    { "definition": "tile/text", "attributes": { "text": "ACTIONS RECOMMANDÉES", "variant": "caption", "weight": "bold", "color": "muted" } },
+                    {
+                      "definition": "tile/row",
+                      "meta": { "forEach": "{!$attrs.actions}", "forItem": "$act", "forIndex": "$ci" },
+                      "attributes": { "gap": "sm", "align": "start", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "check-circle", "size": "sm", "color": "primary", "alt": "Action" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$act.label}", "variant": "body" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$act.ownerDue}", "variant": "caption", "color": "muted" } }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

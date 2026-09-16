@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<UiWidgetBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Confirmer les mises à jour</masterLabel>
+    <description>Sample $attrs for the interactive Confirmer les mises à jour (recordUpdateConfirm) card — an editable 'edit &amp; confirm' form (0.1.1 input tiles: select/textField/textarea/radio/checkbox/switch) with Confirm/Cancel buttons that gather the field values at click time (inputs 'auto' / 'none'), modelled on the HXL gallery 'account-update-confirm'. Matches post-meeting-crm-updates. select/radio options are {label,value} arrays; isChecked binds a boolean. A reference snapshot — illustrative values.</description>
+    <widgetType>JSON</widgetType>
+</UiWidgetBundle>

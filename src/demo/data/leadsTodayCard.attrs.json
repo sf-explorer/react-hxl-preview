@@ -1,0 +1,21 @@
+{
+  "_comment": "Sample $attrs for the Leads du jour card, matching the received-leads-today skill output. French / AXA France agency context. The `leads` array feeds a tile/table (each row is keyed by the column keys: name, product, source, priority, score). A reference snapshot — illustrative values.",
+  "attributes": {
+    "dateLabel": "Lundi 14 septembre 2026 · Agence Paris 12e",
+    "totalLabel": "7 leads",
+    "urgentLabel": "2 urgents",
+    "summaryTitle": "7 leads reçus aujourd'hui, dont 2 à relancer sous 2 heures",
+    "summaryDetail": "Les leads Comparateur sont les plus chauds. Priorisez Camille Girard (auto) et Foyer Nguyen (habitation) avant midi.",
+    "leads": [
+      { "name": "Camille Girard",   "product": "Auto",             "source": "Comparateur", "priority": "Urgent",   "score": 92 },
+      { "name": "Foyer Nguyen",      "product": "Habitation (MRH)", "source": "Comparateur", "priority": "Urgent",   "score": 88 },
+      { "name": "Thomas Berger",     "product": "Santé",            "source": "Site web",    "priority": "Haute",    "score": 74 },
+      { "name": "Léa Fontaine",      "product": "Prévoyance",       "source": "Recommandation", "priority": "Haute", "score": 68 },
+      { "name": "SARL Bâti-Sud",     "product": "RC Pro",           "source": "Salon pro",   "priority": "Moyenne",  "score": 61 },
+      { "name": "Hugo Marchetti",    "product": "Auto",             "source": "Site web",    "priority": "Moyenne",  "score": 54 },
+      { "name": "Inès Roux",         "product": "Assurance emprunteur", "source": "Partenaire courtage", "priority": "Faible", "score": 39 }
+    ],
+    "ctaLabel": "Ouvrir la liste des leads",
+    "ctaUrl": "#"
+  }
+}

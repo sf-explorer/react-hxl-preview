@@ -1,0 +1,37 @@
+{
+  "_comment": "Sample $attrs for the Revue de performance (performanceReview) card — profile header + KPI table (value + trend vs previous period) + strengths + attention + actions, shared by agency-activity-analysis, manager-monthly-team-review, weekly-activity-summary. show* flags gate the optional lists. A reference snapshot — illustrative values.",
+  "attributes": {
+    "personName": "Marc Delaunay",
+    "personInitials": "MD",
+    "subtitle": "Inspecteur commercial · Agence Roussel",
+    "periodLabel": "30 derniers jours",
+    "summaryTitle": "Performance solide, mais haut de pipeline à réalimenter",
+    "summaryDetail": "Conversion et valeur signée en hausse ; le nombre de nouvelles opportunités créées recule et fragilise le trimestre prochain.",
+    "columns": [
+      { "key": "kpi", "header": "Indicateur" },
+      { "key": "value", "header": "Valeur", "align": "right" },
+      { "key": "trend", "header": "Tendance vs mois préc." }
+    ],
+    "rows": [
+      { "kpi": "Taux de conversion", "value": "32 %", "trend": "▲ +4 pts" },
+      { "kpi": "Valeur signée", "value": "148 000 €", "trend": "▲ +12 %" },
+      { "kpi": "Nouvelles opportunités", "value": "9", "trend": "▼ -3" },
+      { "kpi": "Pipeline ouvert", "value": "310 000 €", "trend": "▼ -8 %" }
+    ],
+    "showStrengths": true,
+    "strengths": [
+      { "text": "Excellente dynamique de closing sur les affaires en négociation." },
+      { "text": "Valeur signée au-dessus de l'objectif mensuel." }
+    ],
+    "showAttention": true,
+    "attention": [
+      { "title": "Haut de pipeline en baisse", "detail": "-3 opportunités créées vs mois précédent" },
+      { "title": "Pipeline ouvert en recul", "detail": "-8 %, risque sur le trimestre prochain" }
+    ],
+    "showActions": true,
+    "actions": [
+      { "label": "Bloquer 2 demi-journées de prospection cette semaine", "ownerDue": "Cette semaine" },
+      { "label": "Réactiver les leads dormants du dernier salon", "ownerDue": "Avant le 30/07" }
+    ]
+  }
+}

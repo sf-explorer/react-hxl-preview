@@ -1,0 +1,162 @@
+{
+  "type": "lightning__agentforceWidget",
+  "title": "Mise à jour de la fiche client",
+  "contentBody": {
+    "widgetBody": {
+      "definition": "tile/widget",
+      "children": [
+        {
+          "definition": "tile/container",
+          "attributes": { "borderless": true, "variant": "default" },
+          "children": [
+            {
+              "definition": "tile/column",
+              "attributes": { "gap": "md", "align": "stretch", "width": "full" },
+              "children": [
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "sm", "align": "center", "justify": "between", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/row",
+                      "attributes": { "gap": "sm", "align": "center", "justify": "start", "isWrapped": false },
+                      "children": [
+                        { "definition": "tile/icon", "attributes": { "name": "user", "size": "lg", "color": "primary", "alt": "" } },
+                        {
+                          "definition": "tile/column",
+                          "attributes": { "gap": "none", "align": "start", "width": "stretch" },
+                          "children": [
+                            { "definition": "tile/text", "attributes": { "text": "{!$attrs.clientName}", "variant": "h3", "weight": "bold" } },
+                            { "definition": "tile/text", "attributes": { "text": "{!$attrs.clientSub}", "variant": "caption", "color": "muted" } }
+                          ]
+                        }
+                      ]
+                    },
+                    { "definition": "tile/badge", "attributes": { "label": "{!$attrs.statusLabel}", "variant": "{!$attrs.statusVariant}" } }
+                  ]
+                },
+                {
+                  "definition": "tile/callout",
+                  "meta": { "if": "{!$attrs.showNotice}" },
+                  "attributes": { "title": "{!$attrs.noticeTitle}", "description": "{!$attrs.noticeDetail}", "variant": "{!$attrs.noticeVariant}" }
+                },
+                { "definition": "tile/separator", "attributes": { "orientation": "horizontal" } },
+                { "definition": "tile/text", "attributes": { "text": "COORDONNÉES & PRÉFÉRENCES — AJUSTABLES", "variant": "caption", "weight": "bold", "color": "muted" } },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "lg", "align": "start", "justify": "start", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/select", "attributes": { "id": "advisor", "label": "Conseiller référent", "value": "{!$attrs.advisor}", "options": "{!$attrs.advisorOptions}" } }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/textField", "attributes": { "id": "phone", "label": "Téléphone", "value": "{!$attrs.phone}", "type": "tel", "placeholder": "06 00 00 00 00" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "lg", "align": "start", "justify": "start", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/textField", "attributes": { "id": "email", "label": "E-mail", "value": "{!$attrs.email}", "type": "email", "placeholder": "prenom.nom@exemple.fr" } }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/select", "attributes": { "id": "segment", "label": "Segment client", "value": "{!$attrs.segment}", "options": "{!$attrs.segmentOptions}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "lg", "align": "start", "justify": "start", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/textField", "attributes": { "id": "address", "label": "Adresse postale", "value": "{!$attrs.address}", "type": "text", "placeholder": "N°, rue, code postal, ville" } }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/numberField", "attributes": { "id": "household", "label": "Personnes au foyer", "value": "{!$attrs.household}", "min": 1, "placeholder": "1" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "lg", "align": "start", "justify": "start", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/radio", "attributes": { "id": "channel", "label": "Canal de contact préféré", "value": "{!$attrs.channel}", "options": "{!$attrs.channelOptions}" } }
+                      ]
+                    },
+                    {
+                      "definition": "tile/column",
+                      "attributes": { "gap": "xs", "align": "stretch", "width": "stretch" },
+                      "children": [
+                        { "definition": "tile/checkbox", "attributes": { "id": "marketingConsent", "label": "Consentement communications marketing", "isChecked": "{!$attrs.marketingConsent}" } },
+                        { "definition": "tile/switch", "attributes": { "id": "autoDebit", "label": "Prélèvement automatique", "isChecked": "{!$attrs.autoDebit}" } }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "definition": "tile/textarea",
+                  "attributes": { "id": "notes", "label": "Notes conseiller", "value": "{!$attrs.notes}", "placeholder": "Contexte, préférences, éléments KYC…" }
+                },
+                { "definition": "tile/text", "attributes": { "text": "Vérifiez et ajustez les informations, puis enregistrez — les valeurs sont écrites dans le CRM au clic.", "variant": "caption", "color": "muted" } },
+                { "definition": "tile/spacer", "attributes": { "size": "sm" } },
+                {
+                  "definition": "tile/row",
+                  "attributes": { "gap": "sm", "align": "center", "justify": "end", "isWrapped": true },
+                  "children": [
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "Annuler",
+                        "variant": "secondary",
+                        "actions": { "click": [ { "definition": "clientRecordUpdateCancel", "attributes": {}, "inputs": "none" } ] }
+                      }
+                    },
+                    {
+                      "definition": "tile/button",
+                      "attributes": {
+                        "label": "Enregistrer les modifications",
+                        "variant": "primary",
+                        "iconName": "check-circle",
+                        "actions": { "click": [ { "definition": "clientRecordUpdateConfirm", "attributes": {}, "inputs": "auto" } ] }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

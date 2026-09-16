@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Renders a generic, caller-driven ranked/prioritized table. Pass a JSON `spec` describing optional title/subtitle/badges, an optional summary callout, the `columns` (key/header/align) and `rows` (an id plus a value per column key), optional `highlights` (iconName/iconColor/title/detail) and an optional CTA. The action flattens the keyed rows into typed, column-ordered cells the card renders. Call with no spec to show a portable demo pipeline.</description>
+    <developerName>Get_Ranked_Table</developerName>
+    <invocationTarget>RankedTableAction</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+    <localDeveloperName>Get_Ranked_Table</localDeveloperName>
+    <masterLabel>Get Ranked Table</masterLabel>
+</GenAiFunction>

@@ -1,0 +1,14 @@
+{
+  "title": "Ranked Table Output Values",
+  "description": "Payload fields from the RankedTableAction response",
+  "type": "object",
+  "lightning:type": "lightning__objectType",
+  "unevaluatedProperties": false,
+  "lightning:tags": ["mcp"],
+  "properties": {
+    "table": {
+      "title": "Ranked Table",
+      "lightning:type": "@apexClassType/c__RankedTableAction$RankedTable"
+    }
+  }
+}

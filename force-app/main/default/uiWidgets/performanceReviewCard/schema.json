@@ -1,0 +1,157 @@
+{
+  "title": "Revue de performance Widget",
+  "description": "Sample $attrs for the Revue de performance (performanceReview) card — profile header + KPI table (value + trend vs previous period) + strengths + attention + actions, shared by agency-activity-analysis, manager-monthly-team-review, weekly-activity-summary. show* flags gate the optional lists. A reference snapshot — illustrative values.",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "lightning:type": "lightning__objectType",
+      "properties": {
+        "personName": {
+          "title": "Person Name",
+          "description": "Person Name",
+          "lightning:type": "lightning__textType"
+        },
+        "personInitials": {
+          "title": "Person Initials",
+          "description": "Person Initials",
+          "lightning:type": "lightning__textType"
+        },
+        "subtitle": {
+          "title": "Subtitle",
+          "description": "Subtitle",
+          "lightning:type": "lightning__textType"
+        },
+        "periodLabel": {
+          "title": "Period Label",
+          "description": "Period Label",
+          "lightning:type": "lightning__textType"
+        },
+        "summaryTitle": {
+          "title": "Summary Title",
+          "description": "Summary Title",
+          "lightning:type": "lightning__textType"
+        },
+        "summaryDetail": {
+          "title": "Summary Detail",
+          "description": "Summary Detail",
+          "lightning:type": "lightning__textType"
+        },
+        "columns": {
+          "title": "Columns",
+          "description": "Columns",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "key": {
+                "title": "Key",
+                "description": "Key",
+                "lightning:type": "lightning__textType"
+              },
+              "header": {
+                "title": "Header",
+                "description": "Header",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "rows": {
+          "title": "Rows",
+          "description": "Rows",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "kpi": {
+                "title": "Kpi",
+                "description": "Kpi",
+                "lightning:type": "lightning__textType"
+              },
+              "value": {
+                "title": "Value",
+                "description": "Value",
+                "lightning:type": "lightning__textType"
+              },
+              "trend": {
+                "title": "Trend",
+                "description": "Trend",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showStrengths": {
+          "title": "Show Strengths",
+          "description": "Show Strengths",
+          "lightning:type": "lightning__booleanType"
+        },
+        "strengths": {
+          "title": "Strengths",
+          "description": "Strengths",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "text": {
+                "title": "Text",
+                "description": "Text",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showAttention": {
+          "title": "Show Attention",
+          "description": "Show Attention",
+          "lightning:type": "lightning__booleanType"
+        },
+        "attention": {
+          "title": "Attention",
+          "description": "Attention",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "title": {
+                "title": "Title",
+                "description": "Title",
+                "lightning:type": "lightning__textType"
+              },
+              "detail": {
+                "title": "Detail",
+                "description": "Detail",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        },
+        "showActions": {
+          "title": "Show Actions",
+          "description": "Show Actions",
+          "lightning:type": "lightning__booleanType"
+        },
+        "actions": {
+          "title": "Actions",
+          "description": "Actions",
+          "lightning:type": "lightning__listType",
+          "items": {
+            "lightning:type": "lightning__objectType",
+            "properties": {
+              "label": {
+                "title": "Label",
+                "description": "Label",
+                "lightning:type": "lightning__textType"
+              },
+              "ownerDue": {
+                "title": "Owner Due",
+                "description": "Owner Due",
+                "lightning:type": "lightning__textType"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
